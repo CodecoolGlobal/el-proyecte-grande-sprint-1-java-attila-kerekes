@@ -1,39 +1,39 @@
-package com.table.table.model;
+package com.table.model;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Customer {
+public class Restaurant {
     private final UUID id;
+    private String name;
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
-    private final List<Reservation> reservations;
     private String phoneNumber;
+    private String address;
+    private final List<Table> tables;
 
-    public Customer(String email, String password, String firstName, String lastName, String phoneNumber) {
+    public Restaurant(String name, String email, String password, String phoneNumber, String address) {
         this.id = UUID.randomUUID();
+        this.name = name;
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.reservations = new ArrayList<>();
         this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.tables = new ArrayList<>();
     }
 
-    public boolean addReservation(Reservation ... reservations) {
-        return this.reservations.addAll(List.of(reservations));
+    public boolean addTable(Table... tables) {
+        return this.tables.addAll(List.of(tables));
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id);
+        Restaurant that = (Restaurant) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.table.table;
+package com.table;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
