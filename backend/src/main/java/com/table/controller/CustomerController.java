@@ -1,11 +1,11 @@
 package com.table.controller;
 
+import com.table.controller.dto.CustomerDTO;
 import com.table.model.Customer;
 import com.table.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -13,6 +13,7 @@ import java.util.UUID;
 public class CustomerController {
     private final CustomerService customerService;
 
+    @Autowired
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
@@ -24,5 +25,35 @@ public class CustomerController {
             return ResponseEntity.ok(customer);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    //TODO delete this
+    @GetMapping("/customers")
+    public ResponseEntity<?> getCustomers() {
+        return ResponseEntity.ok(customerService.getCustomers());
+    }
+
+    @PostMapping("/customers")
+    public ResponseEntity<?> addCustomer(@RequestBody CustomerDTO customer) {
+        if (customerService.saveCustomer(customer)) {
+            return ResponseEntity.ok(customer);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/customers/{id}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable UUID id) {
+        if (customerService.deleteCustomer(id)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/customers/{id}")
+    public ResponseEntity<?> updateCustomer(@PathVariable UUID id, @RequestBody CustomerDTO customerDTO) {
+        if (customerService.updateCustomer(id, customerDTO)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
     }
 }
