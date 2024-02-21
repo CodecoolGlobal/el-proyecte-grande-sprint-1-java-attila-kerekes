@@ -24,8 +24,46 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    public Customer(UUID id, String email, String password, String firstName, String lastName, List<Reservation> reservations, String phoneNumber) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.reservations = new ArrayList<>(reservations);
+        this.phoneNumber = phoneNumber;
+    }
+
     public boolean addReservation(Reservation ... reservations) {
         return this.reservations.addAll(List.of(reservations));
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public List<Reservation> getReservations() {
+        return new ArrayList<>(reservations);
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     @Override
@@ -39,5 +77,14 @@ public class Customer {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public Customer update(Customer updatedCustomer) {
+        this.email = updatedCustomer.getEmail();
+        this.password = updatedCustomer.getPassword();
+        this.firstName = updatedCustomer.getFirstName();
+        this.lastName = updatedCustomer.getLastName();
+        this.phoneNumber = updatedCustomer.getPhoneNumber();
+        return this;
     }
 }
