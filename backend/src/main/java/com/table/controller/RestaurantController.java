@@ -3,9 +3,9 @@ package com.table.controller;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Restaurant;
 import com.table.repository.TempRepository;
+import com.table.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.DelegatingServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -13,17 +13,17 @@ import java.util.UUID;
 
 @RestController
 public class RestaurantController {
-    private TempRepository tempRepository;
+    private RestaurantService restaurantService;
 
     @Autowired
-    public RestaurantController(TempRepository tempRepository) {
-        this.tempRepository = tempRepository;
+    public RestaurantController(RestaurantService restaurantService) {
+        this.restaurantService = restaurantService;
     }
 
     //Create
     @PostMapping("/restaurants")
     public ResponseEntity<?> addRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
-        if (tempRepository.addRestaurant(new Restaurant(restaurantDTO))) {
+        if (restaurantService.addRestaurant(new Restaurant(restaurantDTO))) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.badRequest().build();
@@ -33,18 +33,18 @@ public class RestaurantController {
     //Read
     @GetMapping("/restaurants")
     public Set<Restaurant> getAllRestaurants() {
-        return tempRepository.getRestaurants();
+        return restaurantService.getRestaurants();
     }
 
     @GetMapping("/restaurants/{id}")
     public Restaurant getRestaurantById(@PathVariable UUID id) {
-        return tempRepository.getRestaurant(id);
+        return restaurantService.getRestaurantById(id);
     }
 
     //Update
     @PutMapping("/restaurants/{id}")
     public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
-        if (tempRepository.updateRestaurant(restaurantDTO, id)) {
+        if (restaurantService.updateRestaurant(restaurantDTO, id)) {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.noContent().build();
@@ -54,7 +54,7 @@ public class RestaurantController {
     //Delete
     @DeleteMapping("/restaurants/{id}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable UUID id) {
-        if (tempRepository.deleteRestaurant(id)) {
+        if (restaurantService.deleteRestaurant(id)) {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.noContent().build();
