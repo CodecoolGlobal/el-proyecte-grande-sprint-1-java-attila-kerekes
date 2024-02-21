@@ -1,4 +1,4 @@
-package com.table.table;
+package com.table;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
