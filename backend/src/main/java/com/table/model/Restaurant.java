@@ -1,5 +1,7 @@
 package com.table.model;
 
+import com.table.controller.dto.RestaurantDTO;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,23 +16,23 @@ public class Restaurant {
     private String address;
     private final List<Table> tables;
 
-    public Restaurant(String name, String email, String password, String phoneNumber, String address) {
+    public Restaurant(RestaurantDTO restaurantDTO) {
         this.id = UUID.randomUUID();
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+        this.name = restaurantDTO.name();
+        this.email = restaurantDTO.email();
+        this.password = restaurantDTO.password();
+        this.phoneNumber = restaurantDTO.phoneNumber();
+        this.address = restaurantDTO.address();
         this.tables = new ArrayList<>();
     }
 
-    public Restaurant(UUID id, String name, String email, String password, String phoneNumber, String address, List<Table> tables) {
+    public Restaurant(UUID id, RestaurantDTO restaurantDTO, List<Table> tables) {
         this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+        this.name = restaurantDTO.name();
+        this.email = restaurantDTO.email();
+        this.password = restaurantDTO.password();
+        this.phoneNumber = restaurantDTO.phoneNumber();
+        this.address = restaurantDTO.address();
         this.tables = new ArrayList<>(tables);
     }
 
