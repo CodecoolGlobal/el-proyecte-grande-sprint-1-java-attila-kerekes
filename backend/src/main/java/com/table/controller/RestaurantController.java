@@ -24,11 +24,8 @@ public class RestaurantController {
     //Create
     @PostMapping
     public ResponseEntity<?> addRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
-        if (restaurantService.addRestaurant(new Restaurant(restaurantDTO))) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        Restaurant restaurant = restaurantService.addRestaurant(new Restaurant(restaurantDTO));
+        return ResponseEntity.ok(restaurant);
     }
 
     //Read
@@ -45,11 +42,8 @@ public class RestaurantController {
     //Update
     @PutMapping("/{id}")
     public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
-        if (restaurantService.updateRestaurant(restaurantDTO, id)) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.noContent().build();
-        }
+       Restaurant updatedRestaurant = restaurantService.updateRestaurant(restaurantDTO, id);
+       return ResponseEntity.ok(updatedRestaurant);
     }
 
     //Delete
