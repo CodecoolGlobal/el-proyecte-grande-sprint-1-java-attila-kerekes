@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/reservations")
 public class ReservationController {
 
     private final ReservationService reservationService;
@@ -20,7 +21,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/reservation/{restaurantID}")
+    @GetMapping("/{restaurantID}")
     public ResponseEntity<?> getAllReservationByRestaurant(@PathVariable UUID restaurantID) {
         Collection<Reservation> report = reservationService.getAllByRestaurantID(restaurantID);
 
@@ -28,13 +29,13 @@ public class ReservationController {
     }
 
 
-    @GetMapping("/reservation/{customerID}")
+    @GetMapping("/{customerID}")
     public ResponseEntity<?> getAllReservationByCustomer(@PathVariable UUID customerID) {
         Collection<Reservation> report = reservationService.getAllByCustomerID(customerID);
         return ResponseEntity.ok(report);
     }
 
-    @PostMapping("/reservation")
+    @PostMapping
     public ResponseEntity<?> createNewReservation(@RequestBody Reservation reservation) {
         if (reservationService.createNewReservation(reservation)) {
             return ResponseEntity.ok().body("Thank you, for your reservation");
@@ -43,7 +44,7 @@ public class ReservationController {
         }
     }
 
-    @DeleteMapping("/reservation")
+    @DeleteMapping
     public ResponseEntity<?> deleteReservation(@RequestBody Reservation reservation) {
         if (reservationService.deleteReservation(reservation)) {
             return ResponseEntity.ok().body("Delete completed");

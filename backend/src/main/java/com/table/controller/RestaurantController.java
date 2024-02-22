@@ -13,8 +13,9 @@ import java.util.Set;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/restaurants")
 public class RestaurantController {
-    private RestaurantService restaurantService;
+    private final RestaurantService restaurantService;
 
     @Autowired
     public RestaurantController(RestaurantService restaurantService) {
@@ -25,16 +26,17 @@ public class RestaurantController {
     @PostMapping("/restaurants")
     public ResponseEntity<?> addRestaurant(@RequestBody NewRestaurantDTO newRestaurantDTO) {
         RestaurantDTO restaurant = restaurantService.addRestaurant(newRestaurantDTO);
+
         return ResponseEntity.ok(restaurant);
     }
 
     //Read
-    @GetMapping("/restaurants")
+    @GetMapping
     public Set<Restaurant> getAllRestaurants() {
         return restaurantService.getRestaurants();
     }
 
-    @GetMapping("/restaurants/{id}")
+    @GetMapping("/{id}")
     public Restaurant getRestaurantById(@PathVariable UUID id) {
         return restaurantService.getRestaurantById(id);
     }
@@ -47,7 +49,7 @@ public class RestaurantController {
     }
 
     //Delete
-    @DeleteMapping("/restaurants/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable UUID id) {
         if (restaurantService.deleteRestaurant(id)) {
             return ResponseEntity.ok().build();

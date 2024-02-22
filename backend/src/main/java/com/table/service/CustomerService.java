@@ -3,6 +3,7 @@ package com.table.service;
 import com.table.controller.dto.CustomerDTO;
 import com.table.model.Customer;
 import com.table.repository.TempRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.UUID;
 public class CustomerService {
     private final TempRepository repo;
 
+    @Autowired
     public CustomerService(TempRepository repo) {
         this.repo = repo;
     }

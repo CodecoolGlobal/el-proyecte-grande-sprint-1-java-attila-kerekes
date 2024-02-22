@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/customers")
 public class CustomerController {
     private final CustomerService customerService;
 
@@ -18,7 +19,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/customers/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable UUID id) {
         Customer customer = customerService.getCustomerById(id);
         if (customer != null) {
@@ -28,12 +29,12 @@ public class CustomerController {
     }
 
     //TODO delete this
-    @GetMapping("/customers")
+    @GetMapping
     public ResponseEntity<?> getCustomers() {
         return ResponseEntity.ok(customerService.getCustomers());
     }
 
-    @PostMapping("/customers")
+    @PostMapping
     public ResponseEntity<?> addCustomer(@RequestBody CustomerDTO customer) {
         if (customerService.saveCustomer(customer)) {
             return ResponseEntity.ok(customer);
@@ -41,7 +42,7 @@ public class CustomerController {
         return ResponseEntity.badRequest().build();
     }
 
-    @DeleteMapping("/customers/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable UUID id) {
         if (customerService.deleteCustomer(id)) {
             return ResponseEntity.ok().build();
@@ -49,7 +50,7 @@ public class CustomerController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/customers/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateCustomer(@PathVariable UUID id, @RequestBody CustomerDTO customerDTO) {
         if (customerService.updateCustomer(id, customerDTO)) {
             return ResponseEntity.ok().build();
