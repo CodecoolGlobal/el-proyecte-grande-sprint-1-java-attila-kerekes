@@ -1,6 +1,7 @@
 package com.table.controller;
 
 import com.table.controller.dto.CustomerDTO;
+import com.table.controller.dto.NewCustomerDTO;
 import com.table.model.Customer;
 import com.table.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,26 +35,22 @@ public class CustomerController {
     }
 
     @PostMapping("/customers")
-    public ResponseEntity<?> addCustomer(@RequestBody CustomerDTO customer) {
-        if (customerService.saveCustomer(customer)) {
-            return ResponseEntity.ok(customer);
-        }
-        return ResponseEntity.badRequest().build();
+    public ResponseEntity<?> addCustomer(@RequestBody NewCustomerDTO customerDTO) {
+        CustomerDTO newCustomer = customerService.saveCustomer(customerDTO);
+        return ResponseEntity.ok(newCustomer);
     }
 
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable UUID id) {
         if (customerService.deleteCustomer(id)) {
-            return ResponseEntity.ok().build();
+            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/customers/{id}")
-    public ResponseEntity<?> updateCustomer(@PathVariable UUID id, @RequestBody CustomerDTO customerDTO) {
-        if (customerService.updateCustomer(id, customerDTO)) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
+    public ResponseEntity<?> updateCustomer(@RequestBody CustomerDTO customerDTO) {
+        CustomerDTO updated = customerService.updateCustomer(customerDTO);
+        return ResponseEntity.ok(updated);
     }
 }

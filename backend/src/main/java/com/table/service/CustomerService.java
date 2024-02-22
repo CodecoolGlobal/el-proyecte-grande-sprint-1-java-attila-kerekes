@@ -1,6 +1,7 @@
 package com.table.service;
 
 import com.table.controller.dto.CustomerDTO;
+import com.table.controller.dto.NewCustomerDTO;
 import com.table.model.Customer;
 import com.table.repository.TempRepository;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,16 @@ public class CustomerService {
         return repo.getCustomer(id);
     }
 
-    public boolean saveCustomer(CustomerDTO customerDTO) {
-        Customer customer = new Customer(customerDTO);
-        return repo.addCustomer(customer);
+    public CustomerDTO saveCustomer(NewCustomerDTO customerDTO) {
+        UUID id = UUID.randomUUID();
+        String email = customerDTO.email();
+        String password = customerDTO.password();
+        String firstName = customerDTO.firstName();
+        String lastName = customerDTO.lastName();
+        String phoneNumber = customerDTO.phoneNumber();
+        Customer customer = new Customer(id, email, password, firstName, lastName, phoneNumber);
+        Customer saved = repo.addCustomer(customer);
+        return new CustomerDTO(saved.getPublicId(), saved.getEmail(), saved.getPassword(), saved.getFirstName(), saved.getLastName(), saved.getPhoneNumber());
     }
 
     //TODO delete this
@@ -34,8 +42,14 @@ public class CustomerService {
         return repo.deleteCustomer(id);
     }
 
-    public boolean updateCustomer(UUID id, CustomerDTO customerDTO) {
-        Customer customer = new Customer(id, customerDTO, getCustomerById(id).getReservations());
-        return repo.updateCustomer(customer);
+    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
+        UUID id = customerDTO.id();
+        String email = customerDTO.email();
+        String password = customerDTO.password();
+        String firstName = customerDTO.firstName();
+        String lastName = customerDTO.lastName();
+        String phoneNumber = customerDTO.phoneNumber();
+        Customer customer = repo.updateCustomer(new Customer(id, email, password, firstName, lastName, phoneNumber));
+        return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getPassword(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
     }
 }

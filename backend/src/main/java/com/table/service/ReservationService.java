@@ -45,7 +45,7 @@ public class ReservationService {
         reservationListByCustomer.addAll(
                 tempRepository.getAllReservation()
                         .stream()
-                        .filter(reservation -> reservation.customer().getId().equals(id))
+                        .filter(reservation -> reservation.customer().getPublicId().equals(id))
                         .toList());
 
         return reservationListByCustomer;

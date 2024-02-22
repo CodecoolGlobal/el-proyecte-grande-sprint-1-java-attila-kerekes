@@ -29,8 +29,9 @@ public class TempRepository {
         return reservations.add(reservation);
     }
 
-    public boolean addCustomer(Customer customer) {
-        return customers.add(customer);
+    public Customer addCustomer(Customer customer) {
+        customers.add(customer);
+        return customer;
     }
 
     public Set<Restaurant> getRestaurants() {
@@ -45,7 +46,7 @@ public class TempRepository {
 
     public Customer getCustomer(UUID id) {
         return customers.stream()
-                .filter(customer -> customer.getId().equals(id)).findFirst()
+                .filter(customer -> customer.getPublicId().equals(id)).findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
 
@@ -68,7 +69,7 @@ public class TempRepository {
     }
 
     public boolean deleteCustomer(UUID id) {
-        return customers.removeIf(customer -> customer.getId().equals(id));
+        return customers.removeIf(customer -> customer.getPublicId().equals(id));
     }
 
     public boolean updateRestaurant(RestaurantDTO restaurantDTO, UUID id) {
@@ -78,11 +79,9 @@ public class TempRepository {
        return restaurants.add(restaurant);
     }
 
-    public boolean updateCustomer(Customer updatedCustomer) {
-        if (deleteCustomer(updatedCustomer.getId())) {
-            return addCustomer(updatedCustomer);
-        }
-        return false;
+    public Customer updateCustomer(Customer customer) {
+        UUID id = customer.getPublicId();
+        return customers.stream().filter(customer1 -> customer1.getPublicId().equals(id)).findFirst().get().update(customer);
     }
 
     //TODO delete this

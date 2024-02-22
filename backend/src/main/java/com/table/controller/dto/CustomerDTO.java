@@ -1,4 +1,6 @@
 package com.table.controller.dto;
 
-public record CustomerDTO(String email, String password, String firstName, String lastName, String phoneNumber) {
+import java.util.UUID;
+
+public record CustomerDTO(UUID id, String email, String password, String firstName, String lastName, String phoneNumber) {
 }
