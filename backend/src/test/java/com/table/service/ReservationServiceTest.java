@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -67,7 +68,7 @@ class ReservationServiceTest {
                 UUID.randomUUID(),
                 1,
                 LocalDateTime.now(),
-                6,
+                Duration.ofHours(2),
                 5,
                 testCustomer,
                 testTable);
@@ -101,8 +102,8 @@ class ReservationServiceTest {
                 UUID.randomUUID(),
                 1,
                 LocalDateTime.now(),
+                Duration.ofHours(2),
                 6,
-                5,
                 testCustomer,
                 testTable);
 
@@ -140,7 +141,7 @@ class ReservationServiceTest {
                 UUID.randomUUID(),
                 1,
                 LocalDateTime.now(),
-                6,
+                Duration.ofHours(2),
                 5,
                 testCustomer,
                 testTable2);
@@ -148,7 +149,7 @@ class ReservationServiceTest {
                 UUID.randomUUID(),
                 2,
                 LocalDateTime.now(),
-                6,
+                Duration.ofHours(2),
                 5,
                 testCustomer,
                 testTable3);
@@ -157,7 +158,7 @@ class ReservationServiceTest {
                 UUID.randomUUID(),
                 3,
                 LocalDateTime.now(),
-                6,
+                Duration.ofHours(2),
                 5,
                 testCustomer,
                 testTable);
@@ -200,7 +201,7 @@ class ReservationServiceTest {
                 UUID.randomUUID(),
                 1,
                 LocalDateTime.now(),
-                6,
+                Duration.ofHours(2),
                 5,
                 testCustomer2,
                 testTable2);
@@ -208,7 +209,7 @@ class ReservationServiceTest {
                 UUID.randomUUID(),
                 2,
                 LocalDateTime.now(),
-                6,
+                Duration.ofHours(2),
                 5,
                 testCustomer2,
                 testTable3);
@@ -217,7 +218,7 @@ class ReservationServiceTest {
                 UUID.randomUUID(),
                 3,
                 LocalDateTime.now(),
-                6,
+                Duration.ofHours(2),
                 5,
                 testCustomer1,
                 testTable);
