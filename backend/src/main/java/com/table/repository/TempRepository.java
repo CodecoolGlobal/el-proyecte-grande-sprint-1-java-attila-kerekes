@@ -49,6 +49,10 @@ public class TempRepository {
                 .orElseThrow(NoSuchElementException::new);
     }
 
+    public Set<Reservation> getAllReservation() {
+        return new HashSet<>(reservations);
+    }
+
     public Reservation getReservation(UUID id) {
         return reservations.stream()
                 .filter(reservation -> reservation.id().equals(id)).findFirst()
@@ -79,5 +83,10 @@ public class TempRepository {
             return addCustomer(updatedCustomer);
         }
         return false;
+    }
+
+    //TODO delete this
+    public Set<Customer> getCustomers() {
+        return customers;
     }
 }
