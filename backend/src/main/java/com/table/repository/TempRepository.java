@@ -1,8 +1,10 @@
 package com.table.repository;
 
+import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Customer;
 import com.table.model.Reservation;
 import com.table.model.Restaurant;
+import com.table.model.Table;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -65,11 +67,11 @@ public class TempRepository {
         return customers.removeIf(customer -> customer.getId().equals(id));
     }
 
-    public boolean updateRestaurant(Restaurant updatedRestaurant) {
-        if (deleteRestaurant(updatedRestaurant.getId())) {
-            return addRestaurant(updatedRestaurant);
-        }
-        return false;
+    public boolean updateRestaurant(RestaurantDTO restaurantDTO, UUID id) {
+        List<Table> tables = getRestaurant(id).getTables();
+        Restaurant restaurant = new Restaurant(id, restaurantDTO, tables);
+        deleteRestaurant(id);
+       return restaurants.add(restaurant);
     }
 
     public boolean updateCustomer(Customer updatedCustomer) {
