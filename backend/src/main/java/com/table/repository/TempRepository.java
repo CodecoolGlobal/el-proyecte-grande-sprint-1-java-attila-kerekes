@@ -80,4 +80,9 @@ public class TempRepository {
         }
         return false;
     }
+
+    //TODO delete this
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
 }
