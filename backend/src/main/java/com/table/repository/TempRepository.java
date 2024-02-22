@@ -54,9 +54,9 @@ public class TempRepository {
         return new HashSet<>(reservations);
     }
 
-    public Reservation getReservation(UUID id) {
+    public Reservation getReservation(long id) {
         return reservations.stream()
-                .filter(reservation -> reservation.id().equals(id)).findFirst()
+                .filter(reservation -> reservation.getID()==(id)).findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
 
@@ -64,8 +64,8 @@ public class TempRepository {
         return restaurants.removeIf(restaurant -> restaurant.getId().equals(id));
     }
 
-    public boolean deleteReservation(UUID id) {
-        return reservations.removeIf(reservation -> reservation.id().equals(id));
+    public boolean deleteReservation(long id) {
+        return reservations.removeIf(reservation -> reservation.getID()==(id));
     }
 
     public boolean deleteCustomer(UUID id) {
