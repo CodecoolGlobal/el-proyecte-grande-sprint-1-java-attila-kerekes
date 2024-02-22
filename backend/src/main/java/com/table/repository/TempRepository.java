@@ -21,8 +21,9 @@ public class TempRepository {
         this.restaurants = new HashSet<>();
     }
 
-    public boolean addRestaurant(Restaurant restaurant) {
-        return restaurants.add(restaurant);
+    public Restaurant addRestaurant(Restaurant restaurant) {
+        restaurants.add(restaurant);
+        return restaurant;
     }
 
     public boolean addReservation(Reservation reservation) {
@@ -71,11 +72,12 @@ public class TempRepository {
         return customers.removeIf(customer -> customer.getId().equals(id));
     }
 
-    public boolean updateRestaurant(RestaurantDTO restaurantDTO, UUID id) {
+    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO, UUID id) {
         List<Table> tables = getRestaurant(id).getTables();
         Restaurant restaurant = new Restaurant(id, restaurantDTO, tables);
         deleteRestaurant(id);
-       return restaurants.add(restaurant);
+        restaurants.add(restaurant);
+        return restaurant;
     }
 
     public boolean updateCustomer(Customer updatedCustomer) {

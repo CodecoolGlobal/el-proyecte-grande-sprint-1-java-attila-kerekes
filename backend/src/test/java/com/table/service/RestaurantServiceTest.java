@@ -9,8 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -44,21 +46,37 @@ class RestaurantServiceTest {
     @Test
     void addRestaurant() {
         Restaurant restaurant1 = new Restaurant(new RestaurantDTO("restaurant1", "fakeEmail", "admin", "555-555", "street street 15201"));
-        when(tempRepositoryMock.addRestaurant(restaurant1)).thenReturn(true
-        );
+        when(tempRepositoryMock.addRestaurant(restaurant1)).thenReturn(restaurant1);
 
-        Assertions.assertTrue(restaurantService.addRestaurant(restaurant1));
+        Assertions.assertEquals(restaurant1, restaurantService.addRestaurant(restaurant1));
     }
 
     @Test
     void getRestaurantById() {
+        UUID uuid = UUID.randomUUID();
+        Restaurant restaurant1 = new Restaurant(uuid, new RestaurantDTO("restaurant1", "fakeEmail", "admin", "555-555", "street street 15201"), new ArrayList<>());
+        when(tempRepositoryMock.getRestaurant(uuid)).thenReturn(restaurant1);
+
+        Assertions.assertEquals(restaurant1, restaurantService.getRestaurantById(uuid));
     }
 
     @Test
     void deleteRestaurant() {
+        UUID uuid = UUID.randomUUID();
+        when(tempRepositoryMock.deleteRestaurant(uuid)).thenReturn(true);
+
+        Assertions.assertTrue(restaurantService.deleteRestaurant(uuid));
     }
 
     @Test
     void updateRestaurant() {
+        UUID uuid = UUID.randomUUID();
+        Restaurant restaurant2 = new Restaurant(new RestaurantDTO("restaurant2", "fakeEmail", "admin", "555-555", "street street 15201"));
+        RestaurantDTO restaurantDTO = new RestaurantDTO("restaurant2", "fakeEmail", "admin", "555-555", "street street 15201");
+
+
+        when(tempRepositoryMock.updateRestaurant(restaurantDTO, uuid)).thenReturn(restaurant2);
+
+        Assertions.assertEquals(restaurant2, restaurantService.updateRestaurant(restaurantDTO, uuid));
     }
 }
