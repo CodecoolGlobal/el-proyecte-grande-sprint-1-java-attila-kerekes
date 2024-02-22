@@ -24,6 +24,10 @@ public class Table {
         return this.reservations.addAll(List.of(reservations));
     }
 
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
