@@ -20,28 +20,34 @@ class RestaurantServiceTest {
 
     private TempRepository tempRepositoryMock;
     private RestaurantService restaurantService;
+
     @BeforeEach
-    void beforeEach(){
+    void beforeEach() {
         tempRepositoryMock = mock(TempRepository.class);
         restaurantService = new RestaurantService(tempRepositoryMock);
     }
 
     @Test
     void getRestaurants() {
-        Restaurant restaurant1 = new Restaurant(new RestaurantDTO("restaurant1", "fakeEmail", "admin", "555-555", "street street 15201") );
-        Restaurant restaurant2 = new Restaurant(new RestaurantDTO("restaurant2", "fakeEmail", "admin", "555-555", "street street 15201") );
+        Restaurant restaurant1 = new Restaurant(new RestaurantDTO("restaurant1", "fakeEmail", "admin", "555-555", "street street 15201"));
+        Restaurant restaurant2 = new Restaurant(new RestaurantDTO("restaurant2", "fakeEmail", "admin", "555-555", "street street 15201"));
         when(tempRepositoryMock.getRestaurants()).thenReturn(Set.of(
-             restaurant1,
-             restaurant2
+                restaurant1,
+                restaurant2
         ));
 
 
         Assertions.assertEquals(2, restaurantService.getRestaurants().size());
-        Assertions.assertTrue( restaurantService.getRestaurants().containsAll(List.of(restaurant1, restaurant2)));
+        Assertions.assertTrue(restaurantService.getRestaurants().containsAll(List.of(restaurant1, restaurant2)));
     }
 
     @Test
     void addRestaurant() {
+        Restaurant restaurant1 = new Restaurant(new RestaurantDTO("restaurant1", "fakeEmail", "admin", "555-555", "street street 15201"));
+        when(tempRepositoryMock.addRestaurant(restaurant1)).thenReturn(true
+        );
+
+        Assertions.assertTrue(restaurantService.addRestaurant(restaurant1));
     }
 
     @Test
