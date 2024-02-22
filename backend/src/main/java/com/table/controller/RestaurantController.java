@@ -1,5 +1,6 @@
 package com.table.controller;
 
+import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Restaurant;
 import com.table.repository.TempRepository;
@@ -22,8 +23,8 @@ public class RestaurantController {
 
     //Create
     @PostMapping("/restaurants")
-    public ResponseEntity<?> addRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
-        Restaurant restaurant = restaurantService.addRestaurant(new Restaurant(restaurantDTO));
+    public ResponseEntity<?> addRestaurant(@RequestBody NewRestaurantDTO newRestaurantDTO) {
+        RestaurantDTO restaurant = restaurantService.addRestaurant(newRestaurantDTO);
         return ResponseEntity.ok(restaurant);
     }
 
@@ -40,8 +41,8 @@ public class RestaurantController {
 
     //Update
     @PutMapping("/restaurants/{id}")
-    public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
-       Restaurant updatedRestaurant = restaurantService.updateRestaurant(restaurantDTO, id);
+    public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
+       RestaurantDTO updatedRestaurant = restaurantService.updateRestaurant(restaurantDTO);
        return ResponseEntity.ok(updatedRestaurant);
     }
 

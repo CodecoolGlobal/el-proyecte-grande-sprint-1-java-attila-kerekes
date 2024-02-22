@@ -72,12 +72,11 @@ public class TempRepository {
         return customers.removeIf(customer -> customer.getId().equals(id));
     }
 
-    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO, UUID id) {
-        List<Table> tables = getRestaurant(id).getTables();
-        Restaurant restaurant = new Restaurant(id, restaurantDTO, tables);
-        deleteRestaurant(id);
-        restaurants.add(restaurant);
-        return restaurant;
+    public Restaurant updateRestaurant(Restaurant restaurant) {
+        Restaurant oldRestaurant = getRestaurant(restaurant.getId());
+        oldRestaurant.update(restaurant);
+
+        return getRestaurant(restaurant.getId());
     }
 
     public boolean updateCustomer(Customer updatedCustomer) {
