@@ -22,7 +22,7 @@ public class RestaurantService {
         return tempRepository.getRestaurants();
     }
 
-    public boolean addRestaurant(Restaurant restaurant){
+    public Restaurant addRestaurant(Restaurant restaurant){
         return tempRepository.addRestaurant(restaurant);
     }
 
@@ -34,7 +34,7 @@ public class RestaurantService {
         return tempRepository.deleteRestaurant(uuid);
     }
 
-    public boolean updateRestaurant(RestaurantDTO restaurantDTO, UUID uuid){
+    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO, UUID uuid){
     return tempRepository.updateRestaurant(restaurantDTO, uuid);
     }
 }

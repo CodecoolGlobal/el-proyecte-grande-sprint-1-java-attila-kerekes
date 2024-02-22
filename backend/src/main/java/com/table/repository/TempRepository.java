@@ -21,8 +21,9 @@ public class TempRepository {
         this.restaurants = new HashSet<>();
     }
 
-    public boolean addRestaurant(Restaurant restaurant) {
-        return restaurants.add(restaurant);
+    public Restaurant addRestaurant(Restaurant restaurant) {
+        restaurants.add(restaurant);
+        return restaurant;
     }
 
     public boolean addReservation(Reservation reservation) {
@@ -54,9 +55,9 @@ public class TempRepository {
         return new HashSet<>(reservations);
     }
 
-    public Reservation getReservation(UUID id) {
+    public Reservation getReservation(long id) {
         return reservations.stream()
-                .filter(reservation -> reservation.id().equals(id)).findFirst()
+                .filter(reservation -> reservation.getID()==(id)).findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
 
@@ -64,19 +65,20 @@ public class TempRepository {
         return restaurants.removeIf(restaurant -> restaurant.getId().equals(id));
     }
 
-    public boolean deleteReservation(UUID id) {
-        return reservations.removeIf(reservation -> reservation.id().equals(id));
+    public boolean deleteReservation(long id) {
+        return reservations.removeIf(reservation -> reservation.getID()==(id));
     }
 
     public boolean deleteCustomer(UUID id) {
         return customers.removeIf(customer -> customer.getPublicId().equals(id));
     }
 
-    public boolean updateRestaurant(RestaurantDTO restaurantDTO, UUID id) {
+    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO, UUID id) {
         List<Table> tables = getRestaurant(id).getTables();
         Restaurant restaurant = new Restaurant(id, restaurantDTO, tables);
         deleteRestaurant(id);
-       return restaurants.add(restaurant);
+        restaurants.add(restaurant);
+        return restaurant;
     }
 
     public Customer updateCustomer(Customer customer) {

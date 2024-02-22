@@ -12,8 +12,9 @@ import java.util.Set;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/restaurants")
 public class RestaurantController {
-    private RestaurantService restaurantService;
+    private final RestaurantService restaurantService;
 
     @Autowired
     public RestaurantController(RestaurantService restaurantService) {
@@ -21,38 +22,32 @@ public class RestaurantController {
     }
 
     //Create
-    @PostMapping("/restaurants")
+    @PostMapping
     public ResponseEntity<?> addRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
-        if (restaurantService.addRestaurant(new Restaurant(restaurantDTO))) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+        Restaurant restaurant = restaurantService.addRestaurant(new Restaurant(restaurantDTO));
+        return ResponseEntity.ok(restaurant);
     }
 
     //Read
-    @GetMapping("/restaurants")
+    @GetMapping
     public Set<Restaurant> getAllRestaurants() {
         return restaurantService.getRestaurants();
     }
 
-    @GetMapping("/restaurants/{id}")
+    @GetMapping("/{id}")
     public Restaurant getRestaurantById(@PathVariable UUID id) {
         return restaurantService.getRestaurantById(id);
     }
 
     //Update
-    @PutMapping("/restaurants/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
-        if (restaurantService.updateRestaurant(restaurantDTO, id)) {
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.noContent().build();
-        }
+       Restaurant updatedRestaurant = restaurantService.updateRestaurant(restaurantDTO, id);
+       return ResponseEntity.ok(updatedRestaurant);
     }
 
     //Delete
-    @DeleteMapping("/restaurants/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable UUID id) {
         if (restaurantService.deleteRestaurant(id)) {
             return ResponseEntity.ok().build();

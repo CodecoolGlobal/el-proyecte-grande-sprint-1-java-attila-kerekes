@@ -21,11 +21,17 @@ public class ReservationService {
     }
 
     public boolean createNewReservation(Reservation reservation) {
+        if (reservation == null){
+            return false;
+        }
         return tempRepository.addReservation(reservation);
     }
 
     public boolean deleteReservation(Reservation reservation) {
-        return tempRepository.deleteReservation(reservation.id());
+        if (reservation == null){
+            return false;
+        }
+        return tempRepository.deleteReservation(reservation.getID());
     }
 
     public Collection<Reservation> getAllByRestaurantID(UUID id) {
@@ -33,7 +39,7 @@ public class ReservationService {
         reservationListByRestaurant.addAll(
                 tempRepository.getAllReservation()
                         .stream()
-                        .filter(reservation -> reservation.table().getRestaurant().getId().equals(id))
+                        .filter(reservation -> reservation.getTable().getRestaurant().getId().equals(id))
                         .toList());
 
         return reservationListByRestaurant;
@@ -45,7 +51,8 @@ public class ReservationService {
         reservationListByCustomer.addAll(
                 tempRepository.getAllReservation()
                         .stream()
-                        .filter(reservation -> reservation.customer().getPublicId().equals(id))
+
+                        .filter(reservation -> reservation.getCustomer().getPublicId().equals(id))
                         .toList());
 
         return reservationListByCustomer;
