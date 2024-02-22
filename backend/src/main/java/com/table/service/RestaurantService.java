@@ -1,5 +1,6 @@
 package com.table.service;
 
+import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Restaurant;
 import com.table.repository.TempRepository;
@@ -22,19 +23,22 @@ public class RestaurantService {
         return tempRepository.getRestaurants();
     }
 
-    public Restaurant addRestaurant(Restaurant restaurant){
-        return tempRepository.addRestaurant(restaurant);
+    public RestaurantDTO addRestaurant(NewRestaurantDTO newRestaurantDTO) {
+        Restaurant restaurant = tempRepository.addRestaurant(new Restaurant(newRestaurantDTO, UUID.randomUUID()));
+        return new RestaurantDTO(restaurant.getId(), restaurant.getName(), restaurant.getEmail(), restaurant.getPassword(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
 
-    public Restaurant getRestaurantById(UUID uuid){
+    public Restaurant getRestaurantById(UUID uuid) {
         return tempRepository.getRestaurant(uuid);
     }
 
-    public boolean deleteRestaurant(UUID uuid){
+    public boolean deleteRestaurant(UUID uuid) {
         return tempRepository.deleteRestaurant(uuid);
     }
 
-    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO, UUID uuid){
-    return tempRepository.updateRestaurant(restaurantDTO, uuid);
+    public RestaurantDTO updateRestaurant(RestaurantDTO restaurantDTO) {
+        Restaurant restaurant = new Restaurant(restaurantDTO);
+        Restaurant updatedRestaurant = tempRepository.updateRestaurant(restaurant);
+        return new RestaurantDTO(updatedRestaurant.getId(), updatedRestaurant.getName(), updatedRestaurant.getEmail(), updatedRestaurant.getPassword(), updatedRestaurant.getPhoneNumber(), updatedRestaurant.getAddress());
     }
 }

@@ -1,6 +1,7 @@
 package com.table.service;
 
 import com.table.controller.dto.CustomerDTO;
+import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Customer;
 import com.table.model.Reservation;
@@ -47,6 +48,7 @@ class ReservationServiceTest {
 
     @Test
     void createNewReservationWithValidArgument() {
+        UUID uuid = UUID.randomUUID();
         CustomerDTO testCustomerDTO = new CustomerDTO(
                 "email@email.com",
                 "password",
@@ -55,6 +57,7 @@ class ReservationServiceTest {
                 "+369990090");
         Customer testCustomer = new Customer(testCustomerDTO);
         RestaurantDTO testRestaurantDTO = new RestaurantDTO(
+                uuid,
                 "Üvegtigris",
                 "email@email",
                 "password",
@@ -81,6 +84,7 @@ class ReservationServiceTest {
 
     @Test
     void getAllByRestaurantIDWithOneRestaurant() {
+        UUID uuid = UUID.randomUUID();
         CustomerDTO testCustomerDTO = new CustomerDTO(
                 "email@email.com",
                 "password",
@@ -89,6 +93,7 @@ class ReservationServiceTest {
                 "+369990090");
         Customer testCustomer = new Customer(testCustomerDTO);
         RestaurantDTO testRestaurantDTO = new RestaurantDTO(
+                uuid,
                 "Üvegtigris",
                 "email@email",
                 "password",
@@ -117,6 +122,7 @@ class ReservationServiceTest {
 
     @Test
     void getAllByRestaurantIDWithMoreRestaurant() {
+
         CustomerDTO testCustomerDTO = new CustomerDTO(
                 "email@email.com",
                 "password",
@@ -124,15 +130,18 @@ class ReservationServiceTest {
                 "LastName",
                 "+369990090");
         Customer testCustomer = new Customer(testCustomerDTO);
-        RestaurantDTO testRestaurantDTO = new RestaurantDTO(
+        NewRestaurantDTO testRestaurantDTO = new NewRestaurantDTO(
                 "Üvegtigris",
                 "email@email",
                 "password",
                 "+1111111345",
                 "Address");
-        Restaurant testRestaurant1 = new Restaurant(testRestaurantDTO);
-        Restaurant testRestaurant2 = new Restaurant(testRestaurantDTO);
-        Restaurant testRestaurant3 = new Restaurant(testRestaurantDTO);
+        UUID uuid1 = UUID.randomUUID();
+        UUID uuid2 = UUID.randomUUID();
+        UUID uuid3 = UUID.randomUUID();
+        Restaurant testRestaurant1 = new Restaurant(testRestaurantDTO, uuid1);
+        Restaurant testRestaurant2 = new Restaurant(testRestaurantDTO, uuid2);
+        Restaurant testRestaurant3 = new Restaurant(testRestaurantDTO, uuid3);
         Table testTable = new Table(5, "tablü", testRestaurant1);
         Table testTable2 = new Table(5, "tablü", testRestaurant2);
         Table testTable3 = new Table(5, "tablü", testRestaurant3);
@@ -175,6 +184,7 @@ class ReservationServiceTest {
 
     @Test
     void getAllByCustomerID() {
+        UUID uuid = UUID.randomUUID();
 
         CustomerDTO testCustomerDTO = new CustomerDTO(
                 "email@email.com",
@@ -185,6 +195,7 @@ class ReservationServiceTest {
         Customer testCustomer1 = new Customer(testCustomerDTO);
         Customer testCustomer2 = new Customer(testCustomerDTO);
         RestaurantDTO testRestaurantDTO = new RestaurantDTO(
+                uuid,
                 "Üvegtigris",
                 "email@email",
                 "password",

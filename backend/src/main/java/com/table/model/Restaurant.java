@@ -1,5 +1,6 @@
 package com.table.model;
 
+import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 
 import java.util.ArrayList;
@@ -8,7 +9,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Restaurant {
-    private final UUID id;
+    private UUID publicId;
+    private long privateId;
     private String name;
     private String email;
     private String password;
@@ -16,8 +18,18 @@ public class Restaurant {
     private String address;
     private final List<Table> tables;
 
+    public Restaurant(NewRestaurantDTO newRestaurantDTO, UUID id) {
+        this.publicId = id;
+        this.name = newRestaurantDTO.name();
+        this.email = newRestaurantDTO.email();
+        this.password = newRestaurantDTO.password();
+        this.phoneNumber = newRestaurantDTO.phoneNumber();
+        this.address = newRestaurantDTO.address();
+        this.tables = new ArrayList<>();
+    }
+
     public Restaurant(RestaurantDTO restaurantDTO) {
-        this.id = UUID.randomUUID();
+        this.publicId = restaurantDTO.id();
         this.name = restaurantDTO.name();
         this.email = restaurantDTO.email();
         this.password = restaurantDTO.password();
@@ -26,14 +38,34 @@ public class Restaurant {
         this.tables = new ArrayList<>();
     }
 
-    public Restaurant(UUID id, RestaurantDTO restaurantDTO, List<Table> tables) {
-        this.id = id;
-        this.name = restaurantDTO.name();
-        this.email = restaurantDTO.email();
-        this.password = restaurantDTO.password();
-        this.phoneNumber = restaurantDTO.phoneNumber();
-        this.address = restaurantDTO.address();
-        this.tables = new ArrayList<>(tables);
+
+
+    public void setPublicId(UUID publicId) {
+        this.publicId = publicId;
+    }
+
+    public void setPrivateId(long privateId) {
+        this.privateId = privateId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public boolean addTable(Table... tables) {
@@ -41,7 +73,7 @@ public class Restaurant {
     }
 
     public UUID getId() {
-        return id;
+        return publicId;
     }
 
     public String getName() {
@@ -82,11 +114,11 @@ public class Restaurant {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Restaurant that = (Restaurant) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(publicId, that.publicId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(publicId);
     }
 }
