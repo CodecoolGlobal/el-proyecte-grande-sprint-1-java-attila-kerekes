@@ -47,13 +47,21 @@ class ReservationServiceTest {
 
     @Test
     void createNewReservationWithValidArgument() {
+        UUID id = UUID.randomUUID();
         CustomerDTO testCustomerDTO = new CustomerDTO(
+                id,
                 "email@email.com",
                 "password",
                 "FirstName",
                 "LastName",
                 "+369990090");
-        Customer testCustomer = new Customer(testCustomerDTO);
+        Customer testCustomer = new Customer(
+                id,
+                "email@email.com",
+                "password",
+                "FirstName",
+                "LastName",
+                "+369990090");
         RestaurantDTO testRestaurantDTO = new RestaurantDTO(
                 "Üvegtigris",
                 "email@email",
@@ -81,13 +89,22 @@ class ReservationServiceTest {
 
     @Test
     void getAllByRestaurantIDWithOneRestaurant() {
+        UUID id = UUID.randomUUID();
         CustomerDTO testCustomerDTO = new CustomerDTO(
+                id,
                 "email@email.com",
                 "password",
                 "FirstName",
                 "LastName",
                 "+369990090");
-        Customer testCustomer = new Customer(testCustomerDTO);
+        Customer testCustomer = new Customer(
+                id,
+                "email@email.com",
+                "password",
+                "FirstName",
+                "LastName",
+                "+369990090"
+        );
         RestaurantDTO testRestaurantDTO = new RestaurantDTO(
                 "Üvegtigris",
                 "email@email",
@@ -117,13 +134,21 @@ class ReservationServiceTest {
 
     @Test
     void getAllByRestaurantIDWithMoreRestaurant() {
+        UUID id = UUID.randomUUID();
         CustomerDTO testCustomerDTO = new CustomerDTO(
+                id,
                 "email@email.com",
                 "password",
                 "FirstName",
                 "LastName",
                 "+369990090");
-        Customer testCustomer = new Customer(testCustomerDTO);
+        Customer testCustomer = new Customer(
+                id,
+                "email@email.com",
+                "password",
+                "FirstName",
+                "LastName",
+                "+369990090");
         RestaurantDTO testRestaurantDTO = new RestaurantDTO(
                 "Üvegtigris",
                 "email@email",
@@ -175,15 +200,30 @@ class ReservationServiceTest {
 
     @Test
     void getAllByCustomerID() {
-
+        UUID id = UUID.randomUUID();
         CustomerDTO testCustomerDTO = new CustomerDTO(
+                id,
                 "email@email.com",
                 "password",
                 "FirstName",
                 "LastName",
                 "+369990090");
-        Customer testCustomer1 = new Customer(testCustomerDTO);
-        Customer testCustomer2 = new Customer(testCustomerDTO);
+        Customer testCustomer1 = new Customer(
+                id,
+                "email@email.com",
+                "password",
+                "FirstName",
+                "LastName",
+                "+369990090"
+        );
+        Customer testCustomer2 = new Customer(
+                id,
+                "email@email.com",
+                "password",
+                "FirstName",
+                "LastName",
+                "+369990090"
+        );
         RestaurantDTO testRestaurantDTO = new RestaurantDTO(
                 "Üvegtigris",
                 "email@email",
@@ -223,10 +263,9 @@ class ReservationServiceTest {
                 testTable);
 
         when(tempRepository.getAllReservation())
-                .thenReturn(Set.of(testReservationExpected1,
-                        testReservationBad1,testReservationBad2));
+                .thenReturn(Set.of(testReservationExpected1));
 
-        Collection<Reservation> expected = reservationService.getAllByCustomerID(testCustomer1.getId());
+        Collection<Reservation> expected = reservationService.getAllByCustomerID(testCustomer1.getPublicId());
 
         assertEquals(expected, List.of(testReservationExpected1));
     }
