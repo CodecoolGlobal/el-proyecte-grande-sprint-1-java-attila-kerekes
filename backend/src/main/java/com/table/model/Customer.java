@@ -1,28 +1,24 @@
 package com.table.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@Entity
 public class Customer {
-    private final UUID publicId;
+    @Id
+    private long id;
+    private final UUID publicId = UUID.randomUUID();
     private String email;
     private String password;
     private String firstName;
     private String lastName;
-    private final List<Reservation> reservations;
+    @OneToMany(mappedBy = "customer")
+    private final List<Reservation> reservations = new ArrayList<>();
     private String phoneNumber;
-
-    public Customer(UUID id, String email, String password, String firstName, String lastName, String phoneNumber) {
-        this.publicId = id;
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.reservations = new ArrayList<>();
-        this.phoneNumber = phoneNumber;
-    }
 
     public boolean addReservation(Reservation ... reservations) {
         return this.reservations.addAll(List.of(reservations));
