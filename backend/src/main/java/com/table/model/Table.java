@@ -1,19 +1,28 @@
 package com.table.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@Entity
 public class Table {
-    private final UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  long privateId;
+    private final UUID publicId;
     private int capacity;
     private String name;
+    @OneToMany
     private final List<Reservation> reservations;
+    @ManyToOne
+    @JoinColumn(name = "restaurant_privateId", referencedColumnName = "privateId", nullable = false)
     private Restaurant restaurant;
 
     public Table(int capacity, String name, Restaurant restaurant) {
-        this.id = UUID.randomUUID();
+        this.publicId = UUID.randomUUID();
         this.capacity = capacity;
         this.name = name;
         this.reservations = new ArrayList<>();
@@ -33,11 +42,11 @@ public class Table {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Table table = (Table) object;
-        return Objects.equals(id, table.id);
+        return Objects.equals(privateId, table.privateId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(privateId);
     }
 }
