@@ -1,28 +1,28 @@
 package com.table.model;
 
+import jakarta.persistence.*;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
 public class Reservation{
-   private UUID publicID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+   private UUID publicID = UUID.randomUUID();
    private long ID;
    private LocalDateTime start;
    private Duration duration;
    private int numberOfCustomers;
+   @ManyToOne
+   @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
    private Customer customer;
-   private Table table;
 
-    public Reservation(UUID publicID, long ID, LocalDateTime start,
-                       Duration duration, int numberOfCustomers, Customer customer, Table table) {
-        this.publicID = publicID;
-        this.ID = ID;
-        this.start = start;
-        this.duration = duration;
-        this.numberOfCustomers = numberOfCustomers;
-        this.customer = customer;
-        this.table = table;
-    }
+   @OneToMany
+   @JoinColumn(name = "table_id", referencedColumnName = "id")
+   private Table table;
 
     public UUID getPublicID() {
         return publicID;
