@@ -1,43 +1,30 @@
 package com.table.model;
 
-import com.table.controller.dto.NewRestaurantDTO;
-import com.table.controller.dto.RestaurantDTO;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+@Entity
 public class Restaurant {
     private UUID publicId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long privateId;
     private String name;
     private String email;
     private String password;
     private String phoneNumber;
     private String address;
-    private final List<Table> tables;
+    @OneToMany(mappedBy = "restaurant_privateId")
+    private List<Table> tables;
 
-    public Restaurant(NewRestaurantDTO newRestaurantDTO, UUID id) {
-        this.publicId = id;
-        this.name = newRestaurantDTO.name();
-        this.email = newRestaurantDTO.email();
-        this.password = newRestaurantDTO.password();
-        this.phoneNumber = newRestaurantDTO.phoneNumber();
-        this.address = newRestaurantDTO.address();
-        this.tables = new ArrayList<>();
+
+    public Restaurant() {
+
     }
-
-    public Restaurant(RestaurantDTO restaurantDTO) {
-        this.publicId = restaurantDTO.id();
-        this.name = restaurantDTO.name();
-        this.email = restaurantDTO.email();
-        this.password = restaurantDTO.password();
-        this.phoneNumber = restaurantDTO.phoneNumber();
-        this.address = restaurantDTO.address();
-        this.tables = new ArrayList<>();
-    }
-
 
 
     public void setPublicId(UUID publicId) {
