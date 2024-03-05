@@ -39,7 +39,6 @@ public class Restaurant {
     }
 
 
-
     public void setPublicId(UUID publicId) {
         this.publicId = publicId;
     }

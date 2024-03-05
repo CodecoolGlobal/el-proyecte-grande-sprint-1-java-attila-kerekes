@@ -23,7 +23,7 @@ public class RestaurantController {
     }
 
     //Create
-    @PostMapping("/restaurants")
+    @PostMapping
     public ResponseEntity<?> addRestaurant(@RequestBody NewRestaurantDTO newRestaurantDTO) {
         RestaurantDTO restaurant = restaurantService.addRestaurant(newRestaurantDTO);
 
@@ -42,7 +42,7 @@ public class RestaurantController {
     }
 
     //Update
-    @PutMapping("/restaurants/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDTO restaurantDTO) {
        RestaurantDTO updatedRestaurant = restaurantService.updateRestaurant(restaurantDTO);
        return ResponseEntity.ok(updatedRestaurant);
