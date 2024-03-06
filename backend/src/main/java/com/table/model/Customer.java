@@ -10,18 +10,21 @@ import java.util.UUID;
 @Entity
 public class Customer {
     @Id
-    private long id;
-    private final UUID publicId = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long privateId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID publicId = UUID.randomUUID();
     private String email;
     private String password;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "customer")
-    private final List<Reservation> reservations = new ArrayList<>();
     private String phoneNumber;
+    @OneToMany(mappedBy = "customer")
+    private List<Reservation> reservations;
 
-    public boolean addReservation(Reservation ... reservations) {
-        return this.reservations.addAll(List.of(reservations));
+
+    public long getPrivateId() {
+        return privateId;
     }
 
     public UUID getPublicId() {
@@ -44,12 +47,21 @@ public class Customer {
         return lastName;
     }
 
-    public List<Reservation> getReservations() {
-        return new ArrayList<>(reservations);
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+
+    public void setPrivateId(long privateId) {
+        this.privateId = privateId;
+    }
+
+    public void setPublicId(UUID publicId) {
+        this.publicId = publicId;
     }
 
     public void setEmail(String email) {
@@ -72,14 +84,10 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Customer update(Customer customer) {
-        this.firstName = customer.getFirstName();
-        this.lastName = customer.getLastName();
-        this.email = customer.getEmail();
-        this.password = customer.getPassword();
-        this.phoneNumber = customer.getPhoneNumber();
-        return this;
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
+
 
     @Override
     public boolean equals(Object o) {
