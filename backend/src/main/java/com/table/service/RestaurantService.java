@@ -1,9 +1,9 @@
 package com.table.service;
 
-import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Restaurant;
 import com.table.repository.RestaurantRepo;
+import com.table.repository.TableRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +14,12 @@ import java.util.UUID;
 @Service
 public class RestaurantService {
     private RestaurantRepo restaurantRepo;
+    private TableRepo tableRepo;
 
     @Autowired
-    public RestaurantService(RestaurantRepo restaurantRepo) {
+    public RestaurantService(RestaurantRepo restaurantRepo, TableRepo tableRepo) {
         this.restaurantRepo = restaurantRepo;
+        this.tableRepo = tableRepo;
     }
 
     public List<Restaurant> getRestaurants() {
@@ -25,10 +27,14 @@ public class RestaurantService {
     }
 
     // TODO: ADD METHOD
-    public RestaurantDTO addRestaurant(NewRestaurantDTO newRestaurantDTO) {
+    public Restaurant addRestaurant(RestaurantDTO restaurantDTO) {
         Restaurant restaurant = new Restaurant();
-        restaurant.update(newRestaurantDTO);
-        return new RestaurantDTO(restaurant.getId(), restaurant.getName(), restaurant.getEmail(), restaurant.getPassword(), restaurant.getPhoneNumber(), restaurant.getAddress());
+        restaurant.setName(restaurantDTO.name());
+        restaurant.setAddress(restaurantDTO.address());
+        restaurant.setEmail(restaurantDTO.email());
+        restaurant.setPassword(restaurantDTO.password());
+        restaurant.setPhoneNumber(restaurantDTO.phoneNumber());
+        return restaurant;
     }
 
     public Restaurant getRestaurantById(UUID uuid) {
@@ -39,9 +45,15 @@ public class RestaurantService {
         return restaurantRepo.deleteRestaurantByPublicId(uuid);
     }
 
-    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO) {
-        Restaurant restaurant = new Restaurant();
-        restaurant.update(restaurantDTO);
+    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO, UUID uuid) {
+        Restaurant restaurant = getRestaurantById(uuid);
+        restaurant.setName(restaurantDTO.name());
+        restaurant.setAddress(restaurantDTO.address());
+        restaurant.setEmail(restaurantDTO.email());
+        restaurant.setPassword(restaurantDTO.password());
+        restaurant.setPhoneNumber(restaurantDTO.phoneNumber());
         restaurantRepo.save(restaurant);
         return restaurant;
+    }
+
 }
