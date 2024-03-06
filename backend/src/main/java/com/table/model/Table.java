@@ -1,12 +1,17 @@
 package com.table.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Table {
     @Id
@@ -23,64 +28,4 @@ public class Table {
     private Restaurant restaurant;
 
 
-    public long getPrivateId() {
-        return privateId;
-    }
-
-    public UUID getPublicId() {
-        return publicId;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
-
-    public void setPrivateId(long privateId) {
-        this.privateId = privateId;
-    }
-
-    public void setPublicId(UUID publicId) {
-        this.publicId = publicId;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
-
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Table table = (Table) object;
-        return Objects.equals(privateId, table.privateId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(privateId);
-    }
 }
