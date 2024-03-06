@@ -1,9 +1,7 @@
 package com.table.model;
 
-import com.table.controller.dto.RestaurantDTO;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -11,8 +9,8 @@ import java.util.UUID;
 @Entity
 public class Restaurant {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long privateId;
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID publicId;
     private String name;
@@ -23,12 +21,17 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant")
     private List<Table> tables;
-
+    @ManyToMany(mappedBy = "restaurant")
+    private List<Cuisine> cuisines;
 
     public Restaurant() {
     }
 
-    public UUID getId() {
+    public long getPrivateId() {
+        return privateId;
+    }
+
+    public UUID getPublicId() {
         return publicId;
     }
 
@@ -53,17 +56,49 @@ public class Restaurant {
     }
 
     public List<Table> getTables() {
-        return new ArrayList<>(tables);
+        return tables;
     }
 
-    public Restaurant update(RestaurantDTO restaurantDTO) {
-        this.name = restaurantDTO.name();
-        this.email = restaurantDTO.email();
-        this.password = restaurantDTO.password();
-        this.phoneNumber = restaurantDTO.phoneNumber();
-        this.address = restaurantDTO.address();
-        return this;
+    public List<Cuisine> getCuisines() {
+        return cuisines;
     }
+
+    public void setPrivateId(long privateId) {
+        this.privateId = privateId;
+    }
+
+    public void setPublicId(UUID publicId) {
+        this.publicId = publicId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setTables(List<Table> tables) {
+        this.tables = tables;
+    }
+
+    public void setCuisines(List<Cuisine> cuisines) {
+        this.cuisines = cuisines;
+    }
+
 
     @Override
     public boolean equals(Object o) {

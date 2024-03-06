@@ -10,35 +10,66 @@ import java.util.UUID;
 @Entity
 public class Table {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  long privateId;
-    private  UUID publicId;
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long privateId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID publicId;
     private int capacity;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "table")
     private List<Reservation> reservations;
     @ManyToOne
     @JoinColumn(name = "restaurant_privateId", referencedColumnName = "privateId", nullable = false)
     private Restaurant restaurant;
 
-    public Table(int capacity, String name, Restaurant restaurant) {
-        this.publicId = UUID.randomUUID();
-        this.capacity = capacity;
-        this.name = name;
-        this.reservations = new ArrayList<>();
-        this.restaurant = restaurant;
+
+    public long getPrivateId() {
+        return privateId;
     }
 
-    public Table() {
-
+    public UUID getPublicId() {
+        return publicId;
     }
 
-    public boolean addReservation(Reservation... reservations) {
-        return this.reservations.addAll(List.of(reservations));
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 
     public Restaurant getRestaurant() {
         return restaurant;
+    }
+
+    public void setPrivateId(long privateId) {
+        this.privateId = privateId;
+    }
+
+    public void setPublicId(UUID publicId) {
+        this.publicId = publicId;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
     @Override
