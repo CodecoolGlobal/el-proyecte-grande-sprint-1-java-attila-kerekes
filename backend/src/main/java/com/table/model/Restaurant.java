@@ -12,6 +12,7 @@ public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long privateId;
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID publicId;
     private String name;
     private String email;

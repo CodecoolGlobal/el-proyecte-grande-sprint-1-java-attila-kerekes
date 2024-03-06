@@ -12,6 +12,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long privateId;
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID publicId = UUID.randomUUID();
     private String email;
     private String password;
@@ -19,12 +20,8 @@ public class Customer {
     private String lastName;
     private String phoneNumber;
     @OneToMany(mappedBy = "customer")
-//  private final List<Reservation> reservations = new ArrayList<>();
     private List<Reservation> reservations;
 
-//    public boolean addReservation(Reservation ... reservations) {
-//        return this.reservations.addAll(List.of(reservations));
-//    }
 
     public long getPrivateId() {
         return privateId;
@@ -58,6 +55,7 @@ public class Customer {
         return reservations;
     }
 
+
     public void setPrivateId(long privateId) {
         this.privateId = privateId;
     }
@@ -90,14 +88,6 @@ public class Customer {
         this.reservations = reservations;
     }
 
-    //    public Customer update(Customer customer) {
-//        this.firstName = customer.getFirstName();
-//        this.lastName = customer.getLastName();
-//        this.email = customer.getEmail();
-//        this.password = customer.getPassword();
-//        this.phoneNumber = customer.getPhoneNumber();
-//        return this;
-//    }
 
     @Override
     public boolean equals(Object o) {

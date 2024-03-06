@@ -12,6 +12,7 @@ public class Table {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long privateId;
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID publicId;
     private int capacity;
     private String name;
@@ -20,18 +21,6 @@ public class Table {
     @ManyToOne
     @JoinColumn(name = "restaurant_privateId", referencedColumnName = "privateId", nullable = false)
     private Restaurant restaurant;
-
-//    public Table(int capacity, String name, Restaurant restaurant) {
-//        this.publicId = UUID.randomUUID();
-//        this.capacity = capacity;
-//        this.name = name;
-//        this.reservations = new ArrayList<>();
-//        this.restaurant = restaurant;
-//    }
-
-//    public boolean addReservation(Reservation... reservations) {
-//        return this.reservations.addAll(List.of(reservations));
-//    }
 
 
     public long getPrivateId() {
