@@ -12,11 +12,11 @@ public class Table {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long privateId;
-    private final UUID publicId;
+    private  UUID publicId;
     private int capacity;
     private String name;
     @OneToMany
-    private final List<Reservation> reservations;
+    private List<Reservation> reservations;
     @ManyToOne
     @JoinColumn(name = "restaurant_privateId", referencedColumnName = "privateId", nullable = false)
     private Restaurant restaurant;
@@ -27,6 +27,10 @@ public class Table {
         this.name = name;
         this.reservations = new ArrayList<>();
         this.restaurant = restaurant;
+    }
+
+    public Table() {
+
     }
 
     public boolean addReservation(Reservation... reservations) {

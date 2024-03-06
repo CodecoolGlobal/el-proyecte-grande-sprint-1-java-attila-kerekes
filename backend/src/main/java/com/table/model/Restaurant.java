@@ -1,5 +1,6 @@
 package com.table.model;
 
+import com.table.controller.dto.RestaurantDTO;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -9,54 +10,22 @@ import java.util.UUID;
 
 @Entity
 public class Restaurant {
-    private UUID publicId;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long privateId;
+    private long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID publicId;
     private String name;
     private String email;
     private String password;
     private String phoneNumber;
     private String address;
-    @OneToMany(mappedBy = "restaurant_privateId")
+
+    @OneToMany(mappedBy = "restaurant")
     private List<Table> tables;
 
 
     public Restaurant() {
-
-    }
-
-
-    public void setPublicId(UUID publicId) {
-        this.publicId = publicId;
-    }
-
-    public void setPrivateId(long privateId) {
-        this.privateId = privateId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public boolean addTable(Table... tables) {
-        return this.tables.addAll(List.of(tables));
     }
 
     public UUID getId() {
@@ -87,12 +56,12 @@ public class Restaurant {
         return new ArrayList<>(tables);
     }
 
-    public Restaurant update(Restaurant restaurant) {
-        this.name = restaurant.getName();
-        this.email = restaurant.getEmail();
-        this.password = restaurant.getPassword();
-        this.phoneNumber = restaurant.getPhoneNumber();
-        this.address = restaurant.getAddress();
+    public Restaurant update(RestaurantDTO restaurantDTO) {
+        this.name = restaurantDTO.name();
+        this.email = restaurantDTO.email();
+        this.password = restaurantDTO.password();
+        this.phoneNumber = restaurantDTO.phoneNumber();
+        this.address = restaurantDTO.address();
         return this;
     }
 

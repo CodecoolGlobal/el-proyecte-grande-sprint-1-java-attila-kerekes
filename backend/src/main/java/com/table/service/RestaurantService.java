@@ -3,42 +3,45 @@ package com.table.service;
 import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Restaurant;
-import com.table.repository.TempRepository;
+import com.table.repository.RestaurantRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
 public class RestaurantService {
-    private TempRepository tempRepository;
+    private RestaurantRepo restaurantRepo;
 
     @Autowired
-    public RestaurantService(TempRepository tempRepository) {
-        this.tempRepository = tempRepository;
+    public RestaurantService(RestaurantRepo restaurantRepo) {
+        this.restaurantRepo = restaurantRepo;
     }
 
-    public Set<Restaurant> getRestaurants() {
-        return tempRepository.getRestaurants();
+    public List<Restaurant> getRestaurants() {
+        return restaurantRepo.findAll();
     }
 
+    // TODO: ADD METHOD
     public RestaurantDTO addRestaurant(NewRestaurantDTO newRestaurantDTO) {
-        Restaurant restaurant = tempRepository.addRestaurant(new Restaurant(newRestaurantDTO, UUID.randomUUID()));
+        Restaurant restaurant = new Restaurant();
+        restaurant.update(newRestaurantDTO);
         return new RestaurantDTO(restaurant.getId(), restaurant.getName(), restaurant.getEmail(), restaurant.getPassword(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
 
     public Restaurant getRestaurantById(UUID uuid) {
-        return tempRepository.getRestaurant(uuid);
+        return restaurantRepo.findByPublicId(uuid).orElseThrow(NoSuchElementException::new);
     }
 
-    public boolean deleteRestaurant(UUID uuid) {
-        return tempRepository.deleteRestaurant(uuid);
+    public Restaurant deleteRestaurant(UUID uuid) {
+        return restaurantRepo.deleteRestaurantByPublicId(uuid);
     }
 
-    public RestaurantDTO updateRestaurant(RestaurantDTO restaurantDTO) {
-        Restaurant restaurant = new Restaurant(restaurantDTO);
-        Restaurant updatedRestaurant = tempRepository.updateRestaurant(restaurant);
-        return new RestaurantDTO(updatedRestaurant.getId(), updatedRestaurant.getName(), updatedRestaurant.getEmail(), updatedRestaurant.getPassword(), updatedRestaurant.getPhoneNumber(), updatedRestaurant.getAddress());
-    }
+    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO) {
+        Restaurant restaurant = new Restaurant();
+        restaurant.update(restaurantDTO);
+        restaurantRepo.save(restaurant);
+        return restaurant;
 }
