@@ -26,7 +26,58 @@ public class Reservation {
     private Customer customer;
     @ManyToOne
     @JoinColumn(name = "table_privateId", referencedColumnName = "privateId", nullable = false)
-    private Table table;
+    private DiningSpot table;
 
 
+    public UUID getPublicID() {
+        return publicID;
+    }
+
+    public LocalDateTime getStart() {
+        return start;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public int getNumberOfCustomers() {
+        return numberOfCustomers;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public DiningSpot getTable() {
+        return table;
+    }
+
+    public void setPrivateId(long privateId) {
+        this.privateId = privateId;
+    }
+
+    public void setPublicID(UUID publicID) {
+        this.publicID = publicID;
+    }
+
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public void setNumberOfCustomers(int numberOfCustomers) {
+        this.numberOfCustomers = numberOfCustomers;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public void setTable(DiningSpot table) {
+        this.table = table;
+    }
 }
