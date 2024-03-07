@@ -18,8 +18,8 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_seq_gen")
     @SequenceGenerator(name = "restaurant_seq_gen", sequenceName = "restaurant_seq", initialValue = 1, allocationSize = 1)
     private long id;
-    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     //TODO: FIX THIS
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
     private String name;
     private String email;

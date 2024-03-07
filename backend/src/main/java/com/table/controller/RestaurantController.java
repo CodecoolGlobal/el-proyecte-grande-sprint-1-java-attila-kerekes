@@ -1,11 +1,10 @@
 package com.table.controller;
 
+import com.table.controller.dto.LogInRequestDTO;
 import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
-import com.table.model.Restaurant;
 import com.table.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +24,11 @@ public class RestaurantController {
     @PostMapping
     public RestaurantDTO addRestaurant(@RequestBody NewRestaurantDTO NewRestaurantDTO) {
         return restaurantService.addRestaurant(NewRestaurantDTO);
+    }
+
+    @PostMapping("/login")
+    public UUID logInRestaurant(@RequestBody LogInRequestDTO logInRequestDTO) {
+        return restaurantService.findByEmailAndPassword(logInRequestDTO.email(), logInRequestDTO.password());
     }
 
     //Read
