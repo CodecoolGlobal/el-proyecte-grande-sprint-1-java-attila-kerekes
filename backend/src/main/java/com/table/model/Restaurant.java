@@ -3,7 +3,6 @@ package com.table.model;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -20,7 +19,7 @@ public class Restaurant {
     private String address;
 
     @OneToMany(mappedBy = "restaurant")
-    private List<Table> tables;
+    private List<DiningSpot> tables;
     @ManyToMany(mappedBy = "restaurant")
     private List<Cuisine> cuisines;
 
@@ -55,7 +54,7 @@ public class Restaurant {
         return address;
     }
 
-    public List<Table> getTables() {
+    public List<DiningSpot> getTables() {
         return tables;
     }
 
@@ -91,7 +90,7 @@ public class Restaurant {
         this.address = address;
     }
 
-    public void setTables(List<Table> tables) {
+    public void setTables(List<DiningSpot> tables) {
         this.tables = tables;
     }
 

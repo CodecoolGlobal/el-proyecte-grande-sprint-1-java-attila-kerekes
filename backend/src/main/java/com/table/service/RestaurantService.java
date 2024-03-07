@@ -1,11 +1,12 @@
 package com.table.service;
 
 import com.table.controller.dto.RestaurantDTO;
+import com.table.controller.dto.DiningSpotDTO;
 import com.table.model.Cuisine;
+import com.table.model.DiningSpot;
 import com.table.model.Restaurant;
-import com.table.model.Table;
 import com.table.repository.RestaurantRepo;
-import com.table.repository.TableRepo;
+import com.table.repository.DiningSpotRepo;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,13 @@ import java.util.UUID;
 @Service
 public class RestaurantService {
     private RestaurantRepo restaurantRepo;
-    private TableRepo tableRepo;
+    private DiningSpotRepo diningSpotRepo;
     private Cuisine cuisineRepo;
 
     @Autowired
-    public RestaurantService(RestaurantRepo restaurantRepo, TableRepo tableRepo) {
+    public RestaurantService(RestaurantRepo restaurantRepo, DiningSpotRepo tableRepo) {
         this.restaurantRepo = restaurantRepo;
-        this.tableRepo = tableRepo;
+        this.diningSpotRepo = tableRepo;
     }
 
     public List<Restaurant> getRestaurants() {
@@ -65,24 +66,25 @@ public class RestaurantService {
 //        return tables;
 //    }
 
-        //TODO: TALK ABOUT THIS!
-    public Table addTableToRestaurant(UUID restaurantId, Table table, int capacity, String name){
-        table.setRestaurant(getRestaurantById(restaurantId));
-        table.setCapacity(capacity);
-        table.setName(name);
-        tableRepo.save(table);
-        return table;
+    //TODO: TALK ABOUT THIS!
+    public DiningSpot addTableToRestaurant(UUID restaurantId, DiningSpot diningSpot, int capacity, String name) {
+        diningSpot.setRestaurant(getRestaurantById(restaurantId));
+        diningSpot.setCapacity(capacity);
+        diningSpot.setName(name);
+        diningSpotRepo.save(diningSpot);
+        return diningSpot;
     }
 
-    public List<Table> addTablesToRestaurant(UUID restaurantId, List<Table> tables, int capacity, String name){
+    public List<DiningSpotDTO> addTablesToRestaurant(UUID restaurantId, List<DiningSpotDTO> diningSpotDTOs) {
         Restaurant restaurant = getRestaurantById(restaurantId);
-        for (Table table : tables) {
-        table.setRestaurant(restaurant);
-        table.setCapacity(capacity);
-        table.setName(name);
-        tableRepo.save(table);
+        for (DiningSpotDTO diningSpotDTO : diningSpotDTOs) {
+            DiningSpot newDiningSpot = new DiningSpot();
+            newDiningSpot.setRestaurant(restaurant);
+            newDiningSpot.setCapacity(diningSpotDTO.capacity());
+            newDiningSpot.setName(diningSpotDTO.name());
+            diningSpotRepo.save(newDiningSpot);
         }
-        return tables;
+        return diningSpotDTOs;
     }
 
 
@@ -92,7 +94,6 @@ public class RestaurantService {
 //        restaurantRepo.save(restaurant);
 //        return cuisine;
 //    }
-
 
 
 }

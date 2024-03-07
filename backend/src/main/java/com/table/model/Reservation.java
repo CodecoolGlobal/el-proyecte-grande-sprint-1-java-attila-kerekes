@@ -21,7 +21,7 @@ public class Reservation {
     private Customer customer;
     @ManyToOne
     @JoinColumn(name = "table_privateId", referencedColumnName = "privateId", nullable = false)
-    private Table table;
+    private DiningSpot table;
 
     public long getPrivateId() {
         return privateId;
@@ -47,7 +47,7 @@ public class Reservation {
         return customer;
     }
 
-    public Table getTable() {
+    public DiningSpot getTable() {
         return table;
     }
 
@@ -75,7 +75,7 @@ public class Reservation {
         this.customer = customer;
     }
 
-    public void setTable(Table table) {
+    public void setTable(DiningSpot table) {
         this.table = table;
     }
 }

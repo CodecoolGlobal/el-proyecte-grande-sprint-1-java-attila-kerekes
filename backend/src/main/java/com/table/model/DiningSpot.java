@@ -2,13 +2,11 @@ package com.table.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-public class Table {
+public class DiningSpot {
     @Id
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
