@@ -16,8 +16,8 @@ import java.util.UUID;
 
 @Service
 public class RestaurantService {
-    private RestaurantRepo restaurantRepo;
-    private DiningSpotRepo diningSpotRepo;
+    private final RestaurantRepo restaurantRepo;
+    private final DiningSpotRepo diningSpotRepo;
     private Cuisine cuisineRepo;
 
     @Autowired
@@ -44,6 +44,10 @@ public class RestaurantService {
         return restaurantRepo.findByPublicId(uuid).orElseThrow(EntityNotFoundException::new);
     }
 
+    public List<Restaurant> getRestaurantsByName(String name){
+        return restaurantRepo.findAllByNameContainsIgnoreCase(name);
+    }
+
     public Restaurant deleteRestaurant(UUID uuid) {
         return restaurantRepo.deleteRestaurantByPublicId(uuid);
     }
@@ -59,9 +63,6 @@ public class RestaurantService {
         return restaurant;
     }
 
-
-
-    //TODO: TALK ABOUT THIS!
     public DiningSpot addTableToRestaurant(UUID restaurantId, DiningSpotDTO diningSpotDTO) {
         DiningSpot diningSpot = new DiningSpot();
         diningSpot.setRestaurant(getRestaurantById(restaurantId));
@@ -82,6 +83,9 @@ public class RestaurantService {
         }
         return diningSpotDTOs;
     }
+
+
+    //TODO: CUISINE
 
 
 

@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface RestaurantRepo extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findByPublicId(UUID uuid);
 
-    Optional<Restaurant> findByNameIsContainingIgnoreCase(String name);
+    List<Restaurant> findAllByNameContainsIgnoreCase(String name);
 
     @Override
     List<Restaurant> findAll();

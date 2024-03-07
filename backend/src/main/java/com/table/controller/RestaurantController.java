@@ -34,6 +34,11 @@ public class RestaurantController {
         return restaurantService.getRestaurants();
     }
 
+    @GetMapping("/{name}")
+    List<Restaurant> getRestaurantsByName(@PathVariable String name){
+        return restaurantService.getRestaurantsByName(name);
+    }
+
     @GetMapping("/{id}")
     public Restaurant getRestaurantById(@PathVariable UUID id) {
         return restaurantService.getRestaurantById(id);
@@ -52,6 +57,5 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantService.deleteRestaurant(id));
     }
 
-    //TODO: findByName
 
 }
