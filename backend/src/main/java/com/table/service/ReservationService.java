@@ -1,7 +1,6 @@
 package com.table.service;
 
 import com.table.model.Reservation;
-import com.table.repository.TempRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

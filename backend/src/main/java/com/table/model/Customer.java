@@ -15,7 +15,8 @@ import java.util.UUID;
 @Entity
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cuisine_gen")
+    @SequenceGenerator(name="cuisine_gen", sequenceName="cuisine_seq")
     private long privateId;
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID publicId = UUID.randomUUID();
