@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
-    private final CustomerService customerService;
+/*    private final CustomerService customerService;
 
     @Autowired
     public CustomerController(CustomerService customerService) {
@@ -52,5 +52,5 @@ public class CustomerController {
     public ResponseEntity<?> updateCustomer(@RequestBody CustomerDTO customerDTO) {
         CustomerDTO updated = customerService.updateCustomer(customerDTO);
         return ResponseEntity.ok(updated);
-    }
+    }*/
 }

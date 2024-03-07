@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/restaurants")
 public class RestaurantController {
-    private final RestaurantService restaurantService;
+ /*   private final RestaurantService restaurantService;
 
     @Autowired
     public RestaurantController(RestaurantService restaurantService) {
@@ -49,9 +49,9 @@ public class RestaurantController {
     //Delete
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable UUID id) {
+
         return ResponseEntity.ok(restaurantService.deleteRestaurant(id));
     }
-
+*/
     //TODO: findByName
-
 }

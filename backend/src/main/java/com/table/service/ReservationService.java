@@ -13,7 +13,7 @@ import java.util.UUID;
 @Service
 public class ReservationService {
 
-    private final TempRepository tempRepository;
+/*    private final TempRepository tempRepository;
 
     @Autowired
     public ReservationService(TempRepository tempRepository) {
@@ -56,6 +56,6 @@ public class ReservationService {
                         .toList());
 
         return reservationListByCustomer;
-    }
+    }*/
 
 }

@@ -16,9 +16,12 @@ import java.util.UUID;
 
 @Service
 public class RestaurantService {
+/*    private TempRepository tempRepository;
+=======
     private RestaurantRepo restaurantRepo;
     private DiningSpotRepo diningSpotRepo;
     private Cuisine cuisineRepo;
+>>>>>>> development
 
     @Autowired
     public RestaurantService(RestaurantRepo restaurantRepo, DiningSpotRepo tableRepo) {
@@ -48,7 +51,14 @@ public class RestaurantService {
         return restaurantRepo.deleteRestaurantByPublicId(uuid);
     }
 
-    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO, UUID uuid) {
+<<<<<<< HEAD
+    public RestaurantDTO updateRestaurant(RestaurantDTO restaurantDTO) {
+        Restaurant restaurant = new Restaurant(restaurantDTO);
+        Restaurant updatedRestaurant = tempRepository.updateRestaurant(restaurant);
+        return new RestaurantDTO(updatedRestaurant.getId(), updatedRestaurant.getName(), updatedRestaurant.getEmail(), updatedRestaurant.getPassword(), updatedRestaurant.getPhoneNumber(), updatedRestaurant.getAddress());
+    }*/
+
+/*    public Restaurant updateRestaurant(RestaurantDTO restaurantDTO, UUID uuid) {
         Restaurant restaurant = getRestaurantById(uuid);
         restaurant.setName(restaurantDTO.name());
         restaurant.setAddress(restaurantDTO.address());
@@ -58,7 +68,6 @@ public class RestaurantService {
         restaurantRepo.save(restaurant);
         return restaurant;
     }
-
 
 
     //TODO: TALK ABOUT THIS!
@@ -81,8 +90,6 @@ public class RestaurantService {
             diningSpotRepo.save(newDiningSpot);
         }
         return diningSpotDTOs;
-    }
-
-
+    }*/
 
 }
