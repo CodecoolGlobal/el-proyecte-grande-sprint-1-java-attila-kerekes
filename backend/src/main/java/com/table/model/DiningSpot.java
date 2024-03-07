@@ -25,5 +25,4 @@ public class DiningSpot {
     @JoinColumn(name = "restaurant_privateId", referencedColumnName = "privateId", nullable = false)
     private Restaurant restaurant;
 
-
 }

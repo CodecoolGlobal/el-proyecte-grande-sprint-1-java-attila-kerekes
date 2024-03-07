@@ -23,6 +23,7 @@ public class Restaurant {
     private String password;
     private String phoneNumber;
     private String address;
+
     @OneToMany(mappedBy = "restaurant")
     private List<DiningSpot> tables;
     @ManyToMany(mappedBy = "restaurants")
