@@ -14,19 +14,18 @@ import java.util.UUID;
 @Entity
 public class Restaurant {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long privateId;
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_seq_gen")
+    @SequenceGenerator(name = "restaurant_seq_gen", sequenceName = "restaurant_seq", initialValue = 1, allocationSize = 1)
+    private long id;
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId;
     private String name;
     private String email;
     private String password;
     private String phoneNumber;
     private String address;
-
     @OneToMany(mappedBy = "restaurant")
     private List<DiningSpot> tables;
     @ManyToMany(mappedBy = "restaurants")
     private List<Cuisine> cuisines;
-
 }

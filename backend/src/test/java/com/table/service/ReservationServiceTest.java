@@ -1,14 +1,11 @@
-<<<<<<< HEAD
-package com.table.service;
+/*package com.table.service;
 
 import com.table.controller.dto.CustomerDTO;
-import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Customer;
 import com.table.model.Reservation;
 import com.table.model.Restaurant;
 import com.table.model.DiningSpot;
-import com.table.repository.TempRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -576,3 +573,5 @@ class ReservationServiceTest {
 //    }
 //}
 >>>>>>> development
+
+ */
