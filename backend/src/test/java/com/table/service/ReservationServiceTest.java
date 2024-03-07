@@ -6,7 +6,7 @@ import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Customer;
 import com.table.model.Reservation;
 import com.table.model.Restaurant;
-import com.table.model.Table;
+import com.table.model.DiningSpot;
 import com.table.repository.TempRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -75,7 +75,7 @@ class ReservationServiceTest {
                 "+1111111345",
                 "Address");
         Restaurant testRestaurant = new Restaurant(testRestaurantDTO);
-        Table testTable = new Table(5, "tablü", testRestaurant);
+        DiningSpot testTable = new DiningSpot(5, "tablü", testRestaurant);
 
         Reservation testReservation = new Reservation(
                 UUID.randomUUID(),
@@ -120,7 +120,7 @@ class ReservationServiceTest {
                 "+1111111345",
                 "Address");
         Restaurant testRestaurant = new Restaurant(testRestaurantDTO);
-        Table testTable = new Table(5, "tablü", testRestaurant);
+        DiningSpot testTable = new DiningSpot(5, "tablü", testRestaurant);
 
         Reservation testReservationExpected1 = new Reservation(
                 UUID.randomUUID(),
@@ -171,9 +171,9 @@ class ReservationServiceTest {
         Restaurant testRestaurant1 = new Restaurant(testRestaurantDTO, uuid1);
         Restaurant testRestaurant2 = new Restaurant(testRestaurantDTO, uuid2);
         Restaurant testRestaurant3 = new Restaurant(testRestaurantDTO, uuid3);
-        Table testTable = new Table(5, "tablü", testRestaurant1);
-        Table testTable2 = new Table(5, "tablü", testRestaurant2);
-        Table testTable3 = new Table(5, "tablü", testRestaurant3);
+        DiningSpot testTable = new DiningSpot(5, "tablü", testRestaurant1);
+        DiningSpot testTable2 = new DiningSpot(5, "tablü", testRestaurant2);
+        DiningSpot testTable3 = new DiningSpot(5, "tablü", testRestaurant3);
         Reservation testReservationBad1 = new Reservation(
                 UUID.randomUUID(),
                 1,
@@ -249,9 +249,9 @@ class ReservationServiceTest {
         Restaurant testRestaurant1 = new Restaurant(testRestaurantDTO);
         Restaurant testRestaurant2 = new Restaurant(testRestaurantDTO);
         Restaurant testRestaurant3 = new Restaurant(testRestaurantDTO);
-        Table testTable = new Table(5, "tablü", testRestaurant1);
-        Table testTable2 = new Table(5, "tablü", testRestaurant2);
-        Table testTable3 = new Table(5, "tablü", testRestaurant3);
+        DiningSpot testTable = new DiningSpot(5, "tablü", testRestaurant1);
+        DiningSpot testTable2 = new DiningSpot(5, "tablü", testRestaurant2);
+        DiningSpot testTable3 = new DiningSpot(5, "tablü", testRestaurant3);
         Reservation testReservationBad1 = new Reservation(
                 UUID.randomUUID(),
                 1,

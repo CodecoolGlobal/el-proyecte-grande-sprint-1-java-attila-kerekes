@@ -3,9 +3,7 @@ package com.table.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 @Builder
 @NoArgsConstructor
@@ -13,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-public class Table {
+public class DiningSpot {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long privateId;

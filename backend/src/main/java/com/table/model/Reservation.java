@@ -17,7 +17,7 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long privateId;
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID publicID = UUID.randomUUID();
+    private UUID publicId = UUID.randomUUID();
     private LocalDateTime start;
     private Duration duration;
     private int numberOfCustomers;
@@ -26,7 +26,7 @@ public class Reservation {
     private Customer customer;
     @ManyToOne
     @JoinColumn(name = "table_privateId", referencedColumnName = "privateId", nullable = false)
-    private Table table;
+    private DiningSpot table;
 
 
 }

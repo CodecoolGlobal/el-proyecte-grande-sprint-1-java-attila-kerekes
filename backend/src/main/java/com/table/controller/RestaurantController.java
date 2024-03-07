@@ -15,7 +15,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/restaurants")
 public class RestaurantController {
-    private final RestaurantService restaurantService;
+ /*   private final RestaurantService restaurantService;
 
     @Autowired
     public RestaurantController(RestaurantService restaurantService) {
@@ -55,5 +55,5 @@ public class RestaurantController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.noContent().build();
-    }
+    }*/
 }

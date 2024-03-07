@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 public class RestaurantService {
-    private TempRepository tempRepository;
+/*    private TempRepository tempRepository;
 
     @Autowired
     public RestaurantService(TempRepository tempRepository) {
@@ -40,5 +40,5 @@ public class RestaurantService {
         Restaurant restaurant = new Restaurant(restaurantDTO);
         Restaurant updatedRestaurant = tempRepository.updateRestaurant(restaurant);
         return new RestaurantDTO(updatedRestaurant.getId(), updatedRestaurant.getName(), updatedRestaurant.getEmail(), updatedRestaurant.getPassword(), updatedRestaurant.getPhoneNumber(), updatedRestaurant.getAddress());
-    }
+    }*/
 }

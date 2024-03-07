@@ -1,17 +1,10 @@
 package com.table.repository;
 
-import com.table.controller.dto.RestaurantDTO;
-import com.table.model.Customer;
-import com.table.model.Reservation;
-import com.table.model.Restaurant;
-import com.table.model.Table;
 import org.springframework.stereotype.Repository;
-
-import java.util.*;
 
 @Repository
 public class TempRepository {
-    private final Set<Restaurant> restaurants;
+/*    private final Set<Restaurant> restaurants;
     private final Set<Customer> customers;
     private final Set<Reservation> reservations;
 
@@ -88,5 +81,5 @@ public class TempRepository {
     //TODO delete this
     public Set<Customer> getCustomers() {
         return customers;
-    }
+    }*/
 }

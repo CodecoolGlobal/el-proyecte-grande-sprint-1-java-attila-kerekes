@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 public class CustomerService {
-    private final TempRepository repo;
+/*    private final TempRepository repo;
 
     @Autowired
     public CustomerService(TempRepository repo) {
@@ -53,5 +53,5 @@ public class CustomerService {
         String phoneNumber = customerDTO.phoneNumber();
         Customer customer = repo.updateCustomer(new Customer(id, email, password, firstName, lastName, phoneNumber));
         return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getPassword(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
-    }
+    }*/
 }

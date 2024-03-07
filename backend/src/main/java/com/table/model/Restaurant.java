@@ -3,9 +3,7 @@ package com.table.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Builder
@@ -26,8 +24,8 @@ public class Restaurant {
     private String phoneNumber;
     private String address;
     @OneToMany(mappedBy = "restaurant")
-    private List<Table> tables;
-    @ManyToMany(mappedBy = "restaurant")
+    private List<DiningSpot> tables;
+    @ManyToMany(mappedBy = "restaurants")
     private List<Cuisine> cuisines;
 
 }
