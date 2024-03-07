@@ -1,5 +1,6 @@
 package com.table.controller;
 
+import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Restaurant;
 import com.table.service.RestaurantService;
@@ -22,10 +23,8 @@ public class RestaurantController {
 
     //Create
     @PostMapping
-    public ResponseEntity<?> addRestaurant(@RequestBody RestaurantDTO RestaurantDTO) {
-        Restaurant restaurant = restaurantService.addRestaurant(RestaurantDTO);
-
-        return ResponseEntity.ok(restaurant);
+    public RestaurantDTO addRestaurant(@RequestBody NewRestaurantDTO NewRestaurantDTO) {
+        return restaurantService.addRestaurant(NewRestaurantDTO);
     }
 
     //Read
@@ -35,27 +34,24 @@ public class RestaurantController {
     }
 
     @GetMapping("/{name}")
-    List<Restaurant> getRestaurantsByName(@PathVariable String name){
+    List<RestaurantDTO> getRestaurantsByName(@PathVariable String name) {
         return restaurantService.getRestaurantsByName(name);
     }
 
     @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable UUID id) {
+    public RestaurantDTO getRestaurantById(@PathVariable UUID id) {
         return restaurantService.getRestaurantById(id);
     }
 
     //Update
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
-        Restaurant updatedRestaurant = restaurantService.updateRestaurant(restaurantDTO, id);
-        return ResponseEntity.ok(updatedRestaurant);
+    public RestaurantDTO updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
+        return restaurantService.updateRestaurant(restaurantDTO, id);
     }
 
     //Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteRestaurant(@PathVariable UUID id) {
-        return ResponseEntity.ok(restaurantService.deleteRestaurant(id));
+    public RestaurantDTO deleteRestaurant(@PathVariable UUID id) {
+        return restaurantService.deleteRestaurant(id);
     }
-
-
 }

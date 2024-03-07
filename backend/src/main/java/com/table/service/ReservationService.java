@@ -1,7 +1,6 @@
 package com.table.service;
 
 import com.table.model.Reservation;
-import com.table.repository.TempRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.UUID;
 @Service
 public class ReservationService {
 
-    private final TempRepository tempRepository;
+/*    private final TempRepository tempRepository;
 
     @Autowired
     public ReservationService(TempRepository tempRepository) {
@@ -56,6 +55,6 @@ public class ReservationService {
                         .toList());
 
         return reservationListByCustomer;
-    }
+    }*/
 
 }
