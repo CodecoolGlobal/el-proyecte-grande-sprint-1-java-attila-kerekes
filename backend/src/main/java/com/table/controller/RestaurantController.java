@@ -29,11 +29,11 @@ public class RestaurantController {
 
     //Read
     @GetMapping
-    public List<Restaurant> getAllRestaurants() {
+    public List<RestaurantDTO> getAllRestaurants() {
         return restaurantService.getRestaurants();
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     List<RestaurantDTO> getRestaurantsByName(@PathVariable String name) {
         return restaurantService.getRestaurantsByName(name);
     }
@@ -51,7 +51,8 @@ public class RestaurantController {
 
     //Delete
     @DeleteMapping("/{id}")
-    public RestaurantDTO deleteRestaurant(@PathVariable UUID id) {
-        return restaurantService.deleteRestaurant(id);
+    public void deleteRestaurant(@PathVariable UUID id) {
+        restaurantService.deleteRestaurant(id);
     }
+
 }

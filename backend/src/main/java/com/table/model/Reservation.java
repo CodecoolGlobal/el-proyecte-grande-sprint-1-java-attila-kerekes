@@ -1,5 +1,6 @@
 package com.table.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,19 +15,20 @@ import java.util.UUID;
 @Entity
 public class Reservation {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long privateId;
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservation_seq_gen")
+    @SequenceGenerator(name = "reservation_seq_gen", sequenceName = "reservation_seq", initialValue = 1, allocationSize = 1)
+    private long id;
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
     private LocalDateTime start;
     private int duration;
     private int numberOfCustomers;
     @ManyToOne
-    @JoinColumn(name = "customer_privateId", referencedColumnName = "privateId", nullable = false)
+    @JsonIgnore
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer;
     @ManyToOne
-    @JoinColumn(name = "table_privateId", referencedColumnName = "privateId", nullable = false)
+    @JsonIgnore
+    @JoinColumn(name = "table_id", referencedColumnName = "id", nullable = false)
     private DiningSpot table;
-
-
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class RestaurantService {
@@ -28,8 +29,15 @@ public class RestaurantService {
         this.diningSpotRepo = tableRepo;
     }
 
-    public List<Restaurant> getRestaurants() {
-        return restaurantRepo.findAll();
+    public List<RestaurantDTO> getRestaurants() {
+        List<Restaurant> restaurants = restaurantRepo.findAll();
+        return restaurants.stream().map(restaurant -> new RestaurantDTO(
+                restaurant.getPublicId(),
+                restaurant.getName(),
+                restaurant.getEmail(),
+                restaurant.getPhoneNumber(),
+                restaurant.getAddress()
+        )).toList();
     }
 
     public RestaurantDTO addRestaurant(NewRestaurantDTO newRestaurantDTO) {
@@ -39,6 +47,7 @@ public class RestaurantService {
         restaurant.setEmail(newRestaurantDTO.email());
         restaurant.setPassword(newRestaurantDTO.password());
         restaurant.setPhoneNumber(newRestaurantDTO.phoneNumber());
+        restaurantRepo.save(restaurant);
         return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getEmail(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
 
@@ -56,10 +65,15 @@ public class RestaurantService {
         return restaurantDTOs;
     }
 
-    public RestaurantDTO deleteRestaurant(UUID uuid) {
-        Restaurant restaurant = restaurantRepo.deleteRestaurantByPublicId(uuid);
-        return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getName(), restaurant.getPhoneNumber(), restaurant.getAddress());
+//    public RestaurantDTO deleteRestaurant(UUID uuid) {
+//        Restaurant restaurant = restaurantRepo.deleteRestaurantByPublicId(uuid);
+//        return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getName(), restaurant.getPhoneNumber(), restaurant.getAddress());
+//    }
+
+    public void deleteRestaurant(UUID uuid) {
+       restaurantRepo.deleteByPublicId(uuid);
     }
+
 
     public RestaurantDTO updateRestaurant(RestaurantDTO restaurantDTO, UUID uuid) {
         Restaurant restaurant = restaurantRepo.findByPublicId(uuid).orElseThrow(EntityNotFoundException::new);
