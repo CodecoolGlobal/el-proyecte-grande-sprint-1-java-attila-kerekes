@@ -4,7 +4,6 @@ import com.table.controller.dto.CustomerDTO;
 import com.table.controller.dto.NewCustomerDTO;
 import com.table.model.Customer;
 import com.table.repository.CustomerRepo;
-import com.table.repository.TempRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,8 @@ import java.util.*;
 
 @Service
 public class CustomerService {
-    private final CustomerRepo repo;
+ /*  private final CustomerRepo repo;
+
 
     @Autowired
     public CustomerService(CustomerRepo repo) {
@@ -57,5 +57,5 @@ public class CustomerService {
         customer.setPhoneNumber(customerDTO.phoneNumber());
         repo.save(customer);
         return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getPassword(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
-    }
+    }*/
 }

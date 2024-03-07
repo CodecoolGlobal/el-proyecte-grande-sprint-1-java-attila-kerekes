@@ -5,28 +5,24 @@ import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-public class Restaurant {
+public class DiningSpot {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long privateId;
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID publicId;
+    private int capacity;
     private String name;
-    private String email;
-    private String password;
-    private String phoneNumber;
-    private String address;
-
-    @OneToMany(mappedBy = "restaurant")
-    private List<DiningSpot> tables;
-    @ManyToMany(mappedBy = "restaurants")
-    private List<Cuisine> cuisines;
+    @OneToMany(mappedBy = "table")
+    private List<Reservation> reservations;
+    @ManyToOne
+    @JoinColumn(name = "restaurant_privateId", referencedColumnName = "privateId", nullable = false)
+    private Restaurant restaurant;
 
 }
