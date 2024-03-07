@@ -96,19 +96,6 @@ public class Restaurant {
         this.cuisines = cuisines;
     }
 
-    //    public boolean addTable(Table... tables) {
-//        return this.tables.addAll(List.of(tables));
-//    }
-
-//    public Restaurant update(Restaurant restaurant) {
-//        this.name = restaurant.getName();
-//        this.email = restaurant.getEmail();
-//        this.password = restaurant.getPassword();
-//        this.phoneNumber = restaurant.getPhoneNumber();
-//        this.address = restaurant.getAddress();
-//        return this;
-//    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
