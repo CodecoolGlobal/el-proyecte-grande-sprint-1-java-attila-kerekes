@@ -59,18 +59,14 @@ public class RestaurantService {
         return restaurant;
     }
 
-//    public List<Table> addTablesToRestaurant(UUID restaurantId, List<Table> tables){
-//        Restaurant restaurant = getRestaurantById(restaurantId);
-//        restaurant.setTables(tables);
-//        restaurantRepo.save(restaurant);
-//        return tables;
-//    }
+
 
     //TODO: TALK ABOUT THIS!
-    public DiningSpot addTableToRestaurant(UUID restaurantId, DiningSpot diningSpot, int capacity, String name) {
+    public DiningSpot addTableToRestaurant(UUID restaurantId, DiningSpotDTO diningSpotDTO) {
+        DiningSpot diningSpot = new DiningSpot();
         diningSpot.setRestaurant(getRestaurantById(restaurantId));
-        diningSpot.setCapacity(capacity);
-        diningSpot.setName(name);
+        diningSpot.setCapacity(diningSpotDTO.capacity());
+        diningSpot.setName(diningSpotDTO.name());
         diningSpotRepo.save(diningSpot);
         return diningSpot;
     }
@@ -87,13 +83,6 @@ public class RestaurantService {
         return diningSpotDTOs;
     }
 
-
-//    public Cuisine addCuisinesToRestaurant(UUID restaurantId, Cuisine cuisine){
-//        Restaurant restaurant = getRestaurantById(restaurantId);
-//        restaurant.getCuisines().add(cuisine);
-//        restaurantRepo.save(restaurant);
-//        return cuisine;
-//    }
 
 
 }
