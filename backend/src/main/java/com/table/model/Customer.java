@@ -23,7 +23,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
 
 

@@ -1,10 +1,12 @@
 package com.table.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,9 +24,11 @@ public class Reservation {
     private int duration;
     private int numberOfCustomers;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     private Customer customer;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "table_id", referencedColumnName = "id", nullable = false)
     private DiningSpot table;
 }

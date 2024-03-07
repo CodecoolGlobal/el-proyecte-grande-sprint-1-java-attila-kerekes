@@ -1,5 +1,6 @@
 package com.table.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,9 +21,10 @@ public class DiningSpot {
     private UUID publicId;
     private int capacity;
     private String name;
-    @OneToMany(mappedBy = "table")
+    @OneToMany(mappedBy = "table", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "restaurant_id", referencedColumnName = "id", nullable = false)
     private Restaurant restaurant;
 }
