@@ -1,11 +1,16 @@
 package com.table.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.UUID;
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class Reservation {
     @Id
@@ -23,9 +28,6 @@ public class Reservation {
     @JoinColumn(name = "table_privateId", referencedColumnName = "privateId", nullable = false)
     private DiningSpot table;
 
-    public long getPrivateId() {
-        return privateId;
-    }
 
     public UUID getPublicID() {
         return publicID;

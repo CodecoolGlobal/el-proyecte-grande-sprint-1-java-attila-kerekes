@@ -1,10 +1,15 @@
 package com.table.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
-
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 public class DiningSpot {
     @Id
@@ -20,7 +25,6 @@ public class DiningSpot {
     @ManyToOne
     @JoinColumn(name = "restaurant_privateId", referencedColumnName = "privateId", nullable = false)
     private Restaurant restaurant;
-
 
     public long getPrivateId() {
         return privateId;
