@@ -1,6 +1,7 @@
 package com.table.controller;
 
 import com.table.controller.dto.CustomerDTO;
+import com.table.controller.dto.LogInRequestDTO;
 import com.table.controller.dto.NewCustomerDTO;
 import com.table.model.Customer;
 import com.table.service.CustomerService;
@@ -29,6 +30,11 @@ public class CustomerController {
     @PostMapping
     public CustomerDTO addCustomer(@RequestBody NewCustomerDTO customerDTO) {
         return customerService.saveCustomer(customerDTO);
+    }
+
+    @PostMapping("/login")
+    public UUID logInCustomer(@RequestBody LogInRequestDTO logInRequestDTO) {
+        return customerService.findByEmailAndPassword(logInRequestDTO.email(), logInRequestDTO.password());
     }
 
     @DeleteMapping("/{id}")

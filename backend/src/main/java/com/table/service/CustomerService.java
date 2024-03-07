@@ -1,6 +1,7 @@
 package com.table.service;
 
 import com.table.controller.dto.CustomerDTO;
+import com.table.controller.dto.LogInRequestDTO;
 import com.table.controller.dto.NewCustomerDTO;
 import com.table.model.Customer;
 import com.table.repository.CustomerRepo;
@@ -26,6 +27,10 @@ public class CustomerService {
         return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
     }
 
+    public UUID findByEmailAndPassword(String email, String password){
+        Customer customer = repo.findByEmailEqualsAndPasswordEquals(email, password).orElseThrow(EntityNotFoundException::new);
+        return customer.getPublicId();
+    }
     public CustomerDTO saveCustomer(NewCustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setEmail(customerDTO.email());

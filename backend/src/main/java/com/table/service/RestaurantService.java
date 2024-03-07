@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class RestaurantService {
@@ -65,13 +64,9 @@ public class RestaurantService {
         return restaurantDTOs;
     }
 
-//    public RestaurantDTO deleteRestaurant(UUID uuid) {
-//        Restaurant restaurant = restaurantRepo.deleteRestaurantByPublicId(uuid);
-//        return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getName(), restaurant.getPhoneNumber(), restaurant.getAddress());
-//    }
 
     public void deleteRestaurant(UUID uuid) {
-       restaurantRepo.deleteByPublicId(uuid);
+        restaurantRepo.deleteByPublicId(uuid);
     }
 
 
@@ -108,6 +103,10 @@ public class RestaurantService {
         return diningSpotDTOs;
     }
 
+    public UUID findByEmailAndPassword(String email, String password) {
+        Restaurant restaurant = restaurantRepo.findByEmailEqualsAndPasswordEquals(email, password).orElseThrow(EntityNotFoundException::new);
+        return restaurant.getPublicId();
+    }
 
     //TODO: CUISINE ***FEATURE***
 }
