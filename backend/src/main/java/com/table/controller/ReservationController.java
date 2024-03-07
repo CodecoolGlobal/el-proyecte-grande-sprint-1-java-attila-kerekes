@@ -1,6 +1,8 @@
 package com.table.controller;
 
+import com.table.controller.dto.NewReservationDTO;
 import com.table.model.Reservation;
+import com.table.model.Restaurant;
 import com.table.service.ReservationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,36 +23,45 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/{restaurantID}")
-    public ResponseEntity<?> getAllReservationByRestaurant(@PathVariable UUID restaurantID) {
-        Collection<Reservation> report = reservationService.getAllByRestaurantID(restaurantID);
+    @GetMapping
+    public Collection<Reservation> getAllReservation() {
+        return reservationService.getAllReservation();
+    }
 
-        return ResponseEntity.ok(report);
+    @GetMapping("/restaurant/{restaurantID}")
+    public Collection<Reservation> getAllReservationByRestaurant(@PathVariable UUID restaurantID) {
+        return reservationService.getAllByRestaurantID(restaurantID);
     }
 
 
-    @GetMapping("/{customerID}")
+    @GetMapping("/customer/{customerID}")
     public ResponseEntity<?> getAllReservationByCustomer(@PathVariable UUID customerID) {
         Collection<Reservation> report = reservationService.getAllByCustomerID(customerID);
         return ResponseEntity.ok(report);
     }
 
-    @PostMapping
-    public ResponseEntity<?> createNewReservation(@RequestBody Reservation reservation) {
-        if (reservationService.createNewReservation(reservation)) {
-            return ResponseEntity.ok().body("Thank you, for your reservation");
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
+    //TODO Handle resource not found
+    @GetMapping("/{reservationId}")
+    public Reservation getReservationByPublicId(@PathVariable UUID reservationId) {
+        return reservationService.getReservaton(reservationId);
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteReservation(@RequestBody Reservation reservation) {
-        if (reservationService.deleteReservation(reservation)) {
-            return ResponseEntity.ok().body("Delete completed");
-        } else {
-            return ResponseEntity.noContent().build();
-        }
+    //TODO Handle resource not found
+    @DeleteMapping("/{reservationId}")
+    public Reservation deleteReservation(@PathVariable UUID reservationId) {
+        return reservationService.deleteReservation(reservationId);
+    }
+
+
+    @PostMapping("/{restaurantID}/{customerID}")
+    public ResponseEntity<?> createNewReservation(
+            @PathVariable UUID restaurantID,
+            @PathVariable UUID customerID,
+            @RequestBody NewReservationDTO reservationDTO) {
+        Reservation newRestaurant = reservationService
+                .createNewReservation(restaurantID, customerID, reservationDTO);
+        return ResponseEntity.ok().body("Thank you, for your reservation");
+
     }
 
 

@@ -1,61 +1,104 @@
 package com.table.service;
 
+
+import com.table.controller.dto.NewReservationDTO;
+import com.table.model.Customer;
+import com.table.model.DiningSpot;
 import com.table.model.Reservation;
-import com.table.repository.TempRepository;
+import com.table.model.Restaurant;
+import com.table.repository.CustomerRepo;
+import com.table.repository.DiningSpotRepo;
+import com.table.repository.ReservationRepo;
+
+import com.table.repository.RestaurantRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.UUID;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class ReservationService {
 
-    private final TempRepository tempRepository;
+
+    private ReservationRepo reservationRepo;
+    private RestaurantRepo restaurantRepo;
+    private CustomerRepo customerRepo;
+    private DiningSpotRepo diningSpotRepo;
 
     @Autowired
-    public ReservationService(TempRepository tempRepository) {
-        this.tempRepository = tempRepository;
+    public ReservationService(ReservationRepo reservationRepo,
+                              RestaurantRepo restaurantRepo,
+                              CustomerRepo customerRepo,
+                              DiningSpotRepo diningSpotRepo) {
+        this.reservationRepo = reservationRepo;
+        this.restaurantRepo = restaurantRepo;
+        this.customerRepo = customerRepo;
+        this.diningSpotRepo = diningSpotRepo;
     }
 
-    public boolean createNewReservation(Reservation reservation) {
-        if (reservation == null){
-            return false;
+
+    public Reservation createNewReservation(UUID restaurantID,
+                                            UUID customerID,
+                                            NewReservationDTO reservationDTO) {
+        List<DiningSpot> allFreeDiningSpot = diningSpotRepo
+                .findAllByCapacity(reservationDTO.numberOfCustomers());
+        System.out.println(allFreeDiningSpot);
+        Customer targetCustomer = customerRepo.findByPublicId(customerID).get();
+        Reservation newReservation = new Reservation();
+        newReservation.setCustomer(targetCustomer);
+        newReservation.setDiningSpot(allFreeDiningSpot.get(0));
+        newReservation.setDuration(reservationDTO.duration());
+        newReservation.setStart(reservationDTO.start());
+        newReservation.setNumberOfCustomers(reservationDTO.numberOfCustomers());
+
+        return reservationRepo.save(newReservation);
+    }
+
+    @Transactional
+    public Reservation deleteReservation(UUID reservationId) {
+        Reservation targetReservation = getReservaton(reservationId);
+        reservationRepo.deleteByPublicId(reservationId);
+        return targetReservation;
+    }
+
+    public Reservation getReservaton(UUID reservationId) {
+        Reservation targetReservation =
+                reservationRepo.findReservationByPublicId(reservationId);
+        if (targetReservation == null) {
+            throw new ResponseStatusException(NOT_FOUND, "Unable to find reservation");
         }
-        return tempRepository.addReservation(reservation);
+        return targetReservation;
     }
 
-    public boolean deleteReservation(Reservation reservation) {
-        if (reservation == null){
-            return false;
-        }
-        return tempRepository.deleteReservation(reservation.getID());
+    public Collection<Reservation> getAllReservation() {
+        List<Reservation> allReservation = reservationRepo.findAll();
+        return allReservation;
+
     }
 
-    public Collection<Reservation> getAllByRestaurantID(UUID id) {
-        List<Reservation> reservationListByRestaurant = new ArrayList<>();
-        reservationListByRestaurant.addAll(
-                tempRepository.getAllReservation()
-                        .stream()
-                        .filter(reservation -> reservation.getTable().getRestaurant().getId().equals(id))
-                        .toList());
+    public Collection<Reservation> getAllByRestaurantID(UUID restaurantId) {
 
-        return reservationListByRestaurant;
+        return reservationRepo.findByDiningSpot_RestaurantPublicId(restaurantId);
 
     }
 
     public Collection<Reservation> getAllByCustomerID(UUID id) {
+            /*
         List<Reservation> reservationListByCustomer = new ArrayList<>();
         reservationListByCustomer.addAll(
-                tempRepository.getAllReservation()
+                reservationRepo.findAll()
                         .stream()
-
                         .filter(reservation -> reservation.getCustomer().getPublicId().equals(id))
                         .toList());
-
-        return reservationListByCustomer;
+*/
+        return reservationRepo.findAllByCustomerPublicId(id);
     }
+
 
 }
