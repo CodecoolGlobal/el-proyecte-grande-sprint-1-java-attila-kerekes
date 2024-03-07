@@ -72,16 +72,4 @@ public class Table {
         this.restaurant = restaurant;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Table table = (Table) object;
-        return Objects.equals(privateId, table.privateId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(privateId);
-    }
 }

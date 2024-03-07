@@ -52,4 +52,6 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantService.deleteRestaurant(id));
     }
 
+    //TODO: findByName
+
 }

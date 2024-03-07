@@ -98,18 +98,4 @@ public class Restaurant {
     public void setCuisines(List<Cuisine> cuisines) {
         this.cuisines = cuisines;
     }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Restaurant that = (Restaurant) o;
-        return Objects.equals(publicId, that.publicId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(publicId);
-    }
 }
