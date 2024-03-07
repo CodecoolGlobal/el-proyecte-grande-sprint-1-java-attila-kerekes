@@ -13,7 +13,7 @@ import java.util.*;
 
 @Service
 public class CustomerService {
- /*  private final CustomerRepo repo;
+  private final CustomerRepo repo;
 
 
     @Autowired
@@ -21,26 +21,19 @@ public class CustomerService {
         this.repo = repo;
     }
 
-    public Customer getCustomerById(UUID id) {
-        return repo.findByPublicId(id).orElseThrow(EntityNotFoundException::new);
-
+    public CustomerDTO getCustomerById(UUID id) {
+        Customer customer = repo.findByPublicId(id).orElseThrow(EntityNotFoundException::new);
+        return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
     }
 
-    //TODO don't send the password to frontend
     public CustomerDTO saveCustomer(NewCustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setEmail(customerDTO.email());
-        customer.setPassword(customerDTO.password());
         customer.setFirstName(customerDTO.firstName());
         customer.setLastName(customerDTO.lastName());
         customer.setPhoneNumber(customerDTO.phoneNumber());
         Customer saved = repo.save(customer);
-        return new CustomerDTO(saved.getPublicId(), saved.getEmail(), saved.getPassword(), saved.getFirstName(), saved.getLastName(), saved.getPhoneNumber());
-    }
-
-    //TODO delete this
-    public List<Customer> getCustomers() {
-        return repo.findAll();
+        return new CustomerDTO(saved.getPublicId(), saved.getEmail(), saved.getFirstName(), saved.getLastName(), saved.getPhoneNumber());
     }
 
     public void deleteCustomer(UUID id) {
@@ -56,6 +49,6 @@ public class CustomerService {
         customer.setLastName(customerDTO.lastName());
         customer.setPhoneNumber(customerDTO.phoneNumber());
         repo.save(customer);
-        return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getPassword(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
-    }*/
+        return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
+    }
 }
