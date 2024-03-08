@@ -51,6 +51,7 @@ public class RestaurantService {
     }
 
     public RestaurantDTO getRestaurantById(UUID uuid) {
+        //TODO: exception message needed
         Restaurant restaurant = restaurantRepo.findByPublicId(uuid).orElseThrow(EntityNotFoundException::new);
         return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getName(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
@@ -108,10 +109,10 @@ public class RestaurantService {
         return restaurant.getPublicId();
     }
     //TODO: RESERVATION METHOD
-    public List<DiningSpot> findAvailableDiningSpots(UUID uuid){
-        List<DiningSpot> diningSpots = diningSpotRepo.getDiningSpotsByRestaurant_PublicId(uuid);
-
-    }
+//    public List<DiningSpot> findAvailableDiningSpots(UUID uuid){
+//        List<DiningSpot> diningSpots = diningSpotRepo.getDiningSpotsByRestaurant_PublicId(uuid);
+//
+//    }
 
     //TODO: CUISINE ***FEATURE***
 }

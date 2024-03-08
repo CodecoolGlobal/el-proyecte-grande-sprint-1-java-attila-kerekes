@@ -23,6 +23,7 @@ public class CustomerService {
     }
 
     public CustomerDTO getCustomerById(UUID id) {
+        //TODO: exception message needed (probably everywhere)
         Customer customer = repo.findByPublicId(id).orElseThrow(EntityNotFoundException::new);
         return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
     }
