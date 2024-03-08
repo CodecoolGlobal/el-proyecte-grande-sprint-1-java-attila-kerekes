@@ -107,6 +107,11 @@ public class RestaurantService {
         Restaurant restaurant = restaurantRepo.findByEmailEqualsAndPasswordEquals(email, password).orElseThrow(EntityNotFoundException::new);
         return restaurant.getPublicId();
     }
+    //TODO: RESERVATION METHOD
+    public List<DiningSpot> findAvailableDiningSpots(UUID uuid){
+        List<DiningSpot> diningSpots = diningSpotRepo.getDiningSpotsByRestaurant_PublicId(uuid);
+
+    }
 
     //TODO: CUISINE ***FEATURE***
 }

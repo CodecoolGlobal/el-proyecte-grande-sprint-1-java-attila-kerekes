@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 /*package com.table.service;
 
 import com.table.controller.dto.CustomerDTO;
@@ -576,9 +573,4 @@ class ReservationServiceTest {
 //        assertEquals(expected, List.of(testReservationExpected1));
 //    }
 //}
-<<<<<<< HEAD
-=======
->>>>>>> development
-
  */
->>>>>>> development
