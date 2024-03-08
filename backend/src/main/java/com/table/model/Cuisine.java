@@ -1,5 +1,6 @@
 package com.table.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +18,7 @@ public class Cuisine {
     private long id;
     private String cuisineType;
     @ManyToMany
+    @JsonIgnore
     @JoinTable(
             name = "restaurant_cuisine",
             joinColumns = @JoinColumn(name = "cuisine_id"),

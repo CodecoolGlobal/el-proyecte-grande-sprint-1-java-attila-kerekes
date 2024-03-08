@@ -1,10 +1,10 @@
 package com.table.controller;
 
+import com.table.controller.dto.LogInRequestDTO;
+import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
-import com.table.model.Restaurant;
 import com.table.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/restaurants")
 public class RestaurantController {
- /*   private final RestaurantService restaurantService;
+    private final RestaurantService restaurantService;
 
     @Autowired
     public RestaurantController(RestaurantService restaurantService) {
@@ -22,36 +22,41 @@ public class RestaurantController {
 
     //Create
     @PostMapping
-    public ResponseEntity<?> addRestaurant(@RequestBody RestaurantDTO RestaurantDTO) {
-        Restaurant restaurant = restaurantService.addRestaurant(RestaurantDTO);
+    public RestaurantDTO addRestaurant(@RequestBody NewRestaurantDTO NewRestaurantDTO) {
+        return restaurantService.addRestaurant(NewRestaurantDTO);
+    }
 
-        return ResponseEntity.ok(restaurant);
+    @PostMapping("/login")
+    public UUID logInRestaurant(@RequestBody LogInRequestDTO logInRequestDTO) {
+        return restaurantService.findByEmailAndPassword(logInRequestDTO.email(), logInRequestDTO.password());
     }
 
     //Read
     @GetMapping
-    public List<Restaurant> getAllRestaurants() {
+    public List<RestaurantDTO> getAllRestaurants() {
         return restaurantService.getRestaurants();
     }
 
+    @GetMapping("/name/{name}")
+    List<RestaurantDTO> getRestaurantsByName(@PathVariable String name) {
+        return restaurantService.getRestaurantsByName(name);
+    }
+
     @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable UUID id) {
+    public RestaurantDTO getRestaurantById(@PathVariable UUID id) {
         return restaurantService.getRestaurantById(id);
     }
 
     //Update
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
-        Restaurant updatedRestaurant = restaurantService.updateRestaurant(restaurantDTO, id);
-        return ResponseEntity.ok(updatedRestaurant);
+    public RestaurantDTO updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
+        return restaurantService.updateRestaurant(restaurantDTO, id);
     }
 
     //Delete
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteRestaurant(@PathVariable UUID id) {
-
-        return ResponseEntity.ok(restaurantService.deleteRestaurant(id));
+    public void deleteRestaurant(@PathVariable UUID id) {
+        restaurantService.deleteRestaurant(id);
     }
-*/
-    //TODO: findByName
+
 }
