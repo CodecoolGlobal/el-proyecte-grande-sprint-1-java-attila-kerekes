@@ -21,7 +21,7 @@ public class DiningSpot {
     private UUID publicId;
     private int capacity;
     private String name;
-    @OneToMany(mappedBy = "table", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "diningSpot", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
     @ManyToOne
     @JsonIgnore
