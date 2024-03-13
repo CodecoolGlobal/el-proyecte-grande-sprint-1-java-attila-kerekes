@@ -5,12 +5,14 @@ import com.table.controller.dto.NewReservationDTO;
 import com.table.model.Customer;
 import com.table.model.DiningSpot;
 import com.table.model.Reservation;
+
 import com.table.model.Restaurant;
 import com.table.repository.CustomerRepo;
 import com.table.repository.DiningSpotRepo;
 import com.table.repository.ReservationRepo;
 
 import com.table.repository.RestaurantRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,11 +27,11 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 public class ReservationService {
 
-
     private ReservationRepo reservationRepo;
     private RestaurantRepo restaurantRepo;
     private CustomerRepo customerRepo;
     private DiningSpotRepo diningSpotRepo;
+
 
     @Autowired
     public ReservationService(ReservationRepo reservationRepo,
@@ -89,14 +91,7 @@ public class ReservationService {
     }
 
     public Collection<Reservation> getAllByCustomerID(UUID id) {
-            /*
-        List<Reservation> reservationListByCustomer = new ArrayList<>();
-        reservationListByCustomer.addAll(
-                reservationRepo.findAll()
-                        .stream()
-                        .filter(reservation -> reservation.getCustomer().getPublicId().equals(id))
-                        .toList());
-*/
+  
         return reservationRepo.findAllByCustomerPublicId(id);
     }
 

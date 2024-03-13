@@ -1,57 +1,59 @@
 package com.table.service;
 
 import com.table.controller.dto.CustomerDTO;
+import com.table.controller.dto.LogInRequestDTO;
 import com.table.controller.dto.NewCustomerDTO;
 import com.table.model.Customer;
-import com.table.repository.TempRepository;
+import com.table.repository.CustomerRepo;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class CustomerService {
-    private final TempRepository repo;
+  private final CustomerRepo repo;
+
 
     @Autowired
-    public CustomerService(TempRepository repo) {
+    public CustomerService(CustomerRepo repo) {
         this.repo = repo;
     }
 
-    public Customer getCustomerById(UUID id) {
-        return repo.getCustomer(id);
+    public CustomerDTO getCustomerById(UUID id) {
+        Customer customer = repo.findByPublicId(id).orElseThrow(EntityNotFoundException::new);
+        return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
     }
 
+    public UUID findByEmailAndPassword(String email, String password){
+        Customer customer = repo.findByEmailEqualsAndPasswordEquals(email, password).orElseThrow(EntityNotFoundException::new);
+        return customer.getPublicId();
+    }
     public CustomerDTO saveCustomer(NewCustomerDTO customerDTO) {
-        UUID id = UUID.randomUUID();
-        String email = customerDTO.email();
-        String password = customerDTO.password();
-        String firstName = customerDTO.firstName();
-        String lastName = customerDTO.lastName();
-        String phoneNumber = customerDTO.phoneNumber();
-        Customer customer = new Customer(id, email, password, firstName, lastName, phoneNumber);
-        Customer saved = repo.addCustomer(customer);
-        return new CustomerDTO(saved.getPublicId(), saved.getEmail(), saved.getPassword(), saved.getFirstName(), saved.getLastName(), saved.getPhoneNumber());
+        Customer customer = new Customer();
+        customer.setEmail(customerDTO.email());
+        customer.setFirstName(customerDTO.firstName());
+        customer.setLastName(customerDTO.lastName());
+        customer.setPhoneNumber(customerDTO.phoneNumber());
+        Customer saved = repo.save(customer);
+        return new CustomerDTO(saved.getPublicId(), saved.getEmail(), saved.getFirstName(), saved.getLastName(), saved.getPhoneNumber());
     }
 
-    //TODO delete this
-    public Set<Customer> getCustomers() {
-        return repo.getCustomers();
+    public void deleteCustomer(UUID id) {
+        Customer customer = repo.findByPublicId(id).orElseThrow(EntityNotFoundException::new);
+        repo.delete(customer);
     }
 
-    public boolean deleteCustomer(UUID id) {
-        return repo.deleteCustomer(id);
-    }
-
+    @Transactional
     public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-        UUID id = customerDTO.id();
-        String email = customerDTO.email();
-        String password = customerDTO.password();
-        String firstName = customerDTO.firstName();
-        String lastName = customerDTO.lastName();
-        String phoneNumber = customerDTO.phoneNumber();
-        Customer customer = repo.updateCustomer(new Customer(id, email, password, firstName, lastName, phoneNumber));
-        return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getPassword(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
+        Customer customer = repo.findByPublicId(customerDTO.id()).orElseThrow(EntityNotFoundException::new);;
+        customer.setEmail(customerDTO.email());
+        customer.setFirstName(customerDTO.firstName());
+        customer.setLastName(customerDTO.lastName());
+        customer.setPhoneNumber(customerDTO.phoneNumber());
+        repo.save(customer);
+        return new CustomerDTO(customer.getPublicId(), customer.getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
     }
 }

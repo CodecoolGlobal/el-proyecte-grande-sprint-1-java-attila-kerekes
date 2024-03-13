@@ -16,7 +16,7 @@ import java.util.UUID;
 @RequestMapping("/api/reservations")
 public class ReservationController {
 
-    private final ReservationService reservationService;
+/*    private final ReservationService reservationService;
 
     @Autowired
     public ReservationController(ReservationService reservationService) {
@@ -52,7 +52,6 @@ public class ReservationController {
         return reservationService.deleteReservation(reservationId);
     }
 
-
     @PostMapping("/{restaurantID}/{customerID}")
     public ResponseEntity<?> createNewReservation(
             @PathVariable UUID restaurantID,
@@ -63,6 +62,7 @@ public class ReservationController {
         return ResponseEntity.ok().body("Thank you, for your reservation");
 
     }
+
 
 
 }

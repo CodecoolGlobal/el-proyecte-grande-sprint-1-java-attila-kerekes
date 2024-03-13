@@ -1,5 +1,6 @@
 package com.table.repository;
 
+import com.table.model.DiningSpot;
 import com.table.model.Reservation;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,12 +14,14 @@ public interface ReservationRepo extends JpaRepository<Reservation, Long> {
 
     @Transactional
     void deleteByPublicId(UUID publicId);
+  
     List<Reservation> findByDiningSpot_RestaurantPublicId(UUID restaurantId);
 
     List<Reservation> findAllByCustomerPublicId(UUID customerId);
 
     @Transactional
     Reservation findReservationByPublicId(UUID publicId);
+
 
 
 
