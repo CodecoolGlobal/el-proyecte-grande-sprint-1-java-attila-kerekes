@@ -16,7 +16,7 @@ import java.util.UUID;
 @RequestMapping("/api/reservations")
 public class ReservationController {
 
-/*    private final ReservationService reservationService;
+  private final ReservationService reservationService;
 
     @Autowired
     public ReservationController(ReservationService reservationService) {

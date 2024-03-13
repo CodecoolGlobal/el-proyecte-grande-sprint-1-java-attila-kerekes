@@ -17,8 +17,9 @@ public interface RestaurantRepo extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findByPublicId(UUID uuid);
 
     List<Restaurant> findAllByNameContainsIgnoreCase(String name);
-
+    /*
     List<Restaurant> findRestaurantsByNameRegex(String name);
+    */
 
     @Override
     List<Restaurant> findAll();
