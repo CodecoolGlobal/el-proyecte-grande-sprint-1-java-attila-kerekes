@@ -5,7 +5,9 @@ import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Customer;
 import com.table.model.Reservation;
 import com.table.model.Restaurant;
+
 import com.table.model.DiningSpot;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -22,15 +24,15 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 @Disabled
 class ReservationServiceTest {
-
+/*
     @Mock
-    private TempRepository tempRepository;
+    private ReservationRepo reservationRepo;
 
     private ReservationService reservationService;
 
     @BeforeEach
     void setUp() {
-        reservationService = new ReservationService(tempRepository);
+        reservationService = new ReservationService(reservationRepo);
     }
 
 @Disabled
@@ -284,8 +286,7 @@ class ReservationServiceTest {
         assertEquals(expected, List.of(testReservationExpected1));
     }
 }
-=======
->>>>>>> development
+
 //package com.table.service;
 //
 //import com.table.controller.dto.CustomerDTO;
@@ -572,5 +573,7 @@ class ReservationServiceTest {
 //
 //        assertEquals(expected, List.of(testReservationExpected1));
 //    }
-//}
- */
+
+*/
+}
+
