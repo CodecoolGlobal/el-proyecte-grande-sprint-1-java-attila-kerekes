@@ -1,15 +1,14 @@
 package com.table.service;
 
 import com.table.controller.dto.CustomerDTO;
-import com.table.controller.dto.LogInRequestDTO;
 import com.table.controller.dto.NewCustomerDTO;
 import com.table.model.Customer;
 import com.table.repository.CustomerRepo;
 import com.table.security.Role;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import org.hibernate.annotations.Cascade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,11 +16,12 @@ import java.util.*;
 @Service
 public class CustomerService {
   private final CustomerRepo repo;
-
+    private final PasswordEncoder encoder;
 
     @Autowired
-    public CustomerService(CustomerRepo repo) {
+    public CustomerService(CustomerRepo repo, PasswordEncoder encoder) {
         this.repo = repo;
+        this.encoder = encoder;
     }
 
     public CustomerDTO getCustomerById(UUID id) {
@@ -37,12 +37,11 @@ public class CustomerService {
     public CustomerDTO saveCustomer(NewCustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setEmail(customerDTO.email());
-        customer.setPassword(customer.getPassword());
+        customer.setPassword(encoder.encode(customerDTO.password()));
         customer.setFirstName(customerDTO.firstName());
         customer.setLastName(customerDTO.lastName());
         customer.setPhoneNumber(customerDTO.phoneNumber());
         customer.setRole(Role.ROLE_CUSTOMER);
-        customer.setPassword(customerDTO.password());
         Customer saved = repo.save(customer);
         return new CustomerDTO(saved.getPublicId(), saved.getEmail(), saved.getFirstName(), saved.getLastName(), saved.getPhoneNumber());
     }

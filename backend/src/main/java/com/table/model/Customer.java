@@ -14,6 +14,7 @@ import java.util.UUID;
 @Setter
 @Entity
 public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq_gen")
     @SequenceGenerator(name = "customer_seq_gen", sequenceName = "customer_seq", initialValue = 1, allocationSize = 1)

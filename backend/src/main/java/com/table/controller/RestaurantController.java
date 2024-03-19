@@ -48,22 +48,16 @@ public class RestaurantController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
+    public JwtResponse authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        String role = userDetails.getAuthorities().stream()
-                .findFirst()
-                .map(GrantedAuthority::getAuthority)
-                .orElse(null);
-
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_CUSTOMER));
+        return new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_RESTAURANT);
     }
 
     //Read
