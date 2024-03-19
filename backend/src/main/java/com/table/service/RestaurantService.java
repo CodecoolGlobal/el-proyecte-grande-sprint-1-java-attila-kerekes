@@ -51,6 +51,7 @@ public class RestaurantService {
     }
 
     public RestaurantDTO getRestaurantById(UUID uuid) {
+        //TODO: exception message needed
         Restaurant restaurant = restaurantRepo.findByPublicId(uuid).orElseThrow(EntityNotFoundException::new);
         return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getName(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
