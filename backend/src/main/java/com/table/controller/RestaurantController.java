@@ -1,11 +1,23 @@
 package com.table.controller;
 
+import com.table.controller.dto.JwtResponse;
 import com.table.controller.dto.LogInRequestDTO;
 import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
+import com.table.security.Role;
+import com.table.security.jwt.JwtUtils;
+import com.table.service.CustomerService;
 import com.table.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,10 +26,18 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/restaurants")
 public class RestaurantController {
+    private final CustomerService customerService;
+    private final PasswordEncoder encoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
     private final RestaurantService restaurantService;
 
     @Autowired
-    public RestaurantController(RestaurantService restaurantService) {
+    public RestaurantController(CustomerService customerService, PasswordEncoder encoder, AuthenticationManager authenticationManager, JwtUtils jwtUtils, RestaurantService restaurantService) {
+        this.customerService = customerService;
+        this.encoder = encoder;
+        this.authenticationManager = authenticationManager;
+        this.jwtUtils = jwtUtils;
         this.restaurantService = restaurantService;
     }
 
@@ -28,8 +48,22 @@ public class RestaurantController {
     }
 
     @PostMapping("/login")
-    public UUID logInRestaurant(@RequestBody LogInRequestDTO logInRequestDTO) {
-        return restaurantService.findByEmailAndPassword(logInRequestDTO.email(), logInRequestDTO.password());
+    public ResponseEntity<?> authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String role = userDetails.getAuthorities().stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse(null);
+
+        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_CUSTOMER));
     }
 
     //Read
