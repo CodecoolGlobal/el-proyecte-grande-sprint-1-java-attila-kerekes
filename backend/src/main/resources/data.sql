@@ -1,7 +1,7 @@
 
 -- Sample Customer data
-INSERT INTO customer (id, public_id, email, password, first_name, last_name, phone_number) VALUES (nextval('customer_seq'), '74e1a446-7d7a-4b60-8909-5fa2514a7cf7', 'customer1@example.com', 'password1', 'John', 'Doe', '1234567890');
-INSERT INTO customer (id, public_id, email, password, first_name, last_name, phone_number) VALUES (nextval('customer_seq'), 'a4999a0c-0aae-49a0-b31c-4dc972c26f7c', 'customer2@example.com', 'password2', 'Jane', 'Smith', '9876543210');
+INSERT INTO customer (id, public_id, email,role, password, first_name, last_name, phone_number) VALUES (nextval('customer_seq'), '74e1a446-7d7a-4b60-8909-5fa2514a7cf7', 'customer1@example.com','ROLE_CUSTOMER', 'password1', 'John', 'Doe', '1234567890');
+INSERT INTO customer (id, public_id, email,role, password, first_name, last_name, phone_number) VALUES (nextval('customer_seq'), 'a4999a0c-0aae-49a0-b31c-4dc972c26f7c', 'customer2@example.com','ROLE_CUSTOMER', 'password2', 'Jane', 'Smith', '9876543210');
 
 -- Sample Restaurant data
 INSERT INTO restaurant (id, public_id, name, email, password, phone_number, address) VALUES (nextval('restaurant_seq'), '2b6d71e5-07e6-4b0f-9022-2ee70bc68264', 'Italiano Ristorante', 'info@italianoristorante.com', 'password123', '+1234567890', '123 Main St');

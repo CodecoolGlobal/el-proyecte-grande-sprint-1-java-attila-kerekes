@@ -5,6 +5,7 @@ import com.table.controller.dto.LogInRequestDTO;
 import com.table.controller.dto.NewCustomerDTO;
 import com.table.model.Customer;
 import com.table.repository.CustomerRepo;
+import com.table.security.Role;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.hibernate.annotations.Cascade;
@@ -40,6 +41,8 @@ public class CustomerService {
         customer.setFirstName(customerDTO.firstName());
         customer.setLastName(customerDTO.lastName());
         customer.setPhoneNumber(customerDTO.phoneNumber());
+        customer.setRole(Role.ROLE_CUSTOMER);
+        customer.setPassword(customerDTO.password());
         Customer saved = repo.save(customer);
         return new CustomerDTO(saved.getPublicId(), saved.getEmail(), saved.getFirstName(), saved.getLastName(), saved.getPhoneNumber());
     }

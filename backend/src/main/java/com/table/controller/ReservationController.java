@@ -7,6 +7,7 @@ import com.table.service.ReservationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -29,12 +30,14 @@ public class ReservationController {
     }
 
     @GetMapping("/restaurant/{restaurantID}")
+    @PreAuthorize("hasRole('RESTAURANT')")
     public Collection<Reservation> getAllReservationByRestaurant(@PathVariable UUID restaurantID) {
         return reservationService.getAllByRestaurantID(restaurantID);
     }
 
 
     @GetMapping("/customer/{customerID}")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<?> getAllReservationByCustomer(@PathVariable UUID customerID) {
         Collection<Reservation> report = reservationService.getAllByCustomerID(customerID);
         return ResponseEntity.ok(report);
@@ -53,6 +56,7 @@ public class ReservationController {
     }
 
     @PostMapping("/{restaurantID}/{customerID}")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<?> createNewReservation(
             @PathVariable UUID restaurantID,
             @PathVariable UUID customerID,
