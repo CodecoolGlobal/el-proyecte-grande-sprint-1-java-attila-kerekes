@@ -109,10 +109,10 @@ public class RestaurantService {
         return restaurant.getPublicId();
     }
     //TODO: RESERVATION METHOD
-//    public List<DiningSpot> findAvailableDiningSpots(UUID uuid){
-//        List<DiningSpot> diningSpots = diningSpotRepo.getDiningSpotsByRestaurant_PublicId(uuid);
-//
-//    }
+    public List<DiningSpot> findAvailableDiningSpots(UUID uuid){
+        List<DiningSpot> diningSpots = diningSpotRepo.getDiningSpotsByRestaurant_PublicId(uuid);
+        return diningSpots;
+    }
 
     //TODO: CUISINE ***FEATURE***
 }

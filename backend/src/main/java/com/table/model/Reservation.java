@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -21,7 +22,7 @@ public class Reservation {
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
     private LocalDateTime start;
-    private int duration;
+    private Duration duration;
     private int numberOfCustomers;
     @ManyToOne
     @JsonIgnore
@@ -29,6 +30,6 @@ public class Reservation {
     private Customer customer;
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "table_id", referencedColumnName = "id", nullable = false)
-    private DiningSpot table;
+    @JoinColumn(name = "dining_spot_id", referencedColumnName = "id", nullable = false)
+    private DiningSpot diningSpot;
 }

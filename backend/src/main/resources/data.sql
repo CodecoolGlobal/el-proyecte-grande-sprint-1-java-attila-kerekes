@@ -16,8 +16,8 @@ INSERT INTO cuisine (id, cuisine_type) VALUES (nextval('cuisine_seq'), 'Italian'
 INSERT INTO cuisine (id, cuisine_type) VALUES (nextval('cuisine_seq'), 'Mexican');
 
 -- Sample Reservation data
-INSERT INTO reservation (id, public_id, start, duration, number_of_customers, customer_id, table_id) VALUES (nextval('reservation_seq'), '7df4b9a8-38d5-4841-bb9a-2d892b15e43b', '2024-03-06 18:00:00', 1, 4, 1, 1);
-INSERT INTO reservation (id, public_id, start, duration, number_of_customers, customer_id, table_id) VALUES (nextval('reservation_seq'), 'a8d3c07f-5748-4e16-943b-31a4d72ff1d4', '2024-03-07 19:00:00', 1, 6, 2, 2);
+INSERT INTO reservation (id, public_id, start, duration, number_of_customers, customer_id, dining_spot_id) VALUES (nextval('reservation_seq'), '7df4b9a8-38d5-4841-bb9a-2d892b15e43b', '2024-03-06 18:00:00', 1, 4, 1, 1);
+INSERT INTO reservation (id, public_id, start, duration, number_of_customers, customer_id, dining_spot_id) VALUES (nextval('reservation_seq'), 'a8d3c07f-5748-4e16-943b-31a4d72ff1d4', '2024-03-07 19:00:00', 1, 6, 2, 2);
 
 INSERT INTO restaurant_cuisine (cuisine_id, restaurant_id) VALUES (1, 1);
 INSERT INTO restaurant_cuisine (cuisine_id, restaurant_id) VALUES (2, 2);
