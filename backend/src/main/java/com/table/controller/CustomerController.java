@@ -39,6 +39,7 @@ public class CustomerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable UUID id) {
+        customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }
 
