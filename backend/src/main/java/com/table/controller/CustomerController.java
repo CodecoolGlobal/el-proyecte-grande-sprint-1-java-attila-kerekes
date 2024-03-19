@@ -27,16 +27,14 @@ import java.util.UUID;
 @RequestMapping("/api/customers")
 public class CustomerController {
     private final CustomerService customerService;
-    private final PasswordEncoder encoder;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public CustomerController(CustomerService customerService, PasswordEncoder encoder, AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserDetailsService userDetailsService) {
+    public CustomerController(CustomerService customerService, AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserDetailsService userDetailsService) {
         this.customerService = customerService;
-        this.encoder = encoder;
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
         this.userDetailsService = userDetailsService;
@@ -54,22 +52,16 @@ public class CustomerController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
+    public JwtResponse authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        String role = userDetails.getAuthorities().stream()
-                .findFirst()
-                .map(GrantedAuthority::getAuthority)
-                .orElse(null);
-
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_RESTAURANT));
+        return new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_CUSTOMER);
     }
 
     @DeleteMapping("/{id}")
