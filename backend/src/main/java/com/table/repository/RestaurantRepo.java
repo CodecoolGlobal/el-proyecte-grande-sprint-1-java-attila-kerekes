@@ -1,5 +1,6 @@
 package com.table.repository;
 
+import com.table.model.Customer;
 import com.table.model.Restaurant;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,10 +18,9 @@ public interface RestaurantRepo extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findByPublicId(UUID uuid);
 
     List<Restaurant> findAllByNameContainsIgnoreCase(String name);
-    /*
-    List<Restaurant> findRestaurantsByNameRegex(String name);
-    */
 
+
+    Optional<Restaurant> findByEmail(String email);
     @Override
     List<Restaurant> findAll();
 

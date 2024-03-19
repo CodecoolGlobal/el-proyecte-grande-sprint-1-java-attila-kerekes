@@ -1,7 +1,9 @@
 package com.table.model;
 
+import com.table.security.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.List;
 import java.util.UUID;
@@ -19,6 +21,8 @@ public class Customer {
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
     private String email;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     private String password;
     private String firstName;
     private String lastName;

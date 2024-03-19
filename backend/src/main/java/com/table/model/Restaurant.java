@@ -1,6 +1,7 @@
 package com.table.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.table.security.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class Restaurant {
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
     private String name;
+    private Role role = Role.ROLE_RESTAURANT;
     private String email;
     private String password;
     private String phoneNumber;

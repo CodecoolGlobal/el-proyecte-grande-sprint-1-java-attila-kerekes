@@ -4,9 +4,21 @@ import com.table.controller.dto.CustomerDTO;
 import com.table.controller.dto.LogInRequestDTO;
 import com.table.controller.dto.NewCustomerDTO;
 import com.table.model.Customer;
+import com.table.security.JwtResponse;
+import com.table.security.Role;
+import com.table.security.jwt.JwtUtils;
 import com.table.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -16,9 +28,18 @@ import java.util.UUID;
 public class CustomerController {
     private final CustomerService customerService;
 
+    private final AuthenticationManager authenticationManager;
+    private final JwtUtils jwtUtils;
+
+    private final UserDetailsService userDetailsService;
+
+
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(CustomerService customerService, AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserDetailsService userDetailsService) {
         this.customerService = customerService;
+        this.authenticationManager = authenticationManager;
+        this.jwtUtils = jwtUtils;
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("/{id}")
@@ -33,17 +54,37 @@ public class CustomerController {
     }
 
     @PostMapping("/login")
-    public UUID logInCustomer(@RequestBody LogInRequestDTO logInRequestDTO) {
-        return customerService.findByEmailAndPassword(logInRequestDTO.email(), logInRequestDTO.password());
+    public ResponseEntity<?> authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String role = userDetails.getAuthorities().stream()
+                .findFirst()
+                .map(GrantedAuthority::getAuthority)
+                .orElse(null);
+
+        if (Role.ROLE_CUSTOMER.name().equals(role)){
+            return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(),
+                    String.valueOf(Role.ROLE_CUSTOMER)));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid role");
+        }
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<?> deleteCustomer(@PathVariable UUID id) {
         return ResponseEntity.noContent().build();
     }
 
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public CustomerDTO updateCustomer(@RequestBody CustomerDTO customerDTO) {
         return customerService.updateCustomer(customerDTO);
     }

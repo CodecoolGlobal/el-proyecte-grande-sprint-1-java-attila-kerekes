@@ -5,6 +5,7 @@ import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,11 +34,13 @@ public class RestaurantController {
 
     //Read
     @GetMapping
+    @PreAuthorize("hasRole('CUSTOMER')")
     public List<RestaurantDTO> getAllRestaurants() {
         return restaurantService.getRestaurants();
     }
 
     @GetMapping("/name/{name}")
+    @PreAuthorize("hasRole('CUSTOMER')")
     List<RestaurantDTO> getRestaurantsByName(@PathVariable String name) {
         return restaurantService.getRestaurantsByName(name);
     }
@@ -49,12 +52,14 @@ public class RestaurantController {
 
     //Update
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('RESTAURANT')")
     public RestaurantDTO updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
         return restaurantService.updateRestaurant(restaurantDTO, id);
     }
 
     //Delete
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('RESTAURANT')")
     public void deleteRestaurant(@PathVariable UUID id) {
         restaurantService.deleteRestaurant(id);
     }
