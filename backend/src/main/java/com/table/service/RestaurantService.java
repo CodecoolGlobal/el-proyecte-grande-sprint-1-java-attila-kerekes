@@ -3,13 +3,16 @@ package com.table.service;
 import com.table.controller.dto.DiningSpotDTO;
 import com.table.controller.dto.NewRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
+import com.table.model.Client;
 import com.table.model.Cuisine;
 import com.table.model.DiningSpot;
 import com.table.model.Restaurant;
 import com.table.repository.DiningSpotRepo;
 import com.table.repository.RestaurantRepo;
+import com.table.security.Role;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,12 +23,14 @@ import java.util.UUID;
 public class RestaurantService {
     private final RestaurantRepo restaurantRepo;
     private final DiningSpotRepo diningSpotRepo;
+    private final PasswordEncoder encoder;
     private Cuisine cuisineRepo;
 
     @Autowired
-    public RestaurantService(RestaurantRepo restaurantRepo, DiningSpotRepo tableRepo) {
+    public RestaurantService(RestaurantRepo restaurantRepo, DiningSpotRepo tableRepo, PasswordEncoder encoder) {
         this.restaurantRepo = restaurantRepo;
         this.diningSpotRepo = tableRepo;
+        this.encoder = encoder;
     }
 
     public List<RestaurantDTO> getRestaurants() {
@@ -33,21 +38,28 @@ public class RestaurantService {
         return restaurants.stream().map(restaurant -> new RestaurantDTO(
                 restaurant.getPublicId(),
                 restaurant.getName(),
-                restaurant.getEmail(),
+                restaurant.getClient().getEmail(),
                 restaurant.getPhoneNumber(),
                 restaurant.getAddress()
         )).toList();
     }
 
     public RestaurantDTO addRestaurant(NewRestaurantDTO newRestaurantDTO) {
+
+        Client client = new Client();
+        client.setEmail(newRestaurantDTO.email());
+        client.setPassword(encoder.encode(newRestaurantDTO.password()));
+        client.setRole(Role.ROLE_RESTAURANT);
+
         Restaurant restaurant = new Restaurant();
         restaurant.setName(newRestaurantDTO.name());
         restaurant.setAddress(newRestaurantDTO.address());
-        restaurant.setEmail(newRestaurantDTO.email());
-        restaurant.setPassword(newRestaurantDTO.password());
         restaurant.setPhoneNumber(newRestaurantDTO.phoneNumber());
+        restaurant.setClient(client);
         restaurantRepo.save(restaurant);
-        return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getEmail(), restaurant.getPhoneNumber(), restaurant.getAddress());
+
+
+        return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), client.getEmail(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
 
     public RestaurantDTO getRestaurantById(UUID uuid) {
@@ -75,7 +87,7 @@ public class RestaurantService {
         Restaurant restaurant = restaurantRepo.findByPublicId(uuid).orElseThrow(EntityNotFoundException::new);
         restaurant.setName(restaurantDTO.name());
         restaurant.setAddress(restaurantDTO.address());
-        restaurant.setEmail(restaurantDTO.email());
+        restaurant.getClient().setEmail(restaurantDTO.email());
         restaurant.setPhoneNumber(restaurantDTO.phoneNumber());
         restaurantRepo.save(restaurant);
 
@@ -104,12 +116,9 @@ public class RestaurantService {
         return diningSpotDTOs;
     }
 
-    public UUID findByEmailAndPassword(String email, String password) {
-        Restaurant restaurant = restaurantRepo.findByEmailEqualsAndPasswordEquals(email, password).orElseThrow(EntityNotFoundException::new);
-        return restaurant.getPublicId();
-    }
+
     //TODO: RESERVATION METHOD
-    public List<DiningSpot> findAvailableDiningSpots(UUID uuid){
+    public List<DiningSpot> findAvailableDiningSpots(UUID uuid) {
         List<DiningSpot> diningSpots = diningSpotRepo.getDiningSpotsByRestaurant_PublicId(uuid);
         return diningSpots;
     }

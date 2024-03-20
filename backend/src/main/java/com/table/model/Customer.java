@@ -21,15 +21,13 @@ public class Customer {
     private long id;
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
-    private String email;
-    @Enumerated(EnumType.STRING)
-    private Role role;
-    private String password;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Client client;
 
 
     public Customer(UUID id, String email, String password, String firstName, String lastName, String phoneNumber) {
