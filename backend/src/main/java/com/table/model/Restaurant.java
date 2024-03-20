@@ -23,9 +23,6 @@ public class Restaurant {
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
     private String name;
-    private Role role = Role.ROLE_RESTAURANT;
-    private String email;
-    private String password;
     private String phoneNumber;
     private String address;
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
@@ -33,4 +30,6 @@ public class Restaurant {
     @ManyToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Cuisine> cuisines;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Client client;
 }

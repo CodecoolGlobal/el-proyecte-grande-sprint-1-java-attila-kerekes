@@ -1,8 +1,10 @@
 package com.table.security;
 
 
+import com.table.model.Client;
 import com.table.model.Customer;
 import com.table.model.Restaurant;
+import com.table.repository.ClientRepository;
 import com.table.repository.CustomerRepo;
 import com.table.repository.RestaurantRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,21 +22,18 @@ import java.util.Optional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final CustomerRepo customerRepo;
-
-    private final RestaurantRepo restaurantRepo;
+    private final ClientRepository clientRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(CustomerRepo customerRepo, RestaurantRepo restaurantRepo) {
-        this.customerRepo = customerRepo;
-        this.restaurantRepo = restaurantRepo;
+    public UserDetailsServiceImpl(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
-        Optional<Customer> targetCustomer = customerRepo.findByEmail(email);
-        Optional<Restaurant> targetRestaurant = restaurantRepo.findByEmail(email);
+        Optional<Client> targetCustomer = clientRepository.findByEmail(email);
+
         if (targetCustomer.isPresent()) {
 
             List<SimpleGrantedAuthority> roles = new ArrayList<>();
@@ -42,13 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             roles.add(new SimpleGrantedAuthority(targetCustomer.get().getRole().name()));
 
             return new User(targetCustomer.get().getEmail(), targetCustomer.get().getPassword(),
-                    roles);
-        } else if (targetRestaurant.isPresent()) {
-            List<SimpleGrantedAuthority> roles = new ArrayList<>();
-
-            roles.add(new SimpleGrantedAuthority(targetRestaurant.get().getRole().name()));
-
-            return new User(targetRestaurant.get().getEmail(), targetRestaurant.get().getPassword(),
                     roles);
         } else {
             throw new UsernameNotFoundException(email);

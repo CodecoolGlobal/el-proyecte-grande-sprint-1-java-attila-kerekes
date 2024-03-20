@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
     Optional<Customer> findByPublicId(UUID id);
     void deleteByPublicId(UUID id);
-    Optional<Customer> findByEmailEqualsAndPasswordEquals(String email, String password);
 
-    Optional<Customer> findByEmail(String email);
+
+
 }
