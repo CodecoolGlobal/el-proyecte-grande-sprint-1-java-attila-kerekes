@@ -47,7 +47,7 @@ public class ReservationService {
             Reservation reservation = new Reservation();
             reservation.setCustomer(customer.get());
             reservation.setDiningSpot(allFreeDiningSpot.get(0));
-            reservation.setDurationInHours(newReservationDTO.duration());
+            reservation.setDuration(newReservationDTO.duration());
             reservation.setStart(newReservationDTO.start());
             reservation.setNumberOfCustomers(newReservationDTO.numberOfCustomers());
             reservationRepo.save(reservation);
@@ -91,6 +91,6 @@ public class ReservationService {
     }
 
     private ReservationDTO convertReservationEntityToDTO(Reservation reservation) {
-        return new ReservationDTO(reservation.getPublicId(), reservation.getStart(), reservation.getDurationInHours(), reservation.getNumberOfCustomers(), reservation.getCustomer().getPublicId(), reservation.getDiningSpot().getRestaurant().getPublicId(), reservation.getDiningSpot().getPublicId());
+        return new ReservationDTO(reservation.getPublicId(), reservation.getStart(), reservation.getDuration(), reservation.getNumberOfCustomers(), reservation.getCustomer().getPublicId(), reservation.getDiningSpot().getRestaurant().getPublicId(), reservation.getDiningSpot().getPublicId());
     }
 }

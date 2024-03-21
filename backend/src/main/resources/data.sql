@@ -1,4 +1,3 @@
-
 -- Sample Client data
 INSERT INTO client (id, email,  password, role) VALUES (nextval('client_seq'), 'italianofoodlover@email.com','passwordo', 'ROLE_CUSTOMER');
 INSERT INTO client (id, email,  password, role) VALUES (nextval('client_seq'), 'mexicanatacolover@meximail.com','elpasswordo','ROLE_CUSTOMER');
@@ -29,4 +28,3 @@ INSERT INTO reservation (id, public_id, start, duration, number_of_customers, cu
 INSERT INTO restaurant_cuisine (cuisine_id, restaurant_id) VALUES (1, 1);
 INSERT INTO restaurant_cuisine (cuisine_id, restaurant_id) VALUES (2, 2);
 INSERT INTO restaurant_cuisine (cuisine_id, restaurant_id) VALUES (1, 2);
-
