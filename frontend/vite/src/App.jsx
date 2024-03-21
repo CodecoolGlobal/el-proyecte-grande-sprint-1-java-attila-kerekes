@@ -22,36 +22,38 @@ function App() {
     const routes = useRoutes([
         {
             element: <MainPage /*onSubmit={logInUser}*//>,
-            path: '/'
-        },
-        {
-            element: <Login setIsAuthenticated={setIsAuthenticated} setRestaurant={setRestaurant} />,
-            path: '/login'
-        },
-        {
-            element: isAuthenticated ?
-                (isRestaurant ? <Navigate to="/restaurant" /> : <Customer />)
-                : <Navigate to="/" />,
-            path: '/customer',
-        },
-        {
-            element: isAuthenticated ?
-                (isRestaurant ? <Restaurant /> : <Navigate to="/customer" />)
-                : <Navigate to="/" />,
-            path: '/restaurant',
-        },
-        {
-            element: <Register /*onSubmit={logInUser}*//>,
-            path: '/register',
+            path: '/',
             children: [
                 {
-                    element: <CustomerRegistration />,
-                    path: 'customer'
+                    element: <Login setIsAuthenticated={setIsAuthenticated} setRestaurant={setRestaurant} />,
+                    path: '/login'
                 },
                 {
-                    element: <RestaurantRegistration />,
-                    path: 'restaurant'
-                }
+                    element: isAuthenticated ?
+                        (isRestaurant ? <Navigate to="/restaurant" /> : <Customer />)
+                        : <Navigate to="/" />,
+                    path: '/customer',
+                },
+                {
+                    element: isAuthenticated ?
+                        (isRestaurant ? <Restaurant /> : <Navigate to="/customer" />)
+                        : <Navigate to="/" />,
+                    path: '/restaurant',
+                },
+                {
+                    element: <Register /*onSubmit={logInUser}*//>,
+                    path: '/register',
+                    children: [
+                        {
+                            element: <CustomerRegistration />,
+                            path: 'customer'
+                        },
+                        {
+                            element: <RestaurantRegistration />,
+                            path: 'restaurant'
+                        }
+                    ]
+                },
             ]
         },
     ])
