@@ -15,10 +15,17 @@ const Login = ({ setIsAuthenticated, setRestaurant }) => {
                 },
                 body: JSON.stringify({ email, password }),
             });
+            if (!response.ok) {
+                navigate("/");
+            }
+
             const data = await response.json();
 
-            localStorage.setItem('token', data.jwt);
+            if (!data.jwt) {
+                throw new Error('Token is missing in response.');
+            }
 
+            localStorage.setItem('token', data.jwt);
             const role = data.role;
 
             if (role === 'ROLE_RESTAURANT') {
