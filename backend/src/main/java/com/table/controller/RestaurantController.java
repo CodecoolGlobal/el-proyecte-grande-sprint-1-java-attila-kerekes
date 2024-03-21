@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/api/restaurants")
 public class RestaurantController {
     private final CustomerService customerService;
     private final PasswordEncoder encoder;
