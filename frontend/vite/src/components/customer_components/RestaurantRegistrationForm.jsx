@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import './form.css';
 
 function RestaurantRegistrationForm(){
     //email, password, firstname, lastname, phoneNumber
@@ -37,19 +38,19 @@ function RestaurantRegistrationForm(){
 
                 <div>
                     <label>e-mail</label>
-                    <input type={"text"} name={"email"} value={restaurant.email} onChange={(event) =>
+                    <input type={"email"} name={"email"} value={restaurant.email} onChange={(event) =>
                     {setRestaurant(prev => ({...prev, email: event.target.value}))}}/>
                 </div>
 
                 <div>
                     <label>Password</label>
-                    <input type={"text"} name={"password"} value={restaurant.password} onChange={(event) =>
+                    <input type={"password"} name={"password"} value={restaurant.password} onChange={(event) =>
                     {setRestaurant(prev => ({...prev, password: event.target.value}))}}/>
                 </div>
 
                 <div>
                     <label>Phone number</label>
-                    <input type={"text"} name={"phoneNumber"} value={restaurant.phoneNumber} onChange={(event) =>
+                    <input type={"number"} name={"phoneNumber"} value={restaurant.phoneNumber} onChange={(event) =>
                     {setRestaurant(prev => ({...prev, phoneNumber: event.target.value}))}}/>
                 </div>
 

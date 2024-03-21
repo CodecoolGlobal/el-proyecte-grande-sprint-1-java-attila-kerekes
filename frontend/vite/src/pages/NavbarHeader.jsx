@@ -14,7 +14,7 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
 
     return (
         <nav className="CustomerNavbar">
-            <h1>NavbarHeader</h1>
+            {/* <h1>NavbarHeader</h1> */}
             <Link to={`/`}>
                 <button>RESTaurant</button>
             </Link>
