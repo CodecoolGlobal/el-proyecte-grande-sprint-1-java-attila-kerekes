@@ -1,23 +1,40 @@
-import {Link, Navigate} from "react-router-dom";
-import Customer from "./Customer.jsx";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 
-function NavbarHeader({id, isAuthenticated}) {
+function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+
+        setIsAuthenticated(false);
+
+        localStorage.removeItem('token');
+
+        navigate("/");
+    };
 
     return (
         <nav className="CustomerNavbar">
             <h1>NavbarHeader</h1>
-            <Link to={`/`}><button>RESTaurant</button></Link>
+            <Link to={`/`}>
+                <button>RESTaurant</button>
+            </Link>
             {isAuthenticated ? (
                     <>
-                    <Link to={`/customer`}>    <button>My profile</button></Link>
-                    <Link to={`/`}> <button>Logout</button></Link>
+                        <Link to={`/customer`}>
+                            <button>My profile</button>
+                        </Link>
+                        <button onClick={handleLogout}>Logout</button>
                     </>
                 )
                 :
                 (
                     <>
-                    <Link to={`/register`}><button>Register</button></Link>
-                    <Link to={`/login`}> <button>Login</button></Link>
+                        <Link to={`/register`}>
+                            <button>Register</button>
+                        </Link>
+                        <Link to={`/login`}>
+                            <button>Login</button>
+                        </Link>
                     </>
                 )
             }

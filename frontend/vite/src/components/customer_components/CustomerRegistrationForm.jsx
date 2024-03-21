@@ -23,6 +23,7 @@ function CustomerRegistrationForm(){
         if(response.statusCode.statusCode === "401"){
             navigate("/");
         }
+        navigate("/");
     }
 
     return(
