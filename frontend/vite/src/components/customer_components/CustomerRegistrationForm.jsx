@@ -25,9 +25,6 @@ function CustomerRegistrationForm(){
         }
     }
 
-
-
-
     return(
         <div>
             <form onSubmit={(event)=>handleSubmit(event)}>
