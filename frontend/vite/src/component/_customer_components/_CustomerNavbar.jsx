@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CustomerNavbar({id}) {
+function _CustomerNavbar({id}) {
 
   return (
     <nav className="CustomerNavbar">
@@ -12,5 +12,5 @@ function CustomerNavbar({id}) {
   )
 }
 
-export default CustomerNavbar;
+export default _CustomerNavbar;
 

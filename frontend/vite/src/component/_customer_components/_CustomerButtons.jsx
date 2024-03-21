@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CustomerButtons({id}) {
+function _CustomerButtons({id}) {
 
   return (
       <nav className="CustomerSidebar">
@@ -20,4 +20,4 @@ function CustomerButtons({id}) {
   )
 }
 
-export default CustomerButtons;
+export default _CustomerButtons;

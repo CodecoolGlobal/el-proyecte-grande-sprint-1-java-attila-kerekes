@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 
 import { Outlet, useParams } from "react-router-dom";
 
-import CustomerNavbar from "./customer_components/CustomerNavbar";
-import CustomerButtons from "./customer_components/CustomerButtons";
+import _CustomerNavbar from "./_customer_components/_CustomerNavbar.jsx";
+import _CustomerButtons from "./_customer_components/_CustomerButtons.jsx";
 
 
-function CustomerMain() {
+function _CustomerMain() {
   const [customerInfo, setCustomerInfo] = useState({});
   const { id } = useParams();
 
@@ -21,9 +21,9 @@ function CustomerMain() {
 
   return (
     <div className="CustomerMain">
-      <CustomerNavbar id={id} />
+      <_CustomerNavbar id={id} />
       <div className="CustomerDisplayBelow">
-        <CustomerButtons id={id} />
+        <_CustomerButtons id={id} />
         <div className="CustomerContent">
           <Outlet />
         </div>
@@ -32,4 +32,4 @@ function CustomerMain() {
   )
 }
 
-export default CustomerMain;
+export default _CustomerMain;

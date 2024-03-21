@@ -1,4 +1,4 @@
-function RestaurantTableElements({table}){
+function _RestaurantTableElements({table}){
 
     return (
         <tr>
@@ -9,4 +9,4 @@ function RestaurantTableElements({table}){
     )
 }
 
-export default RestaurantTableElements
+export default _RestaurantTableElements

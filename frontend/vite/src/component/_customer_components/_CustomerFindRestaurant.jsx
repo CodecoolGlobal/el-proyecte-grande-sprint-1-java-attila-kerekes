@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-function CustomerFindRestaurant() {
+function _CustomerFindRestaurant() {
   const { id } = useParams();
   const [restaurants, setRestaurants] = useState([]);
 
@@ -34,4 +34,4 @@ function CustomerFindRestaurant() {
   )
 }
 
-export default CustomerFindRestaurant;
+export default _CustomerFindRestaurant;

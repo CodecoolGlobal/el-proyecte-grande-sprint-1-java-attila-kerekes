@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export const RegisterForRestaurants = () => {
+export const _RegisterForRestaurants = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [number, setNumber] = useState('');
@@ -48,7 +48,7 @@ export const RegisterForRestaurants = () => {
     };
 
     return (
-        <div className="login">
+        <div className="_Login">
             <h2>Register your restaurant</h2>
             <form onSubmit={handleSubmit}>
                 <label>
@@ -112,7 +112,7 @@ export const RegisterForRestaurants = () => {
                 <button type="submit">Register</button> <br/>
             </form>
                 <Link to='/'>Log in as a customer</Link><br/>
-                <Link to='/restaurants/login'>Login for Restaurants</Link>
+                <Link to='/restaurants/_Login'>Login for Restaurants</Link>
         </div>
     );
 };

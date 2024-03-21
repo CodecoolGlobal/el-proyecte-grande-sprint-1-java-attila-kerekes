@@ -1,19 +1,11 @@
 import './App.css'
-import { useRoutes } from 'react-router-dom'
-import CustomerMain from './component/CustomerMain';
-import About from './component/customer_components/About';
-import Contact from './component/customer_components/Contact';
-import CustomerFindRestaurant from './component/customer_components/CustomerFindRestaurant';
-import CustomerEditor from './component/customer_components/CustomerEditor';
-import CustomerReservations from './component/customer_components/CustomerReservations';
-import MyRestaurant from './pages/MyRestaurant'
-import { Login } from './pages/Login'
-import { Register } from './pages/Register'
-import UpdateRestaurant from './pages/UpdateRestaurant'
-import { useState } from 'react';
-import AddTables from './pages/AddTables';
-import RestaurantReservation from './pages/RestaurantReservation';
-import ReservationPage from './component/customer_components/ReservationPage';
+import {useRoutes} from 'react-router-dom'
+
+import MainPage from "./pages/MainPage.jsx";
+import Login from "./pages/Login.jsx";
+import Register from "./pages/Register.jsx";
+import CustomerRegistration from "./pages/CustomerRegistration.jsx";
+import RestaurantRegistration from "./pages/RestaurantRegistration.jsx";
 
 function App() {
     const [userId, setUserId] = useState('');
@@ -24,63 +16,28 @@ function App() {
 
     const routes = useRoutes([
         {
-            element: <CustomerMain />,
-            path: '/customer/:id',
-            children: [
-                {
-                    element: <About />,
-                    path: 'about'
-                },
-                {
-                    element: <Contact />,
-                    path: 'contact'
-                },
-                {
-                    element: <CustomerEditor />,
-                    path: 'editor'
-                },
-                {
-                    element: <CustomerFindRestaurant />,
-                    path: 'restaurants'
-                },
-                {
-                    element: <ReservationPage />,
-                    path: ':id2'
-                },
-                {
-                    element: <CustomerReservations />,
-                    path: 'reservations'
-                },
-                {
-                    element: <h1>Hello</h1>,
-                    path: 'hello'
-                },
-            ]
-        },
-        {
-            element: <Login onSubmit={logInUser}/>,
+            element: <MainPage onSubmit={logInUser}/>,
             path: '/'
         },
         {
+            element: <Login onSubmit={logInUser}/>,
+            path: '/login'
+        },
+        {
             element: <Register onSubmit={logInUser}/>,
-            path: '/register'
+            path: '/register',
+            children: [
+                {
+                    element: <CustomerRegistration />,
+                    path: 'customer'
+                },
+                {
+                    element: <RestaurantRegistration />,
+                    path: 'restaurant'
+                }
+            ]
         },
-        {
-            element: <MyRestaurant/>,
-            path: '/restaurant/myrestaurant/:id',
-        },
-        {
-            element: <UpdateRestaurant />,
-            path: '/restaurant/update/:id'
-        },
-        {
-            element: <AddTables />,
-            path: '/restaurant/addtable/:id',
-        },
-        {
-            path: '/restaurant/reservations/:id',
-            element: <RestaurantReservation />
-        }
+
     ])
 
     return routes;

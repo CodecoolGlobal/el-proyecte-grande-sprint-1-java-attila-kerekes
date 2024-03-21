@@ -1,4 +1,4 @@
-function ReservationElement({reservation}){
+function _ReservationElement({reservation}){
 
     console.log(reservation);
     return (
@@ -11,4 +11,4 @@ function ReservationElement({reservation}){
     )
 }
 
-export default ReservationElement;
+export default _ReservationElement;

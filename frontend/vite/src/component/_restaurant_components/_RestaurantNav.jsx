@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 
-function RestaurantNav(){
+function _RestaurantNav(){
     const {id} = useParams();
 
     return (
@@ -15,4 +15,4 @@ function RestaurantNav(){
     )
 }
 
-export default RestaurantNav;
+export default _RestaurantNav;
