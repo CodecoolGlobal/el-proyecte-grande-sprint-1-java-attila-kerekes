@@ -30,28 +30,33 @@ function CustomerRegistrationForm(){
             <form onSubmit={(event)=>handleSubmit(event)}>
                 <div>
                 <label>FirstName</label>
-                <input type={"text"} name={"firstName"} value={customer.firstName} onChange={(event) => {setCustomer(prev => ({...prev, firstName: event.target.value}))}}/>
+                <input type={"text"} name={"firstName"} value={customer.firstName} onChange={(event) =>
+                {setCustomer(prev => ({...prev, firstName: event.target.value}))}}/>
                 </div>
 
 
                 <div>
                 <label>LastName</label>
-                <input type={"text"} name={"lastName"} value={customer.lastName} onChange={(event) => {setCustomer(prev => ({...prev, lastName: event.target.value}))}}/>
+                <input type={"text"} name={"lastName"} value={customer.lastName} onChange={(event) =>
+                {setCustomer(prev => ({...prev, lastName: event.target.value}))}}/>
                 </div>
 
                 <div>
                 <label>e-mail</label>
-                <input type={"text"} name={"email"} value={customer.email} onChange={(event) => {setCustomer(prev => ({...prev, email: event.target.value}))}}/>
+                <input type={"text"} name={"email"} value={customer.email} onChange={(event) =>
+                {setCustomer(prev => ({...prev, email: event.target.value}))}}/>
                 </div>
 
                 <div>
                 <label>Password</label>
-                <input type={"text"} name={"password"} value={customer.password} onChange={(event) => {setCustomer(prev => ({...prev, password: event.target.value}))}}/>
+                <input type={"text"} name={"password"} value={customer.password} onChange={(event) =>
+                {setCustomer(prev => ({...prev, password: event.target.value}))}}/>
                 </div>
 
                 <div>
                 <label>Phone number</label>
-                    <input type={"text"} name={"phoneNumber"} value={customer.phoneNumber} onChange={(event) => {setCustomer(prev => ({...prev, phoneNumber: event.target.value}))}}/>
+                    <input type={"text"} name={"phoneNumber"} value={customer.phoneNumber} onChange={(event) =>
+                    {setCustomer(prev => ({...prev, phoneNumber: event.target.value}))}}/>
                 </div>
 
                 <div>
@@ -60,9 +65,6 @@ function CustomerRegistrationForm(){
             </form>
         </div>
     );
-
-
 }
-
 
 export default CustomerRegistrationForm;
