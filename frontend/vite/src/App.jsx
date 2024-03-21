@@ -6,11 +6,8 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import CustomerRegistration from "./pages/CustomerRegistration.jsx";
 import RestaurantRegistration from "./pages/RestaurantRegistration.jsx";
-<<<<<<< Updated upstream
 import Customer from "./pages/Customer.jsx";
 import Restaurant from "./pages/Restaurant.jsx";
-=======
->>>>>>> Stashed changes
 import {useState} from "react";
 
 function App() {
