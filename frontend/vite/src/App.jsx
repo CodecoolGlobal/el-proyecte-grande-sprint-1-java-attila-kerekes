@@ -1,30 +1,47 @@
 import './App.css'
-import {useRoutes} from 'react-router-dom'
+import {Navigate, useRoutes} from 'react-router-dom'
 
 import MainPage from "./pages/MainPage.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import CustomerRegistration from "./pages/CustomerRegistration.jsx";
 import RestaurantRegistration from "./pages/RestaurantRegistration.jsx";
+import Customer from "./pages/Customer.jsx";
+import Restaurant from "./pages/Restaurant.jsx";
+import {useState} from "react";
 
 function App() {
-    const [userId, setUserId] = useState('');
+    // const [userId, setUserId] = useState('');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isRestaurant, setRestaurant] = useState(false);
 
-    const logInUser = async (id) => {
-        setUserId(id);
-    }
+    // const logInUser = async (id) => {
+    //     setUserId(id);
+    // }
 
     const routes = useRoutes([
         {
-            element: <MainPage onSubmit={logInUser}/>,
+            element: <MainPage /*onSubmit={logInUser}*//>,
             path: '/'
         },
         {
-            element: <Login onSubmit={logInUser}/>,
+            element: <Login setIsAuthenticated={setIsAuthenticated} setRestaurant={setRestaurant} />,
             path: '/login'
         },
         {
-            element: <Register onSubmit={logInUser}/>,
+            element: isAuthenticated ?
+                (isRestaurant ? <Navigate to="/restaurant" /> : <Customer />)
+                : <Navigate to="/" />,
+            path: '/customer',
+        },
+        {
+            element: isAuthenticated ?
+                (isRestaurant ? <Restaurant /> : <Navigate to="/customer" />)
+                : <Navigate to="/" />,
+            path: '/restaurant',
+        },
+        {
+            element: <Register /*onSubmit={logInUser}*//>,
             path: '/register',
             children: [
                 {
@@ -37,7 +54,6 @@ function App() {
                 }
             ]
         },
-
     ])
 
     return routes;
