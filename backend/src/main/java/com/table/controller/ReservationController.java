@@ -1,6 +1,7 @@
 package com.table.controller;
 
 import com.table.controller.dto.NewReservationDTO;
+import com.table.exception.ReservationNotFoundException;
 import com.table.model.Reservation;
 import com.table.service.ReservationService;
 
@@ -44,13 +45,13 @@ public class ReservationController {
 
     //TODO Handle resource not found
     @GetMapping("/{reservationId}")
-    public Reservation getReservationByPublicId(@PathVariable UUID reservationId) {
+    public Reservation getReservationByPublicId(@PathVariable UUID reservationId) throws ReservationNotFoundException {
         return reservationService.getReservation(reservationId);
     }
 
     //TODO Handle resource not found
     @DeleteMapping("/{reservationId}")
-    public Reservation deleteReservation(@PathVariable UUID reservationId) {
+    public Reservation deleteReservation(@PathVariable UUID reservationId) throws ReservationNotFoundException {
         return reservationService.deleteReservation(reservationId);
     }
 

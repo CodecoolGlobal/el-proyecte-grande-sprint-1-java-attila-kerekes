@@ -1,10 +1,9 @@
 package com.table.service;
 
 import com.table.controller.dto.CustomerDTO;
-import com.table.controller.dto.NewCustomerDTO;
+import com.table.controller.dto.RegisterCustomerDTO;
 import com.table.model.Client;
 import com.table.model.Customer;
-import com.table.repository.ClientRepository;
 import com.table.repository.CustomerRepo;
 import com.table.security.Role;
 import jakarta.persistence.EntityNotFoundException;
@@ -32,7 +31,7 @@ public class CustomerService {
     }
 
 
-    public CustomerDTO saveCustomer(NewCustomerDTO customerDTO) {
+    public CustomerDTO saveCustomer(RegisterCustomerDTO customerDTO) {
         Client client = new Client();
         client.setEmail(customerDTO.email());
         client.setPassword(encoder.encode(customerDTO.password()));

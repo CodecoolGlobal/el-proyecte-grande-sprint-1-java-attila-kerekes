@@ -2,6 +2,7 @@ package com.table.service;
 
 
 import com.table.controller.dto.NewReservationDTO;
+import com.table.exception.ReservationNotFoundException;
 import com.table.model.Customer;
 import com.table.model.DiningSpot;
 import com.table.model.Reservation;
@@ -54,17 +55,17 @@ public class ReservationService {
     }
 
     @Transactional
-    public Reservation deleteReservation(UUID reservationId) {
+    public Reservation deleteReservation(UUID reservationId) throws ReservationNotFoundException {
         Reservation targetReservation = getReservation(reservationId);
         reservationRepo.deleteByPublicId(reservationId);
         return targetReservation;
     }
 
-    public Reservation getReservation(UUID reservationId) {
+    public Reservation getReservation(UUID reservationId) throws ReservationNotFoundException {
         Reservation targetReservation =
                 reservationRepo.findReservationByPublicId(reservationId);
         if (targetReservation == null) {
-            throw new ResponseStatusException(NOT_FOUND, "Unable to find reservation");
+            throw new ReservationNotFoundException("Unable to find reservation");
         }
         return targetReservation;
     }
