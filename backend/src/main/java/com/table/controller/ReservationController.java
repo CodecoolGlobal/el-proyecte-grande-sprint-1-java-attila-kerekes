@@ -2,7 +2,6 @@ package com.table.controller;
 
 import com.table.controller.dto.NewReservationDTO;
 import com.table.model.Reservation;
-import com.table.model.Restaurant;
 import com.table.service.ReservationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +45,7 @@ public class ReservationController {
     //TODO Handle resource not found
     @GetMapping("/{reservationId}")
     public Reservation getReservationByPublicId(@PathVariable UUID reservationId) {
-        return reservationService.getReservaton(reservationId);
+        return reservationService.getReservation(reservationId);
     }
 
     //TODO Handle resource not found

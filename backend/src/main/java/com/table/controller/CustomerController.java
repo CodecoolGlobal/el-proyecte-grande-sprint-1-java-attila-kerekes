@@ -30,14 +30,11 @@ public class CustomerController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 
-    private final UserDetailsService userDetailsService;
-
     @Autowired
-    public CustomerController(CustomerService customerService, AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserDetailsService userDetailsService) {
+    public CustomerController(CustomerService customerService, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
         this.customerService = customerService;
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
-        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("/{id}")
@@ -51,7 +48,7 @@ public class CustomerController {
         return customerService.saveCustomer(customerDTO);
     }
 
-    @PostMapping("/login")
+  /*  @PostMapping("/login")
     public JwtResponse authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -62,7 +59,7 @@ public class CustomerController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         return new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_CUSTOMER);
-    }
+    } */
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('CUSTOMER')")
@@ -70,7 +67,6 @@ public class CustomerController {
         customerService.deleteCustomer(id);
         return ResponseEntity.noContent().build();
     }
-
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('CUSTOMER')")
