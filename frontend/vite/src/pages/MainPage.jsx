@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useState} from "react";
 
 import {Outlet, useParams} from "react-router-dom";
 
@@ -6,7 +6,7 @@ import NavbarHeader from "./NavbarHeader.jsx";
 import NavbarFooter from "./NavbarFooter.jsx";
 
 
-function MainPage() {
+function MainPage({isAuthenticated}) {
     const [customerInfo, setCustomerInfo] = useState({});
     const {id} = useParams();
     //
@@ -23,12 +23,14 @@ function MainPage() {
 
     return (
         <div className="CustomerMain">
-            <NavbarHeader id={id}/>
+            <div className="CustomerMain">
+                <NavbarHeader id={id} isAuthenticated={isAuthenticated}/>
+            </div>
             <div className="CustomerDisplayBelow">
                 <Outlet/>
             </div>
-            <NavbarFooter id={id}/>
-            <div className="CustomerDisplayBelow">
+            <div className="CustomerMain">
+                <NavbarFooter id={id}/>
             </div>
         </div>
     )

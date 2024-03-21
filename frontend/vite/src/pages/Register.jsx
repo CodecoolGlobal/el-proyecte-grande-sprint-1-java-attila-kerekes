@@ -1,11 +1,12 @@
-import Restaurant from "./Restaurant.jsx";
-import {Outlet} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 
 export default function Register() {
     return (
         <>
-            <h1>Register</h1>
-            <Outlet></Outlet>
+            <h2>Register</h2>
+            <Link to={`customer`}> <button>As customer</button></Link>
+            <Link to={`restaurant`}><button>As restaurant</button></Link>
+            <Outlet/>
         </>
     )
 }

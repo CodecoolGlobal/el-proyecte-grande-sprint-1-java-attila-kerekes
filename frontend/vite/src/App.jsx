@@ -9,6 +9,8 @@ import RestaurantRegistration from "./pages/RestaurantRegistration.jsx";
 import Customer from "./pages/Customer.jsx";
 import Restaurant from "./pages/Restaurant.jsx";
 import {useState} from "react";
+import About from "./pages/About.jsx";
+import Contact from "./pages/Contact.jsx";
 
 function App() {
     // const [userId, setUserId] = useState('');
@@ -21,37 +23,47 @@ function App() {
 
     const routes = useRoutes([
         {
-            element: <MainPage /*onSubmit={logInUser}*//>,
-            path: '/'
-        },
-        {
-            element: <Login setIsAuthenticated={setIsAuthenticated} setRestaurant={setRestaurant} />,
-            path: '/login'
-        },
-        {
-            element: isAuthenticated ?
-                (isRestaurant ? <Navigate to="/restaurant" /> : <Customer />)
-                : <Navigate to="/" />,
-            path: '/customer',
-        },
-        {
-            element: isAuthenticated ?
-                (isRestaurant ? <Restaurant /> : <Navigate to="/customer" />)
-                : <Navigate to="/" />,
-            path: '/restaurant',
-        },
-        {
-            element: <Register /*onSubmit={logInUser}*//>,
-            path: '/register',
+            element: <MainPage isAuthenticated={isAuthenticated}/>,
+            path: '/',
             children: [
                 {
-                    element: <CustomerRegistration />,
-                    path: 'customer'
+                    element: <Login setIsAuthenticated={setIsAuthenticated} setRestaurant={setRestaurant} />,
+                    path: '/login'
                 },
                 {
-                    element: <RestaurantRegistration />,
-                    path: 'restaurant'
-                }
+                    element: isAuthenticated ?
+                        (isRestaurant ? <Navigate to="/restaurant" /> : <Customer />)
+                        : <Navigate to="/" />,
+                    path: '/customer',
+                },
+                {
+                    element: isAuthenticated ?
+                        (isRestaurant ? <Restaurant /> : <Navigate to="/customer" />)
+                        : <Navigate to="/" />,
+                    path: '/restaurant',
+                },
+                {
+                    element: <Register/>,
+                    path: '/register',
+                    children: [
+                        {
+                            element: <CustomerRegistration />,
+                            path: 'customer'
+                        },
+                        {
+                            element: <RestaurantRegistration />,
+                            path: 'restaurant'
+                        }
+                    ]
+                },
+                {
+                    element: <About />,
+                    path: '/about'
+                },
+                {
+                    element: <Contact />,
+                    path: '/contact'
+                },
             ]
         },
     ])
