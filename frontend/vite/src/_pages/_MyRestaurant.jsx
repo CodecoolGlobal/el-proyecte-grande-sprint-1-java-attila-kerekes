@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
-import _RestaurantNav from "../component/_restaurant_components/_RestaurantNav.jsx";
-import _RestaurantTableElements from '../component/_restaurant_components/_RestaurantTableElements.jsx';
-import _CustomerNavbar from '../component/_customer_components/_CustomerNavbar.jsx';
+import _RestaurantNav from "../components/_restaurant_components/_RestaurantNav.jsx";
+import _RestaurantTableElements from '../components/_restaurant_components/_RestaurantTableElements.jsx';
+import _CustomerNavbar from '../components/_customer_components/_CustomerNavbar.jsx';
 
 
 function RestaurantMain(){

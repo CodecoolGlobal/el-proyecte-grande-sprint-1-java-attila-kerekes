@@ -1,11 +1,11 @@
 import './App.css'
 import { useRoutes } from 'react-router-dom'
-import _CustomerMain from './component/_CustomerMain.jsx';
-import _About from './component/_customer_components/_About.jsx';
-import _Contact from './component/_customer_components/_Contact.jsx';
-import _CustomerFindRestaurant from './component/_customer_components/_CustomerFindRestaurant.jsx';
-import _CustomerEditor from './component/_customer_components/_CustomerEditor.jsx';
-import _CustomerReservations from './component/_customer_components/_CustomerReservations.jsx';
+import _CustomerMain from './components/_CustomerMain.jsx';
+import _About from './components/_customer_components/_About.jsx';
+import _Contact from './components/_customer_components/_Contact.jsx';
+import _CustomerFindRestaurant from './components/_customer_components/_CustomerFindRestaurant.jsx';
+import _CustomerEditor from './components/_customer_components/_CustomerEditor.jsx';
+import _CustomerReservations from './components/_customer_components/_CustomerReservations.jsx';
 import MyRestaurant from './_pages/_MyRestaurant.jsx'
 import { Login } from './_pages/./_Login.jsx'
 import { _Register } from './_pages/_Register.jsx'
@@ -13,7 +13,7 @@ import _UpdateRestaurant from './_pages/_UpdateRestaurant.jsx'
 import { useState } from 'react';
 import _AddTables from './_pages/_AddTables.jsx';
 import _RestaurantReservation from './_pages/_RestaurantReservation.jsx';
-import _ReservationPage from './component/_customer_components/_ReservationPage.jsx';
+import _ReservationPage from './components/_customer_components/_ReservationPage.jsx';
 
 function _App() {
     const [userId, setUserId] = useState('');

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import _RestaurantNav from "../component/_restaurant_components/_RestaurantNav.jsx";
-import _RestaurantReservationElements from "../component/_restaurant_components/_RestaurantReservationElements.jsx";
-import _CustomerNavbar from '../component/_customer_components/_CustomerNavbar.jsx';
+import _RestaurantNav from "../components/_restaurant_components/_RestaurantNav.jsx";
+import _RestaurantReservationElements from "../components/_restaurant_components/_RestaurantReservationElements.jsx";
+import _CustomerNavbar from '../components/_customer_components/_CustomerNavbar.jsx';
 
 function _RestaurantReservation(){
     const [reservations, setReservations] = useState(null);

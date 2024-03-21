@@ -9,17 +9,17 @@ import NavbarFooter from "./NavbarFooter.jsx";
 function MainPage() {
     const [customerInfo, setCustomerInfo] = useState({});
     const {id} = useParams();
-
-    useEffect(() => {
-
-        //TODO what to fetch
-        const fetchData = async () => {
-            const response = await fetch(`/api/customers/${id}`);
-            const customerData = await response.json();
-            setCustomerInfo(customerData);
-        }
-        fetchData();
-    }, [])
+    //
+    // useEffect(() => {
+    //
+    //     //TODO what to fetch
+    //     const fetchData = async () => {
+    //         const response = await fetch(`/api/customers/${id}`);
+    //         const customerData = await response.json();
+    //         setCustomerInfo(customerData);
+    //     }
+    //     fetchData();
+    // }, [])
 
     return (
         <div className="CustomerMain">
