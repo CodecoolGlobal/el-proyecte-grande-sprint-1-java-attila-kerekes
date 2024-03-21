@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import { useParams } from 'react-router-dom';
-import ReservationElement from "./ReservationElement";
+import _ReservationElement from "./_ReservationElement.jsx";
 
-function CustomerReservations() {
+function _CustomerReservations() {
   const [reservations, setReservations] = useState([]);
   const { id } = useParams();
 
@@ -18,9 +18,9 @@ function CustomerReservations() {
   return (
     <div>
       <h1>Reservations: {reservations.length ? reservations.length : 'You don\'t have any reservations!'}</h1>
-      {reservations && <table>{reservations.map(reservation => <ReservationElement key={reservation._id} reservation={reservation}/>)}</table>}
+      {reservations && <table>{reservations.map(reservation => <_ReservationElement key={reservation._id} reservation={reservation}/>)}</table>}
     </div>
   )
 }
 
-export default CustomerReservations;
+export default _CustomerReservations;

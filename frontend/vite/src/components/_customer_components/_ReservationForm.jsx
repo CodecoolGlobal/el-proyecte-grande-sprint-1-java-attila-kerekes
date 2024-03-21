@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function ReservationForm({ onUpdate }) {
+function _ReservationForm({ onUpdate }) {
 
   const { id, id2 } = useParams();
   const [reservationInfo, setReservationInfo] = useState({});
@@ -63,4 +63,4 @@ function ReservationForm({ onUpdate }) {
   )
 }
 
-export default ReservationForm;
+export default _ReservationForm;

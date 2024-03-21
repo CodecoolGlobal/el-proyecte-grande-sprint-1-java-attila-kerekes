@@ -1,10 +1,10 @@
 import { useState } from "react";
-import RestaurantNav from "../components/RestaurantNav";
+import _RestaurantNav from "../components/_restaurant_components/_RestaurantNav.jsx";
 import { useNavigate, useParams } from "react-router-dom";
-import CustomerNavbar from '../component/customer_components/CustomerNavbar';
+import _CustomerNavbar from '../components/_customer_components/_CustomerNavbar.jsx';
 
 
-function AddTables(){
+function _AddTables(){
     const [table, setTable] = useState({available: true});
     const {id} = useParams();
     const navigate = useNavigate();
@@ -27,8 +27,8 @@ function AddTables(){
 
     return(
         <div className="add-table restaurant-display">
-            <CustomerNavbar />
-            <RestaurantNav />
+            <_CustomerNavbar />
+            <_RestaurantNav />
             <form onSubmit={handleSubmit}>
                 <label>Table id: </label>
                 <input type="number" value={table.id} required onChange={(event) => {setTable(prev => ({...prev, tableId: Number(event.target.value)}))}}/>
@@ -42,4 +42,4 @@ function AddTables(){
     )
 }
 
-export default AddTables;
+export default _AddTables;
