@@ -17,10 +17,11 @@ function CustomerRegistrationForm(){
             } ,
             body: JSON.stringify(customer)
         });
-
-        const response = await register.json();
-        console.log("asd")
-        if(response.statusCode.statusCode === "401"){
+        const response = await register;
+        if (response.status === 200) {
+            navigate("/login");
+        }
+        if (response.status === 401) {
             navigate("/");
         }
     }
