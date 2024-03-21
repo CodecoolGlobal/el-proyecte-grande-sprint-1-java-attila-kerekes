@@ -24,6 +24,7 @@ function CustomerRegistrationForm(){
         if (response.status === 401) {
             navigate("/");
         }
+        navigate("/");
     }
 
     return(

@@ -23,7 +23,7 @@ function App() {
 
     const routes = useRoutes([
         {
-            element: <MainPage isAuthenticated={isAuthenticated}/>,
+            element: <MainPage isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>,
             path: '/',
             children: [
                 {

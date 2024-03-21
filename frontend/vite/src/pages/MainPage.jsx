@@ -6,7 +6,7 @@ import NavbarHeader from "./NavbarHeader.jsx";
 import NavbarFooter from "./NavbarFooter.jsx";
 
 
-function MainPage({isAuthenticated}) {
+function MainPage({isAuthenticated, setIsAuthenticated}) {
     const [customerInfo, setCustomerInfo] = useState({});
     const {id} = useParams();
     //
@@ -24,7 +24,7 @@ function MainPage({isAuthenticated}) {
     return (
         <div className="CustomerMain">
             <div className="CustomerMain">
-                <NavbarHeader id={id} isAuthenticated={isAuthenticated}/>
+                <NavbarHeader id={id} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
             </div>
             <div className="CustomerDisplayBelow">
                 <Outlet/>
