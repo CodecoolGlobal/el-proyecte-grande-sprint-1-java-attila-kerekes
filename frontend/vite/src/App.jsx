@@ -9,6 +9,8 @@ import RestaurantRegistration from "./pages/RestaurantRegistration.jsx";
 import Customer from "./pages/Customer.jsx";
 import Restaurant from "./pages/Restaurant.jsx";
 import {useState} from "react";
+import About from "./pages/About.jsx";
+import Contact from "./pages/Contact.jsx";
 
 function App() {
     // const [userId, setUserId] = useState('');
@@ -21,7 +23,7 @@ function App() {
 
     const routes = useRoutes([
         {
-            element: <MainPage /*onSubmit={logInUser}*//>,
+            element: <MainPage isAuthenticated={isAuthenticated}/>,
             path: '/',
             children: [
                 {
@@ -41,7 +43,7 @@ function App() {
                     path: '/restaurant',
                 },
                 {
-                    element: <Register /*onSubmit={logInUser}*//>,
+                    element: <Register/>,
                     path: '/register',
                     children: [
                         {
@@ -53,6 +55,14 @@ function App() {
                             path: 'restaurant'
                         }
                     ]
+                },
+                {
+                    element: <About />,
+                    path: '/about'
+                },
+                {
+                    element: <Contact />,
+                    path: '/contact'
                 },
             ]
         },

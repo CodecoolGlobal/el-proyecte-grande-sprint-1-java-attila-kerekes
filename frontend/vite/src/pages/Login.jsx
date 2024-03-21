@@ -24,9 +24,11 @@ const Login = ({ setIsAuthenticated, setRestaurant }) => {
             if (role === 'ROLE_RESTAURANT') {
                 setRestaurant(true);
                 navigate('/restaurant');
-            } else {
+            } else if (role === 'ROLE_CUSTOMER') {
                 setRestaurant(false);
                 navigate('/customer');
+            } else {
+                navigate('/');
             }
 
             setIsAuthenticated(true);

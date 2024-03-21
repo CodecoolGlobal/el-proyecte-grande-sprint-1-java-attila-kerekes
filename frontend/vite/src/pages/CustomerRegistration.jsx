@@ -3,7 +3,7 @@ import CustomerRegistrationForm from "../components/customer_components/Customer
 export default function CustomerRegistration() {
     return (
         <>
-        <CustomerRegistrationForm></CustomerRegistrationForm>
+        <CustomerRegistrationForm/>
         </>
     )
 }
