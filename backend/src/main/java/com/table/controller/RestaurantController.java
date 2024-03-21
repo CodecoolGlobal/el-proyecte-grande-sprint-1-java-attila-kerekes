@@ -47,7 +47,7 @@ public class RestaurantController {
         return restaurantService.addRestaurant(NewRestaurantDTO);
     }
 
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public JwtResponse authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -58,7 +58,7 @@ public class RestaurantController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         return new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_RESTAURANT);
-    }
+    }*/
 
     //Read
     @GetMapping
