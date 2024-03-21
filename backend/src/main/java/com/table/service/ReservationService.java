@@ -2,7 +2,7 @@ package com.table.service;
 
 
 import com.table.controller.dto.NewReservationDTO;
-import com.table.exception.ReservationNotFoundException;
+import com.table.controller.dto.ReservationDTO;
 import com.table.model.Customer;
 import com.table.model.DiningSpot;
 import com.table.model.Reservation;
@@ -13,15 +13,14 @@ import com.table.repository.ReservationRepo;
 
 import com.table.repository.RestaurantRepo;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
-
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class ReservationService {
@@ -29,7 +28,6 @@ public class ReservationService {
     private RestaurantRepo restaurantRepo;
     private CustomerRepo customerRepo;
     private DiningSpotRepo diningSpotRepo;
-
 
     @Autowired
     public ReservationService(ReservationRepo reservationRepo, RestaurantRepo restaurantRepo, CustomerRepo customerRepo, DiningSpotRepo diningSpotRepo) {
@@ -39,50 +37,60 @@ public class ReservationService {
         this.diningSpotRepo = diningSpotRepo;
     }
 
-
-    public Reservation createNewReservation(UUID restaurantID, UUID customerID, NewReservationDTO reservationDTO) {
-        List<DiningSpot> allFreeDiningSpot = diningSpotRepo
-                .findAllByCapacity(reservationDTO.numberOfCustomers());
-        Customer targetCustomer = customerRepo.findByPublicId(customerID).get();
-        Reservation newReservation = new Reservation();
-        newReservation.setCustomer(targetCustomer);
-        newReservation.setDiningSpot(allFreeDiningSpot.get(0));
-        newReservation.setDuration(reservationDTO.duration());
-        newReservation.setStart(reservationDTO.start());
-        newReservation.setNumberOfCustomers(reservationDTO.numberOfCustomers());
-
-        return reservationRepo.save(newReservation);
+    public ReservationDTO createNewReservation(UUID customerID, NewReservationDTO newReservationDTO) {
+        List<DiningSpot> allFreeDiningSpot = diningSpotRepo.findAllByCapacity(newReservationDTO.numberOfCustomers());
+        if (allFreeDiningSpot.isEmpty()) {
+            throw new EntityNotFoundException("No free tables.");
+        }
+        Optional<Customer> customer = customerRepo.findByPublicId(customerID);
+        if(customer.isPresent()) {
+            Reservation reservation = new Reservation();
+            reservation.setCustomer(customer.get());
+            reservation.setDiningSpot(allFreeDiningSpot.get(0));
+            reservation.setDurationInHours(newReservationDTO.duration());
+            reservation.setStart(newReservationDTO.start());
+            reservation.setNumberOfCustomers(newReservationDTO.numberOfCustomers());
+            reservationRepo.save(reservation);
+            return convertReservationEntityToDTO(reservation);
+        }
+        throw new EntityNotFoundException("User not found.");
     }
 
     @Transactional
-    public Reservation deleteReservation(UUID reservationId) throws ReservationNotFoundException {
-        Reservation targetReservation = getReservation(reservationId);
+    public void deleteReservation(UUID reservationId) {
         reservationRepo.deleteByPublicId(reservationId);
-        return targetReservation;
     }
 
-    public Reservation getReservation(UUID reservationId) throws ReservationNotFoundException {
-        Reservation targetReservation =
-                reservationRepo.findReservationByPublicId(reservationId);
-        if (targetReservation == null) {
-            throw new ReservationNotFoundException("Unable to find reservation");
+    public ReservationDTO getReservation(UUID reservationId) {
+        Reservation reservation = reservationRepo.findReservationByPublicId(reservationId);
+        if (reservation == null) {
+            throw new EntityNotFoundException("Unable to find reservation");
         }
-        return targetReservation;
+        return convertReservationEntityToDTO(reservation);
     }
 
-    public Collection<Reservation> getAllReservation() {
-        List<Reservation> allReservation = reservationRepo.findAll();
-        return allReservation;
+    public Collection<ReservationDTO> getAllReservations() {
+        return convertReservationEntityToDTO(reservationRepo.findAll());
 
     }
 
-    public Collection<Reservation> getAllByRestaurantID(UUID restaurantId) {
-        return reservationRepo.findByDiningSpot_RestaurantPublicId(restaurantId);
+    public Collection<ReservationDTO> getAllByRestaurantID(UUID restaurantId) {
+        return convertReservationEntityToDTO(reservationRepo.findByDiningSpot_RestaurantPublicId(restaurantId));
     }
 
-    public Collection<Reservation> getAllByCustomerID(UUID id) {
-        return reservationRepo.findAllByCustomerPublicId(id);
+    public Collection<ReservationDTO> getAllByCustomerID(UUID id) {
+        return convertReservationEntityToDTO(reservationRepo.findAllByCustomerPublicId(id));
     }
 
+    private List<ReservationDTO> convertReservationEntityToDTO(List<Reservation> reservations) {
+        List<ReservationDTO> reservationDTOS = new ArrayList<>();
+        for (Reservation reservation : reservations) {
+            reservationDTOS.add(convertReservationEntityToDTO(reservation));
+        }
+        return reservationDTOS;
+    }
 
+    private ReservationDTO convertReservationEntityToDTO(Reservation reservation) {
+        return new ReservationDTO(reservation.getPublicId(), reservation.getStart(), reservation.getDurationInHours(), reservation.getNumberOfCustomers(), reservation.getCustomer().getPublicId(), reservation.getDiningSpot().getRestaurant().getPublicId(), reservation.getDiningSpot().getPublicId());
+    }
 }

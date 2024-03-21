@@ -26,10 +26,9 @@ public class CustomerService {
     }
 
     public CustomerDTO getCustomerById(UUID id) {
-        Customer customer = customerRepo.findByPublicId(id).orElseThrow(() -> new EntityNotFoundException("Client not found"));
+        Customer customer = customerRepo.findByPublicId(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
         return new CustomerDTO(customer.getPublicId(), customer.getClient().getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
     }
-
 
     public CustomerDTO saveCustomer(RegisterCustomerDTO customerDTO) {
         Client client = new Client();
@@ -54,7 +53,7 @@ public class CustomerService {
 
     @Transactional
     public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-        Customer customer = customerRepo.findByPublicId(customerDTO.id()).orElseThrow(() -> new EntityNotFoundException("Client not found"));
+        Customer customer = customerRepo.findByPublicId(customerDTO.id()).orElseThrow(() -> new EntityNotFoundException("User not found"));
         customer.getClient().setEmail(customerDTO.email());
         customer.setFirstName(customerDTO.firstName());
         customer.setLastName(customerDTO.lastName());

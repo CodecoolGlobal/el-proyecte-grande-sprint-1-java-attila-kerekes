@@ -21,11 +21,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableMethodSecurity
 public class WebSecurityConfig {
-
     private final UserDetailsService userDetailsService;
-
     private final AuthEntryPointJwt unauthorizedHandler;
-
     private final JwtUtils jwtUtils;
 
     @Autowired
@@ -69,7 +66,6 @@ public class WebSecurityConfig {
                                 .requestMatchers("api/clients/**").permitAll()
                                 .requestMatchers("error").permitAll()
                                 .anyRequest().authenticated()
-
                 );
 
         http.authenticationProvider(authenticationProvider());

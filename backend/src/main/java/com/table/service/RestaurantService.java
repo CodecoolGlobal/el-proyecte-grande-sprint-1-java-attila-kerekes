@@ -1,7 +1,7 @@
 package com.table.service;
 
 import com.table.controller.dto.DiningSpotDTO;
-import com.table.controller.dto.NewRestaurantDTO;
+import com.table.controller.dto.RegisterRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Client;
 import com.table.model.Cuisine;
@@ -44,8 +44,7 @@ public class RestaurantService {
         )).toList();
     }
 
-    public RestaurantDTO addRestaurant(NewRestaurantDTO newRestaurantDTO) {
-
+    public RestaurantDTO addRestaurant(RegisterRestaurantDTO newRestaurantDTO) {
         Client client = new Client();
         client.setEmail(newRestaurantDTO.email());
         client.setPassword(encoder.encode(newRestaurantDTO.password()));
@@ -58,13 +57,11 @@ public class RestaurantService {
         restaurant.setClient(client);
         restaurantRepo.save(restaurant);
 
-
         return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), client.getEmail(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
 
     public RestaurantDTO getRestaurantById(UUID uuid) {
-        //TODO: exception message needed
-        Restaurant restaurant = restaurantRepo.findByPublicId(uuid).orElseThrow(EntityNotFoundException::new);
+        Restaurant restaurant = restaurantRepo.findByPublicId(uuid).orElseThrow(() -> new EntityNotFoundException("User not found"));
         return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getName(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
 
@@ -74,17 +71,18 @@ public class RestaurantService {
         for (Restaurant restaurant : restaurants) {
             restaurantDTOs.add(new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getName(), restaurant.getPhoneNumber(), restaurant.getAddress()));
         }
+        if (restaurantDTOs.isEmpty()) {
+            throw new EntityNotFoundException("No restaurants found with given name.");
+        }
         return restaurantDTOs;
     }
-
 
     public void deleteRestaurant(UUID uuid) {
         restaurantRepo.deleteByPublicId(uuid);
     }
 
-
     public RestaurantDTO updateRestaurant(RestaurantDTO restaurantDTO, UUID uuid) {
-        Restaurant restaurant = restaurantRepo.findByPublicId(uuid).orElseThrow(EntityNotFoundException::new);
+        Restaurant restaurant = restaurantRepo.findByPublicId(uuid).orElseThrow(() -> new EntityNotFoundException("User not found"));
         restaurant.setName(restaurantDTO.name());
         restaurant.setAddress(restaurantDTO.address());
         restaurant.getClient().setEmail(restaurantDTO.email());
@@ -96,7 +94,7 @@ public class RestaurantService {
 
     public DiningSpot addTableToRestaurant(UUID restaurantId, DiningSpotDTO diningSpotDTO) {
         DiningSpot diningSpot = new DiningSpot();
-        Restaurant restaurant = restaurantRepo.findByPublicId(restaurantId).orElseThrow(EntityNotFoundException::new);
+        Restaurant restaurant = restaurantRepo.findByPublicId(restaurantId).orElseThrow(() -> new EntityNotFoundException("User not found"));
         diningSpot.setRestaurant(restaurant);
         diningSpot.setCapacity(diningSpotDTO.capacity());
         diningSpot.setName(diningSpotDTO.name());
@@ -105,7 +103,7 @@ public class RestaurantService {
     }
 
     public List<DiningSpotDTO> addTablesToRestaurant(UUID restaurantId, List<DiningSpotDTO> diningSpotDTOs) {
-        Restaurant restaurant = restaurantRepo.findByPublicId(restaurantId).orElseThrow(EntityNotFoundException::new);
+        Restaurant restaurant = restaurantRepo.findByPublicId(restaurantId).orElseThrow(() -> new EntityNotFoundException("User not found"));
         for (DiningSpotDTO diningSpotDTO : diningSpotDTOs) {
             DiningSpot newDiningSpot = new DiningSpot();
             newDiningSpot.setRestaurant(restaurant);
@@ -115,7 +113,6 @@ public class RestaurantService {
         }
         return diningSpotDTOs;
     }
-
 
     //TODO: RESERVATION METHOD
     public List<DiningSpot> findAvailableDiningSpots(UUID uuid) {

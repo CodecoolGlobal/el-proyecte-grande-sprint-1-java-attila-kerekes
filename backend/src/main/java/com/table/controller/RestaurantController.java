@@ -1,22 +1,13 @@
 package com.table.controller;
 
-import com.table.controller.dto.JwtResponse;
-import com.table.controller.dto.LogInRequestDTO;
-import com.table.controller.dto.NewRestaurantDTO;
+import com.table.controller.dto.RegisterRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
-import com.table.security.Role;
 import com.table.security.jwt.JwtUtils;
 import com.table.service.CustomerService;
 import com.table.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,22 +34,9 @@ public class RestaurantController {
 
     //Create
     @PostMapping
-    public RestaurantDTO addRestaurant(@RequestBody NewRestaurantDTO NewRestaurantDTO) {
+    public RestaurantDTO addRestaurant(@RequestBody RegisterRestaurantDTO NewRestaurantDTO) {
         return restaurantService.addRestaurant(NewRestaurantDTO);
     }
-
-    /*@PostMapping("/login")
-    public JwtResponse authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
-
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-        return new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_RESTAURANT);
-    }*/
 
     //Read
     @GetMapping
@@ -81,7 +59,7 @@ public class RestaurantController {
     //Update
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('RESTAURANT')")
-    public RestaurantDTO updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id) {
+    public RestaurantDTO updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id){
         return restaurantService.updateRestaurant(restaurantDTO, id);
     }
 
@@ -91,5 +69,4 @@ public class RestaurantController {
     public void deleteRestaurant(@PathVariable UUID id) {
         restaurantService.deleteRestaurant(id);
     }
-
 }
