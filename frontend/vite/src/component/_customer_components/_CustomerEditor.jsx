@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import CustomerForm from './CustomerForm';
+import _CustomerForm from './_CustomerForm.jsx';
 import { useParams } from 'react-router-dom';
 
-function CustomerEditor() {
+function _CustomerEditor() {
   const [customerInfo, setCustomerInfo] = useState({});
   const { id } = useParams();
 
@@ -19,10 +19,10 @@ function CustomerEditor() {
 
   return (
     <div className="updateCustomer">
-      {updateSuccess === null ? <CustomerForm onUpdate={(isSuccess) => { setUpdateSuccess(isSuccess) }} /> : updateSuccess === true ? <h1>The updates was successfull!</h1> : <h1>Try again! Something went wrong!</h1>}
+      {updateSuccess === null ? <_CustomerForm onUpdate={(isSuccess) => { setUpdateSuccess(isSuccess) }} /> : updateSuccess === true ? <h1>The updates was successfull!</h1> : <h1>Try again! Something went wrong!</h1>}
 
     </div>
   )
 }
 
-export default CustomerEditor;
+export default _CustomerEditor;

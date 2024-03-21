@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function RestaurantForm({onUpdate}){
+function _RestaurantForm({onUpdate}){
     const [restaurantInfo, setRestaurantInfo] = useState({});
     const {id} = useParams();
 
@@ -96,4 +96,4 @@ function RestaurantForm({onUpdate}){
   },
   tables: [] */
 
-export default RestaurantForm;
+export default _RestaurantForm;

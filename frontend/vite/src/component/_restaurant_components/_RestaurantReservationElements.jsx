@@ -1,4 +1,4 @@
-function RestaurantReservationElements({customerData}){
+function _RestaurantReservationElements({customerData}){
     console.log(customerData)
     return(
         <div className="reservation-cards">
@@ -11,4 +11,4 @@ function RestaurantReservationElements({customerData}){
     )
 }
 
-export default RestaurantReservationElements;
+export default _RestaurantReservationElements;

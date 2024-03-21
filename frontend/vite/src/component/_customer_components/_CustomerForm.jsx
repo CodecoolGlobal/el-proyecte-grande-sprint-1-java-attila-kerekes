@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function CustomerForm({ onUpdate }) {
+function _CustomerForm({ onUpdate }) {
   const [customerInfo, setCustomerInfo] = useState({});
   const { id } = useParams();
 
@@ -57,4 +57,4 @@ function CustomerForm({ onUpdate }) {
   )
 }
 
-export default CustomerForm;
+export default _CustomerForm;

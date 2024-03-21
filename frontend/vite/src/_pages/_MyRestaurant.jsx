@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
-import RestaurantNav from "../components/RestaurantNav";
-import RestaurantTableElements from '../components/RestaurantTableElements';
-import CustomerNavbar from '../component/customer_components/CustomerNavbar';
+import _RestaurantNav from "../component/_restaurant_components/_RestaurantNav.jsx";
+import _RestaurantTableElements from '../component/_restaurant_components/_RestaurantTableElements.jsx';
+import _CustomerNavbar from '../component/_customer_components/_CustomerNavbar.jsx';
 
 
 function RestaurantMain(){
@@ -33,8 +33,8 @@ function RestaurantMain(){
 
     return(
         <div className="restaurantMain restaurant-display">
-            <CustomerNavbar />
-            <RestaurantNav />
+            <_CustomerNavbar />
+            <_RestaurantNav />
             {restaurant && 
                 <div className="my-restaurant">
                     <h1>Restaurant name: {restaurant.restaurantName}</h1>
@@ -64,7 +64,7 @@ function RestaurantMain(){
                             <th>Seats:</th>
                             <th>Available:</th>
                         </tr>
-                        {restaurant.tables.map(table => <RestaurantTableElements key={table.id} table={table}/>)}
+                        {restaurant.tables.map(table => <_RestaurantTableElements key={table.id} table={table}/>)}
                     </table>
                 </div>
             }
