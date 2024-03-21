@@ -66,6 +66,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("api/customers/**").permitAll()
                                 .requestMatchers("api/restaurants/**").permitAll()
+                                .requestMatchers("api/clients/**").permitAll()
                                 .requestMatchers("error").permitAll()
                                 .anyRequest().authenticated()
 

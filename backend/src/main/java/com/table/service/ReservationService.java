@@ -6,7 +6,6 @@ import com.table.model.Customer;
 import com.table.model.DiningSpot;
 import com.table.model.Reservation;
 
-import com.table.model.Restaurant;
 import com.table.repository.CustomerRepo;
 import com.table.repository.DiningSpotRepo;
 import com.table.repository.ReservationRepo;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -26,7 +24,6 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @Service
 public class ReservationService {
-
     private ReservationRepo reservationRepo;
     private RestaurantRepo restaurantRepo;
     private CustomerRepo customerRepo;
@@ -34,10 +31,7 @@ public class ReservationService {
 
 
     @Autowired
-    public ReservationService(ReservationRepo reservationRepo,
-                              RestaurantRepo restaurantRepo,
-                              CustomerRepo customerRepo,
-                              DiningSpotRepo diningSpotRepo) {
+    public ReservationService(ReservationRepo reservationRepo, RestaurantRepo restaurantRepo, CustomerRepo customerRepo, DiningSpotRepo diningSpotRepo) {
         this.reservationRepo = reservationRepo;
         this.restaurantRepo = restaurantRepo;
         this.customerRepo = customerRepo;
@@ -45,12 +39,9 @@ public class ReservationService {
     }
 
 
-    public Reservation createNewReservation(UUID restaurantID,
-                                            UUID customerID,
-                                            NewReservationDTO reservationDTO) {
+    public Reservation createNewReservation(UUID restaurantID, UUID customerID, NewReservationDTO reservationDTO) {
         List<DiningSpot> allFreeDiningSpot = diningSpotRepo
                 .findAllByCapacity(reservationDTO.numberOfCustomers());
-        System.out.println(allFreeDiningSpot);
         Customer targetCustomer = customerRepo.findByPublicId(customerID).get();
         Reservation newReservation = new Reservation();
         newReservation.setCustomer(targetCustomer);
@@ -64,12 +55,12 @@ public class ReservationService {
 
     @Transactional
     public Reservation deleteReservation(UUID reservationId) {
-        Reservation targetReservation = getReservaton(reservationId);
+        Reservation targetReservation = getReservation(reservationId);
         reservationRepo.deleteByPublicId(reservationId);
         return targetReservation;
     }
 
-    public Reservation getReservaton(UUID reservationId) {
+    public Reservation getReservation(UUID reservationId) {
         Reservation targetReservation =
                 reservationRepo.findReservationByPublicId(reservationId);
         if (targetReservation == null) {
@@ -85,13 +76,10 @@ public class ReservationService {
     }
 
     public Collection<Reservation> getAllByRestaurantID(UUID restaurantId) {
-
         return reservationRepo.findByDiningSpot_RestaurantPublicId(restaurantId);
-
     }
 
     public Collection<Reservation> getAllByCustomerID(UUID id) {
-  
         return reservationRepo.findAllByCustomerPublicId(id);
     }
 
