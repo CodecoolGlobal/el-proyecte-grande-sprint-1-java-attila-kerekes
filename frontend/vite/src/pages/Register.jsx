@@ -4,8 +4,8 @@ export default function Register() {
     return (
         <>
             <h2>Register</h2>
-            <button><Link to={`customer`}>As customer</Link></button>
-            <button><Link to={`restaurant`}>As restaurant</Link></button>
+            <Link to={`customer`}> <button>As customer</button></Link>
+            <Link to={`restaurant`}><button>As restaurant</button></Link>
             <Outlet/>
         </>
     )

@@ -6,18 +6,18 @@ function NavbarHeader({id, isAuthenticated}) {
     return (
         <nav className="CustomerNavbar">
             <h1>NavbarHeader</h1>
-            <button><Link to={`/`}>RESTaurant</Link></button>
+            <Link to={`/`}><button>RESTaurant</button></Link>
             {isAuthenticated ? (
                     <>
-                        <button><Link to={`/customer`}>My profile</Link></button>
-                        <button><Link to={`/`}>Logout</Link></button>
+                    <Link to={`/customer`}>    <button>My profile</button></Link>
+                    <Link to={`/`}> <button>Logout</button></Link>
                     </>
                 )
                 :
                 (
                     <>
-                        <button><Link to={`/register`}>Register</Link></button>
-                        <button><Link to={`/login`}>Login</Link></button>
+                    <Link to={`/register`}><button>Register</button></Link>
+                    <Link to={`/login`}> <button>Login</button></Link>
                     </>
                 )
             }
