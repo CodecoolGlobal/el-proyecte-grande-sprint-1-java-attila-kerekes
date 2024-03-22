@@ -1,12 +1,11 @@
 package com.table.model;
 
-import com.table.security.Role;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.List;
 import java.util.UUID;
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +13,6 @@ import java.util.UUID;
 @Setter
 @Entity
 public class Customer {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_seq_gen")
     @SequenceGenerator(name = "customer_seq_gen", sequenceName = "customer_seq", initialValue = 1, allocationSize = 1)
@@ -28,8 +26,6 @@ public class Customer {
     private List<Reservation> reservations;
     @OneToOne(cascade = CascadeType.ALL)
     private Client client;
-
-
     public Customer(UUID id, String email, String password, String firstName, String lastName, String phoneNumber) {
     }
 }

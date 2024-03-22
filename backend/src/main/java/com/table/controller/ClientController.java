@@ -2,10 +2,9 @@ package com.table.controller;
 
 import com.table.controller.dto.JwtResponse;
 import com.table.controller.dto.LogInRequestDTO;
-import com.table.exception.UserNotFoundException;
 import com.table.security.Role;
 import com.table.security.jwt.JwtUtils;
-import com.table.service.ClientService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,19 +21,17 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/api/clients")
 public class ClientController {
-    private final ClientService clientService;
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
 
     @Autowired
-    public ClientController(ClientService clientService, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
-        this.clientService = clientService;
+    public ClientController(AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
     }
 
     @PostMapping("/login")
-    public JwtResponse login(@RequestBody LogInRequestDTO loginRequest) throws UserNotFoundException {
+    public JwtResponse login(@RequestBody LogInRequestDTO loginRequest) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
         String jwt = jwtUtils.generateJwtToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
@@ -48,6 +45,6 @@ public class ClientController {
                 return new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_CUSTOMER);
             }
         }
-        throw new UserNotFoundException("Client not found.");
+        throw new EntityNotFoundException("User not found.");
     }
 }

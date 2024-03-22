@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
+
+//TODO rename Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
