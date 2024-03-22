@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import _RestaurantForm from '../components/_restaurant_components/_RestaurantForm.jsx';
-import _RestaurantNav from '../components/_restaurant_components/_RestaurantNav.jsx';
-import _CustomerNavbar from '../components/_customer_components/_CustomerNavbar.jsx';
+import _RestaurantForm from '../_components/_restaurant_components/_RestaurantForm.jsx';
+import _RestaurantNav from '../_components/_restaurant_components/_RestaurantNav.jsx';
+import _CustomerNavbar from '../_components/_customer_components/_CustomerNavbar.jsx';
 
 function _UpdateRestaurant(){
 

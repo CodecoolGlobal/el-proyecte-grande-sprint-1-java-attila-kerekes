@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Outlet, useParams } from "react-router-dom";
 
-import _CustomerNavbar from "./_customer_components/_CustomerNavbar.jsx";
-import _CustomerButtons from "./_customer_components/_CustomerButtons.jsx";
+import _CustomerNavbar from "./_components/_customer_components/_CustomerNavbar.jsx";
+import _CustomerButtons from "./_components/_customer_components/_CustomerButtons.jsx";
 
 
 function _CustomerMain() {
