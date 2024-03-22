@@ -4,7 +4,7 @@ function NavbarFooter({id}) {
 
     return (
         <nav className="CustomerNavbar">
-            <h1>NavbarFooter</h1>
+            <h2>NavbarFooter</h2>
             <Link to={`/about`}><button>About</button></Link>
             <Link to={`/contact`}><button>Contact</button></Link>
         </nav>

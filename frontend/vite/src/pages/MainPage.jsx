@@ -22,17 +22,17 @@ function MainPage({isAuthenticated, setIsAuthenticated}) {
     // }, [])
 
     return (
-        <div className="CustomerMain">
-            <div className="CustomerMain">
+        <>
+            <div className="CustomerMain" style={{ border: "1px solid black", backgroundColor: 'cornflowerblue' }}>
                 <NavbarHeader id={id} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
             </div>
-            <div className="CustomerDisplayBelow">
+            <div className="CustomerDisplayBelow" style={{ border: "1px solid black", backgroundColor: 'lightblue'}}>
                 <Outlet/>
             </div>
-            <div className="CustomerMain">
+            <div className="CustomerMain" style={{ border: "1px solid black", backgroundColor: 'cornflowerblue' }}>
                 <NavbarFooter id={id}/>
             </div>
-        </div>
+        </>
     )
 }
 

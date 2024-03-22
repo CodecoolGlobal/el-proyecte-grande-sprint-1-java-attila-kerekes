@@ -1,7 +1,7 @@
 import { useState } from "react";
-import _RestaurantNav from "../components/_restaurant_components/_RestaurantNav.jsx";
+import _RestaurantNav from "../_components/_restaurant_components/_RestaurantNav.jsx";
 import { useNavigate, useParams } from "react-router-dom";
-import _CustomerNavbar from '../components/_customer_components/_CustomerNavbar.jsx';
+import _CustomerNavbar from '../_components/_customer_components/_CustomerNavbar.jsx';
 
 
 function _AddTables(){

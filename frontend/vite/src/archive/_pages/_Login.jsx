@@ -73,7 +73,7 @@ export const Login = ({ onSubmit }) => {
                     <button type="submit">Login</button><br />
                 </form>
                 <Link to='/register'><button>Register</button></Link><br />
-                <button onClick={() => setSearchParams({isCustomer: !isCustomer})}>{isCustomer ? "Log in as a Restaurant" : "Log in as customer"}</button>
+                <button onClick={() => setSearchParams({isCustomer: !isCustomer})}>{isCustomer ? "Log in as a RestaurantPage" : "Log in as customer"}</button>
             </div>
         );
     } else {
@@ -103,7 +103,7 @@ export const Login = ({ onSubmit }) => {
                     <br />
                     <button type="submit">Login</button><br />
                     <Link to='/register?isCustomer=false'><button>Register as a restaurant</button></Link><br />
-                    <button onClick={() => setSearchParams({isCustomer: !isCustomer})}>{isCustomer ? "Log in as a Restaurant" : "Log in as customer"}</button>
+                    <button onClick={() => setSearchParams({isCustomer: !isCustomer})}>{isCustomer ? "Log in as a RestaurantPage" : "Log in as customer"}</button>
                 </form>
             </div>
         );
