@@ -1,7 +1,6 @@
 package com.table.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.table.security.Role;
 import jakarta.persistence.*;
 import lombok.*;
 

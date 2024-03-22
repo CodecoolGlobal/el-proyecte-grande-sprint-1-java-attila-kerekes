@@ -5,7 +5,6 @@ import com.table.controller.dto.RegisterCustomerDTO;
 import com.table.security.jwt.JwtUtils;
 import com.table.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
@@ -37,24 +36,10 @@ public class CustomerController {
         return customerService.saveCustomer(customerDTO);
     }
 
-  /*  @PostMapping("/login")
-    public JwtResponse authenticateUser(@RequestBody LogInRequestDTO loginRequest) {
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
-
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-
-        return new JwtResponse(jwt, userDetails.getUsername(), Role.ROLE_CUSTOMER);
-    } */
-
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public ResponseEntity<?> deleteCustomer(@PathVariable UUID id) {
+    public void deleteCustomer(@PathVariable UUID id) {
         customerService.deleteCustomer(id);
-        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")

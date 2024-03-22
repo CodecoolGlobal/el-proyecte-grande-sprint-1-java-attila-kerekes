@@ -1,6 +1,5 @@
 package com.table.repository;
 
-import com.table.model.DiningSpot;
 import com.table.model.Reservation;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface ReservationRepo extends JpaRepository<Reservation, Long> {
-
     @Transactional
     void deleteByPublicId(UUID publicId);
   
@@ -21,8 +19,4 @@ public interface ReservationRepo extends JpaRepository<Reservation, Long> {
 
     @Transactional
     Reservation findReservationByPublicId(UUID publicId);
-
-
-
-
 }

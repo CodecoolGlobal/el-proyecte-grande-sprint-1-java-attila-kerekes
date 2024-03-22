@@ -13,20 +13,15 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
 
-
 @Component
 public class JwtUtils {
-
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-
     @Value("${codecool.app.jwtSecret}")
     private String jwtSecret;
-
     @Value("${codecool.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
-
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
 
         return Jwts.builder()
@@ -59,7 +54,6 @@ public class JwtUtils {
         } catch (IllegalArgumentException e) {
             logger.error("JWT claims string is empty: {}", e.getMessage());
         }
-
         return false;
     }
 }

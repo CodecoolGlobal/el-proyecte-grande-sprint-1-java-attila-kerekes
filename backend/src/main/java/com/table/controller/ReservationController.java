@@ -1,7 +1,7 @@
 package com.table.controller;
 
 import com.table.controller.dto.NewReservationDTO;
-import com.table.exception.ReservationNotFoundException;
+import com.table.controller.dto.ReservationDTO;
 import com.table.model.Reservation;
 import com.table.service.ReservationService;
 
@@ -16,7 +16,6 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/reservations")
 public class ReservationController {
-
   private final ReservationService reservationService;
 
     @Autowired
@@ -25,48 +24,35 @@ public class ReservationController {
     }
 
     @GetMapping
-    public Collection<Reservation> getAllReservation() {
-        return reservationService.getAllReservation();
+    public Collection<ReservationDTO> getAllReservation() {
+        return reservationService.getAllReservations();
     }
 
     @GetMapping("/restaurant/{restaurantID}")
     @PreAuthorize("hasRole('RESTAURANT')")
-    public Collection<Reservation> getAllReservationByRestaurant(@PathVariable UUID restaurantID) {
+    public Collection<ReservationDTO> getAllReservationByRestaurant(@PathVariable UUID restaurantID) {
         return reservationService.getAllByRestaurantID(restaurantID);
     }
 
-
     @GetMapping("/customer/{customerID}")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public ResponseEntity<?> getAllReservationByCustomer(@PathVariable UUID customerID) {
-        Collection<Reservation> report = reservationService.getAllByCustomerID(customerID);
-        return ResponseEntity.ok(report);
+    public Collection<ReservationDTO> getAllReservationByCustomer(@PathVariable UUID customerID) {
+        return reservationService.getAllByCustomerID(customerID);
     }
 
-    //TODO Handle resource not found
     @GetMapping("/{reservationId}")
-    public Reservation getReservationByPublicId(@PathVariable UUID reservationId) throws ReservationNotFoundException {
+    public ReservationDTO getReservationByPublicId(@PathVariable UUID reservationId) {
         return reservationService.getReservation(reservationId);
     }
 
-    //TODO Handle resource not found
     @DeleteMapping("/{reservationId}")
-    public Reservation deleteReservation(@PathVariable UUID reservationId) throws ReservationNotFoundException {
-        return reservationService.deleteReservation(reservationId);
+    public void deleteReservation(@PathVariable UUID reservationId) {
+        reservationService.deleteReservation(reservationId);
     }
 
     @PostMapping("/{restaurantID}/{customerID}")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public ResponseEntity<?> createNewReservation(
-            @PathVariable UUID restaurantID,
-            @PathVariable UUID customerID,
-            @RequestBody NewReservationDTO reservationDTO) {
-        Reservation newRestaurant = reservationService
-                .createNewReservation(restaurantID, customerID, reservationDTO);
-        return ResponseEntity.ok().body("Thank you, for your reservation");
-
+    public ReservationDTO createNewReservation(@PathVariable UUID restaurantID, @PathVariable UUID customerID, @RequestBody NewReservationDTO reservationDTO) {
+        return reservationService.createNewReservation(customerID, reservationDTO);
     }
-
-
-
 }

@@ -21,7 +21,6 @@ import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
     private final ClientRepository clientRepository;
 
     @Autowired
@@ -43,9 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return new User(targetCustomer.get().getEmail(), targetCustomer.get().getPassword(),
                     roles);
         } else {
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException(email + " not found.");
         }
-
-
     }
 }
