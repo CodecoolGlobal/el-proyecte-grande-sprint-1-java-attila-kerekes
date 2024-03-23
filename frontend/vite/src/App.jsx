@@ -17,6 +17,7 @@ import RestaurantDetails from "./pages/restaurant/RestaurantDetails.jsx";
 import TableEditor from "./pages/restaurant/TableEditor.jsx";
 import Home from "./pages/Home.jsx";
 import CustomerRestaurantList from "./pages/customer/CustomerRestaurantList.jsx";
+import ReservationPage from "./pages/customer/ReservationPage.jsx";
 
 function App() {
     // const [userId, setUserId] = useState('');
@@ -56,6 +57,10 @@ function App() {
                         {
                             element: <CustomerDetails />,
                             path: 'details'
+                        },
+                        {
+                            element: <ReservationPage/>,
+                            path: 'restaurants/:id'
                         },
                         {
                             element: <CustomerRestaurantList />,

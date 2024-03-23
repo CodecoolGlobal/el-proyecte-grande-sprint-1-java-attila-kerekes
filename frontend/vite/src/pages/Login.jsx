@@ -33,7 +33,7 @@ const Login = ({ setIsAuthenticated, setRestaurant }) => {
                 navigate('/restaurant');
             } else if (role === 'ROLE_CUSTOMER') {
                 setRestaurant(false);
-                navigate('/customer');
+                navigate('/customer/details');
             } else {
                 navigate('/');
             }
