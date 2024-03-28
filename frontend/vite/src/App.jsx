@@ -4,19 +4,19 @@ import {Navigate, useRoutes} from 'react-router-dom'
 import MainPage from "./pages/MainPage.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import CustomerRegistration from "./pages/CustomerRegistration.jsx";
-import RestaurantRegistration from "./pages/RestaurantRegistration.jsx";
-import CustomerPage from "./pages/CustomerPage.jsx";
-import RestaurantPage from "./pages/RestaurantPage.jsx";
+import CustomerRegistration from "./pages/customer/CustomerRegistration.jsx";
+import RestaurantRegistration from "./pages/restaurant/RestaurantRegistration.jsx";
+import CustomerPage from "./pages/customer/CustomerPage.jsx";
+import RestaurantPage from "./pages/restaurant/RestaurantPage.jsx";
 import {useEffect, useState} from "react";
 import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
-import CustomerDetails from "./pages/CustomerDetails.jsx";
-import RestaurantList from "./pages/RestaurantList.jsx";
+import CustomerDetails from "./pages/customer/CustomerDetails.jsx";
 import ReservationList from "./pages/ReservationList.jsx";
-import RestaurantDetails from "./pages/RestaurantDetails.jsx";
-import TableEditor from "./pages/TableEditor.jsx";
+import RestaurantDetails from "./pages/restaurant/RestaurantDetails.jsx";
+import TableEditor from "./pages/restaurant/TableEditor.jsx";
 import Home from "./pages/Home.jsx";
+import CustomerRestaurantList from "./pages/customer/CustomerRestaurantList.jsx";
 
 function App() {
     // const [userId, setUserId] = useState('');
@@ -58,7 +58,7 @@ function App() {
                             path: 'details'
                         },
                         {
-                            element: <RestaurantList />,
+                            element: <CustomerRestaurantList />,
                             path: 'restaurants'
                         },
                         {

@@ -10,7 +10,7 @@ export default function CustomerPage() {
                 <CustomerSidebar/>
             </div>
             <div className="CustomerDisplayBelow"
-                 style={{display: 'inline-block'}}>
+                 style={{display: 'inline-block', border: "1px solid black"}}>
                 <Outlet/>
             </div>
         </div>
