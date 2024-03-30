@@ -33,7 +33,7 @@ function CustomerDetails() {
     return (
         <div>
             <h3>Customer details</h3>
-            <div className="customerDetails" style={{border: "1px solid black"}} key={customerDetails.publicId}>
+            <div className="customerDetails"  key={customerDetails.publicId}>
                 <h5>First name:{customerDetails.firstName}</h5>
                 <h5>Last name:{customerDetails.lastName}</h5>
                 <h5>E-mail: {customerDetails.email}</h5>

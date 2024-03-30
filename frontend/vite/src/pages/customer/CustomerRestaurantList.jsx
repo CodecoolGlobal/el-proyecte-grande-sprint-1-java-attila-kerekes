@@ -34,12 +34,14 @@ function CustomerRestaurantList() {
             <h3>Restaurant List</h3>
             <div>
                 {restaurants && restaurants.map((restaurant) => (
-                    <div className="restaurantList" style={{border: "1px solid black"}} key={restaurant.publicId}>
+                    <div className="restaurantList" key={restaurant.publicId}>
                         <h4>Name: {restaurant.name}</h4>
                         <h5>E-mail: {restaurant.email}</h5>
                         <h5>Phone: {restaurant.phoneNumber}</h5>
                         <h5>Address: {restaurant.address}</h5>
-                        <Link to={`/customer/restaurants/${restaurant.publicId}`}><button>Reserve a table!</button></Link>
+                        <Link to={`/customer/restaurants/${restaurant.publicId}`}>
+                            <button>Reserve a table!</button>
+                        </Link>
                     </div>
                 ))}
             </div>

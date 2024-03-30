@@ -2,8 +2,8 @@ import RestaurantRegistrationForm from "../../components/customer_components/Res
 
 export default function RestaurantRegistration() {
     return (
-        <>
+        <div className={"RegistrationFormContainer"}>
             <RestaurantRegistrationForm/>
-        </>
+        </div>
     )
 }
