@@ -1,6 +1,5 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import './form.css';
 
 function CustomerRegistrationForm(){
     //email, password, firstname, lastname, phoneNumber

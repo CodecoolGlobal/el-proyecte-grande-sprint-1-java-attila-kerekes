@@ -3,14 +3,12 @@ import CustomerSidebar from "./CustomerSidebar.jsx";
 
 export default function CustomerPage() {
     return (
-        <div>
-            <div className="CustomerMain"
-                 style={{display: 'inline-block'}}>
+        <div className={"MainContainer"}>
+            <div className={"SidebarContainer"}>
                 <h3>CustomerSidebar</h3>
                 <CustomerSidebar/>
             </div>
-            <div className="CustomerDisplayBelow"
-                 style={{display: 'inline-block', border: "1px solid black"}}>
+            <div className="CustomerDisplayBelow">
                 <Outlet/>
             </div>
         </div>

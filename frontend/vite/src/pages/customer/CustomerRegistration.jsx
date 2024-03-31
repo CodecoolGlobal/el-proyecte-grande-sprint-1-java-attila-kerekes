@@ -2,8 +2,8 @@ import CustomerRegistrationForm from "../../components/customer_components/Custo
 
 export default function CustomerRegistration() {
     return (
-        <>
+        <div className={"RegistrationFormContainer"}>
         <CustomerRegistrationForm/>
-        </>
+        </div>
     )
 }

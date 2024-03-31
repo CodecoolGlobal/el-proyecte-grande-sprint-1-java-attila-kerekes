@@ -23,13 +23,13 @@ function MainPage({isAuthenticated, setIsAuthenticated}) {
 
     return (
         <>
-            <div className="CustomerMain" style={{ border: "1px solid black", backgroundColor: 'cornflowerblue' }}>
+            <div className="CustomerMain" >
                 <NavbarHeader id={id} isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>
             </div>
-            <div className="CustomerDisplayBelow" style={{ border: "1px solid black", backgroundColor: 'lightblue'}}>
+            <div className="CustomerDisplayBelow">
                 <Outlet/>
             </div>
-            <div className="CustomerMain" style={{ border: "1px solid black", backgroundColor: 'cornflowerblue' }}>
+            <div className="CustomerMain" >
                 <NavbarFooter id={id}/>
             </div>
         </>
