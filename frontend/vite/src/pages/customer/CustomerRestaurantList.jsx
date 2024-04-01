@@ -30,17 +30,16 @@ function CustomerRestaurantList() {
     }, []);
 
     return (
-        <div>
-            <h3>Restaurant List</h3>
-            <div>
+        <div className={"CustomerRestaurantList"} >
+            <h3>Restaurants</h3>
+            <div className={"restaurantCardContainer"}>
                 {restaurants && restaurants.map((restaurant) => (
-                    <div className="restaurantList" key={restaurant.publicId}>
-                        <h4>Name: {restaurant.name}</h4>
-                        <h5>E-mail: {restaurant.email}</h5>
-                        <h5>Phone: {restaurant.phoneNumber}</h5>
-                        <h5>Address: {restaurant.address}</h5>
+                    <div className="restaurantCard" key={restaurant.publicId}>
                         <Link to={`/customer/restaurants/${restaurant.publicId}`}>
-                            <button>Reserve a table!</button>
+                        <h4 className={"restaurantName"}>{restaurant.name}</h4>
+                        <h5 className={"restaurantDetail"}>E-mail: {restaurant.email}</h5>
+                        <h5 className={"restaurantDetail"}>Phone: {restaurant.phoneNumber}</h5>
+                        <h5 className={"restaurantDetail"}>Address: {restaurant.address}</h5>
                         </Link>
                     </div>
                 ))}
