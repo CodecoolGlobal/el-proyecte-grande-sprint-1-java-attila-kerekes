@@ -3,11 +3,13 @@ function RestaurantDetails() {
 
     return (
         <div>
-            <ul>
-                <li><h3>DET1</h3></li>
-                <li><h3>DET2</h3></li>
-                <li><h3>DET3</h3></li>
-            </ul>
+           <h3>Restaurant details</h3>
+            <div className="customerDetails">
+            <h5></h5>
+            <h5></h5>
+            <h5></h5>
+            <h5></h5>
+            </div>
         </div>
     )
 }
