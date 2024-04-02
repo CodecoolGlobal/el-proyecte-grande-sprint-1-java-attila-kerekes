@@ -14,7 +14,10 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
 
     return (
         <nav className="CustomerNavbar">
-            <h2>NavbarHeader</h2>
+            <div className={"TitleContainer"}>
+            <h2 className={"Title"}>RESTaurant</h2>
+            </div>
+            <div>
             <Link to={`/`}>
                 <button>RESTaurant</button>
             </Link>
@@ -38,6 +41,7 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
                     </>
                 )
             }
+            </div>
         < /nav>
     )
 }
