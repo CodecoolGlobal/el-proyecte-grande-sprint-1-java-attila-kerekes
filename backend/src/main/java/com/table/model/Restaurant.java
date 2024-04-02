@@ -30,5 +30,6 @@ public class Restaurant {
     @JsonIgnore
     private List<Cuisine> cuisines;
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false)
     private Client client;
 }

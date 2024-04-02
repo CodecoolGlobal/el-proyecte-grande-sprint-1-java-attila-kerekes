@@ -8,7 +8,8 @@ function ReservationForm({ onUpdate }) {
     const [reservationInfo, setReservationInfo] = useState({
         duration: 1,
         numberOfCustomers: 0,
-        start: null
+        startDate: null,
+        startTime: null
     });
     const [restaurantDetails, setRestaurantDetails] = useState(null);
     const [customerDetails, setCustomerDetails] = useState([]);
@@ -64,10 +65,14 @@ function ReservationForm({ onUpdate }) {
 
     async function handleSubmit(event) {
         event.preventDefault();
-        const { start, ...rest } = reservationInfo;
+        const { startDate, startTime, ...rest } = reservationInfo;
         const startDateTime = new Date();
-        const [hours, minutes] = start.split(':');
-        startDateTime.setHours(hours, minutes);
+        console.log(startDate);
+        const [year, month, day] = startDate.split('-');
+        const [hours, minutes] = startTime.split(':');
+        startDateTime.setHours(hours, minutes)
+        startDateTime.setFullYear(year, month, day)
+        console.log(startDateTime)
         const reservationDTO = { ...rest, start: startDateTime.toISOString() };
         console.log(reservationDTO);
 
@@ -103,11 +108,11 @@ function ReservationForm({ onUpdate }) {
                             <br />
                             <label style={{fontSize: 10}}>Chosen date:  </label>
                             <input type="date" name="date" onChange={(event) => {
-                                setReservationInfo(prev => ({ ...prev, start: event.target.value })) }} />
+                                setReservationInfo(prev => ({ ...prev, startDate: event.target.value })) }} />
                             <br />
                             <label style={{fontSize: 10}}>Start of timeslot:  </label>
                             <input type="time" step={3600} name="time" onChange={(event) => {
-                                setReservationInfo(prev => ({ ...prev, start: event.target.value })) }} />
+                                setReservationInfo(prev => ({ ...prev, startTime: event.target.value })) }} />
                             <br />
                             <button>Send request</button>
                         </form>
