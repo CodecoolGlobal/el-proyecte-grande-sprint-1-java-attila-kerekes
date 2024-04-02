@@ -17,6 +17,8 @@ public interface ReservationRepo extends JpaRepository<Reservation, Long> {
 
     List<Reservation> findAllByCustomerPublicId(UUID customerId);
 
+    List<Reservation> findAllByCustomer_Client_Email(String email);
+
     @Transactional
     Reservation findReservationByPublicId(UUID publicId);
 }

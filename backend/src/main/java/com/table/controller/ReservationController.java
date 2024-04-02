@@ -34,11 +34,17 @@ public class ReservationController {
         return reservationService.getAllByRestaurantID(restaurantID);
     }
 
-    @GetMapping("/customer/{customerID}")
+    @GetMapping("/customer/{email}")
     @PreAuthorize("hasRole('CUSTOMER')")
-    public Collection<ReservationDTO> getAllReservationByCustomer(@PathVariable UUID customerID) {
-        return reservationService.getAllByCustomerID(customerID);
+    public Collection<ReservationDTO> getAllReservationByEmail (@PathVariable String email) {
+        return reservationService.getAllByCustomerEmail(email);
     }
+
+//    @GetMapping("/customer/{customerID}")
+//    @PreAuthorize("hasRole('CUSTOMER')")
+//    public Collection<ReservationDTO> getAllReservationByCustomer(@PathVariable UUID customerID) {
+//        return reservationService.getAllByCustomerID(customerID);
+//    }
 
     @GetMapping("/{reservationId}")
     public ReservationDTO getReservationByPublicId(@PathVariable UUID reservationId) {
