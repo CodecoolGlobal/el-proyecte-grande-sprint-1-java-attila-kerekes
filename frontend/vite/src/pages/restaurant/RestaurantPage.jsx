@@ -3,8 +3,8 @@ import RestaurantSidebar from "./RestaurantSidebar.jsx";
 
 export default function RestaurantPage() {
     return (
-        <div>
-            <div className="CustomerMain">
+        <div className={"MainContainer"}>
+            <div className="SidebarContainer">
                 <h3>RestaurantSidebar</h3>
                 <RestaurantSidebar/>
             </div>

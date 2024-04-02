@@ -125,6 +125,45 @@ body {
     background-color: lightblue;
 }
 
+.CustomerRestaurantList{
+}
+
+.restaurantCardContainer{
+    max-width: 80vw;
+    height: 75vh;
+    display: flex;
+    place-items: center;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    flex-direction: column;
+}
+
+.restaurantCard{
+    background-color: aliceblue;
+    border: solid;
+    border-color: #1a1a1a;
+    margin: 5px;
+    height: 15vh;
+    width: 25vw;
+    transition: 0.5s ease;
+}
+
+.restaurantCard:hover{
+    background-color: lightskyblue;
+    transition: 0.5s ease;
+    width: 26vw;
+
+}
+
+.restaurantName{
+    background-color: #1a1a1a;
+    color: #f9f9f9;
+}
+
+.restaurantDetail{
+    color: #888888;
+}
+
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
