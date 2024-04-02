@@ -18,6 +18,7 @@ import TableEditor from "./pages/restaurant/TableEditor.jsx";
 import Home from "./pages/Home.jsx";
 import CustomerRestaurantList from "./pages/customer/CustomerRestaurantList.jsx";
 import ReservationPage from "./pages/customer/ReservationPage.jsx";
+import ReservationPage_v02 from "./pages/customer/ReservationPage_v02.jsx";
 
 function App() {
     // const [userId, setUserId] = useState('');
@@ -58,8 +59,12 @@ function App() {
                             element: <CustomerDetails />,
                             path: 'details'
                         },
+                        // {
+                        //     element: <ReservationPage/>,
+                        //     path: 'restaurants/:id'
+                        // },
                         {
-                            element: <ReservationPage/>,
+                            element: <ReservationPage_v02/>,
                             path: 'restaurants/:id'
                         },
                         {
