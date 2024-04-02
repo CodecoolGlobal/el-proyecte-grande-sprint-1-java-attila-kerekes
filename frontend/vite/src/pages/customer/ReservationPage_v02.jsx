@@ -41,13 +41,22 @@ function ReservationPage_v02() {
               value={numberOfGuests}
               onChange={(e) => setNumberOfGuests(e.target.value)}
           />
-          <button onClick={handleOkClick}>OK</button>
+          <button
+              style={{ padding: "5px", fontSize: "15px" }}
+              onClick={handleOkClick}>OK
+          </button>
         </div>
         {showReservationTable && (
             <div>
               <div>
-                <button onClick={handlePrevWeek}>&lt; Prev Week</button>
-                <button onClick={handleNextWeek}>Next Week &gt;</button>
+                <button
+                    style={{ padding: "5px", fontSize: "15px" }}
+                    onClick={handlePrevWeek}>&lt; Prev Week
+                </button>
+                <button
+                    style={{ padding: "5px", fontSize: "15px" }}
+                    onClick={handleNextWeek}>Next Week &gt;
+                </button>
               </div>
               <h2>Week of {currentMonday.toLocaleDateString()}</h2>
               <ReservationTableFor_v02

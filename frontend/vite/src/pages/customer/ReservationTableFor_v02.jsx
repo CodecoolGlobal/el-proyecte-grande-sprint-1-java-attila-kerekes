@@ -2,7 +2,7 @@
 function ReservationTableFor_v02({ startDate, openingTime, closingTime }) {
 
   const generateDateStrings = (startDate) => {
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const dateStrings = [];
     for (let i = 0; i < 7; i++) {
       const currentDate = new Date(startDate);
@@ -42,7 +42,10 @@ function ReservationTableFor_v02({ startDate, openingTime, closingTime }) {
             <td>{time}</td>
             {dates.map((_, index) => (
               <td key={index}>
-                <button onClick={() => console.log(`Date: ${dates[index]}, Time: ${time}`)}>
+                <button
+                    style={{ padding: "5px", fontSize: "15px" }}
+                    onClick={() => console.log(`Date: ${dates[index]}, Time: ${time}`)}
+                >
                   Reserve
                 </button>
               </td>
