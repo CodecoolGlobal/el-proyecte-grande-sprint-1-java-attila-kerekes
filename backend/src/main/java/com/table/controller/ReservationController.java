@@ -55,4 +55,5 @@ public class ReservationController {
     public ReservationDTO createNewReservation(@PathVariable UUID restaurantID, @PathVariable UUID customerID, @RequestBody NewReservationDTO reservationDTO) {
         return reservationService.createNewReservation(customerID, reservationDTO);
     }
+
 }

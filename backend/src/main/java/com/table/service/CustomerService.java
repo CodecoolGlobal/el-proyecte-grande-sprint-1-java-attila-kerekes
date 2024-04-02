@@ -30,6 +30,11 @@ public class CustomerService {
         return new CustomerDTO(customer.getPublicId(), customer.getClient().getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
     }
 
+    public CustomerDTO getCustomerByEmail(String email) {
+        Customer customer = customerRepo.findCustomerByClient_Email(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        return new CustomerDTO(customer.getPublicId(), customer.getClient().getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
+    }
+
     public CustomerDTO saveCustomer(RegisterCustomerDTO customerDTO) {
         Client client = new Client();
         client.setEmail(customerDTO.email());
