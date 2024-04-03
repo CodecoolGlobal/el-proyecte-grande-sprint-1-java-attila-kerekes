@@ -23,7 +23,7 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
             </Link>
             {isAuthenticated ? (
                     <>
-                        <Link to={`/customer`}>
+                        <Link to={`/customer/details`}>
                             <button>My profile</button>
                         </Link>
                         <button onClick={handleLogout}>Logout</button>
