@@ -18,11 +18,12 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
             <h2 className={"Title"}>RESTaurant</h2>
             </div>
             <div>
-            <Link to={`/`}>
-                <button>RESTaurant</button>
-            </Link>
+
             {isAuthenticated ? (
                     <>
+                        <Link to={`/customer/restaurants`}>
+                            <button>RESTaurant</button>
+                        </Link>
                         <Link to={`/customer/details`}>
                             <button>My profile</button>
                         </Link>
@@ -32,6 +33,10 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
                 :
                 (
                     <>
+                        <Link to={`/`}>
+                            <button>RESTaurant</button>
+                        </Link>
+
                         <Link to={`/register`}>
                             <button>Register</button>
                         </Link>
