@@ -82,6 +82,12 @@ public class ReservationService {
         return convertReservationEntityToDTO(reservationRepo.findAllByCustomerPublicId(id));
     }
 
+    public Collection<ReservationDTO> getAllByCustomerEmail(String email) {
+        return convertReservationEntityToDTO(reservationRepo.findAllByCustomer_Client_Email(email));
+    }
+
+
+
     private List<ReservationDTO> convertReservationEntityToDTO(List<Reservation> reservations) {
         List<ReservationDTO> reservationDTOS = new ArrayList<>();
         for (Reservation reservation : reservations) {

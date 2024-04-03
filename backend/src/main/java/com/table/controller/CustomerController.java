@@ -31,6 +31,12 @@ public class CustomerController {
         return customerDTO;
     }
 
+    @GetMapping("email/{email}")
+    public CustomerDTO getCustomerByEmail(@PathVariable String email) {
+        CustomerDTO customerDTO = customerService.getCustomerByEmail(email);
+        return customerDTO;
+    }
+
     @PostMapping
     public CustomerDTO addCustomer(@RequestBody RegisterCustomerDTO customerDTO) {
         return customerService.saveCustomer(customerDTO);

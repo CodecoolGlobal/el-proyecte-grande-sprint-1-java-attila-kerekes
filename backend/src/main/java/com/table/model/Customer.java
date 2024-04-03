@@ -25,7 +25,9 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false)
     private Client client;
+
     public Customer(UUID id, String email, String password, String firstName, String lastName, String phoneNumber) {
     }
 }
