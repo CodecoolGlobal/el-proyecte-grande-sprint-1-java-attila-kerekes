@@ -34,6 +34,8 @@ body {
     align-content: center;
     background-color: #1a1a1a;
     min-width: 15vw;
+    width: 15vw;
+    border-right: solid;
     border-color: #1a1a1a;
 }
 
@@ -79,7 +81,8 @@ body {
     height: 80vh;
     border-right: solid;
     border-color: #1a1a1a;
-    max-width: 20vw;
+    min-width: 15vw;
+    width: 15vw;
 }
 
 .Sidebar{
@@ -91,14 +94,15 @@ body {
     display: flex;
     flex-direction: row;
     place-content: center;
+    max-width: 100vw;
 }
 
 .CustomerDisplayBelow {
     display: flex;
     place-content: center;
     background-color: cornflowerblue;
-    min-height: 80vh;
-    min-width: 80vw;
+    height: 80vh;
+    width: 100vw;
 }
 
 
@@ -129,7 +133,7 @@ body {
 }
 
 .restaurantCardContainer{
-    max-width: 80vw;
+    width: 80vw;
     height: 75vh;
     display: flex;
     place-items: center;
