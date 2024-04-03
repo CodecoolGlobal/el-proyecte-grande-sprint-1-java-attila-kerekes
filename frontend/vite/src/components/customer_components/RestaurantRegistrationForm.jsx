@@ -20,10 +20,10 @@ function RestaurantRegistrationForm(){
 
         const response = await register.json();
         console.log("asd")
-        if(response.statusCode.statusCode === "401"){
+        if(response.status === "401"){
             navigate("/");
         }
-        navigate("/");
+        navigate("/login");
     }
 
     return(
