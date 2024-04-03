@@ -51,6 +51,16 @@ public class RestaurantController {
         return restaurantService.getRestaurantsByName(name);
     }
 
+//    @GetMapping("/{id}/available-tables")
+//    @PreAuthorize("hasRole('CUSTOMER')")
+//    public ResponseEntity<List<AvailableTableDTO>> getAvailableTables(
+//            @PathVariable UUID id,
+//            @RequestParam int numberOfGuests) {
+//        List<AvailableTableDTO> availableTables = restaurantService.getAvailableTables(id, numberOfGuests);
+//        return ResponseEntity.ok(availableTables);
+//    }
+
+
     @GetMapping("/{id}")
     public RestaurantDTO getRestaurantById(@PathVariable UUID id) {
         return restaurantService.getRestaurantById(id);

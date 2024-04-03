@@ -37,13 +37,25 @@ public class ReservationService {
         this.diningSpotRepo = diningSpotRepo;
     }
 
-    public ReservationDTO createNewReservation(UUID customerID, NewReservationDTO newReservationDTO) {
-        List<DiningSpot> allFreeDiningSpot = diningSpotRepo.findAllByCapacity(newReservationDTO.numberOfCustomers());
+    public List<DiningSpot> suitableTables(int numberOfGuests, UUID publicId) {
+        List<DiningSpot> suitableTables = diningSpotRepo.findByCapacityGreaterThanEqualAndCapacityLessThanEqualAndRestaurant_PublicId(
+                numberOfGuests,
+                numberOfGuests + 2,
+                publicId);
+        return suitableTables;
+
+    }
+
+    public ReservationDTO createNewReservation(UUID customerID, UUID restaurantId, NewReservationDTO newReservationDTO) {
+        List<DiningSpot> allFreeDiningSpot = diningSpotRepo.findByCapacityGreaterThanEqualAndCapacityLessThanEqualAndRestaurant_PublicId(
+                newReservationDTO.numberOfCustomers(),
+                newReservationDTO.numberOfCustomers() + 2,
+                restaurantId);
         if (allFreeDiningSpot.isEmpty()) {
             throw new EntityNotFoundException("No free tables.");
         }
         Optional<Customer> customer = customerRepo.findByPublicId(customerID);
-        if(customer.isPresent()) {
+        if (customer.isPresent()) {
             Reservation reservation = new Reservation();
             reservation.setCustomer(customer.get());
             reservation.setDiningSpot(allFreeDiningSpot.get(0));
@@ -85,7 +97,6 @@ public class ReservationService {
     public Collection<ReservationDTO> getAllByCustomerEmail(String email) {
         return convertReservationEntityToDTO(reservationRepo.findAllByCustomer_Client_Email(email));
     }
-
 
 
     private List<ReservationDTO> convertReservationEntityToDTO(List<Reservation> reservations) {
