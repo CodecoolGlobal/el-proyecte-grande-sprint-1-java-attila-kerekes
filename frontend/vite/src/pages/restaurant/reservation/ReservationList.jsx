@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
 import {jwtDecode} from "jwt-decode";
 
-function RestaurantDetails() {
-    const [restaurantDetails, setRestaurantDetails] = useState(null)
+function ReservationList() {
 
+    const [reservations, setReservations] = useState(null)
+    const [restaurantDetails, setRestaurantDetails] = useState(null)
 
     useEffect(() => {
         const fetchDetails = async () => {
@@ -24,20 +25,31 @@ function RestaurantDetails() {
             }
         };
         fetchDetails();
+
     }, []);
+
+    useEffect(() => {
+        const fetchReservations = async () => {
+            const response = await fetch(`/api/reservations/restaurant/${restaurantDetails.publicId}`);
+            const reservationList = await response.json();
+            console.log(reservationList);
+            setReservations(reservationList);
+        }
+        restaurantDetails && fetchReservations();
+    }, [restaurantDetails]);
 
 
     return (
-        restaurantDetails && <div className={"restaurantDetailsContainer"}>
-            <h3>Restaurant details</h3>
-            <div className="detailsCard">
-                <h5 className={"restaurantDetail"}>Name: {restaurantDetails.name}</h5>
-                <h5 className={"restaurantDetail"}>e-mail: {restaurantDetails.email}</h5>
-                <h5 className={"restaurantDetail"}>Phone number: {restaurantDetails.phoneNumber}</h5>
-                <h5 className={"restaurantDetail"}>Address: {restaurantDetails.address}</h5>
+        <div>
+            <div className={"tableReservationCardContainer"}>
+                {reservations && reservations.map((reservation) => (
+                        <div key={reservation.publicId}>{reservation.stat}</div>
+
+                    )
+                )}
             </div>
         </div>
     )
 }
 
-export default RestaurantDetails;
+export default ReservationList;

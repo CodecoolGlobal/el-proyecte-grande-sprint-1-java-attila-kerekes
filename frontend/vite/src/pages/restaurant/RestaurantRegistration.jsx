@@ -1,4 +1,4 @@
-import RestaurantRegistrationForm from "../../components/customer_components/RestaurantRegistrationForm.jsx";
+import RestaurantRegistrationForm from "./RestaurantRegistrationForm.jsx";
 
 export default function RestaurantRegistration() {
     return (

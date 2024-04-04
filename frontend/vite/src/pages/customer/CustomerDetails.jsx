@@ -33,11 +33,11 @@ function CustomerDetails() {
     return (
         <div>
             <h3>Customer details</h3>
-            <div  key={customerDetails.publicId}>
-                <h5>First name:{customerDetails.firstName}</h5>
-                <h5>Last name:{customerDetails.lastName}</h5>
-                <h5>E-mail: {customerDetails.email}</h5>
-                <h5>Phone: {customerDetails.phoneNumber}</h5>
+            <div className={"detailsCard"} key={customerDetails.publicId}>
+                <h5 className={"restaurantDetail"}>First name:{customerDetails.firstName}</h5>
+                <h5 className={"restaurantDetail"}>Last name:{customerDetails.lastName}</h5>
+                <h5 className={"restaurantDetail"}>E-mail: {customerDetails.email}</h5>
+                <h5 className={"restaurantDetail"}>Phone: {customerDetails.phoneNumber}</h5>
             </div>
         </div>
     )
