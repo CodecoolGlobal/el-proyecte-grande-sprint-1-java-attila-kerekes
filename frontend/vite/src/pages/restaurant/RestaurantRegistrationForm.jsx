@@ -19,7 +19,6 @@ function RestaurantRegistrationForm(){
         });
 
         const response = await register.json();
-        console.log("asd")
         if(response.status === "401"){
             navigate("/");
         }
