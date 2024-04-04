@@ -31,33 +31,29 @@ function CustomerRegistrationForm(){
         <div>
             <form onSubmit={(event)=>handleSubmit(event)}>
                 <div>
-                <label>FirstName</label>
-                <input type={"text"} name={"firstName"} value={customer.firstName} onChange={(event) =>
+                <input placeholder={"First name"} type={"text"} name={"firstName"} value={customer.firstName} onChange={(event) =>
                 {setCustomer(prev => ({...prev, firstName: event.target.value}))}}/>
                 </div>
 
 
                 <div>
-                <label>LastName</label>
-                <input type={"text"} name={"lastName"} value={customer.lastName} onChange={(event) =>
+                <input placeholder={"Last name"} type={"text"} name={"lastName"} value={customer.lastName} onChange={(event) =>
                 {setCustomer(prev => ({...prev, lastName: event.target.value}))}}/>
                 </div>
 
                 <div>
-                <label>e-mail</label>
-                <input type={"email"} name={"email"} value={customer.email} onChange={(event) =>
+                <input placeholder={"e-mail"} type={"email"} name={"email"} value={customer.email} onChange={(event) =>
                 {setCustomer(prev => ({...prev, email: event.target.value}))}}/>
                 </div>
 
                 <div>
-                <label>Password</label>
-                <input type={"password"} name={"password"} value={customer.password} onChange={(event) =>
+                <input placeholder="Password" type={"password"} name={"password"} value={customer.password} onChange={(event) =>
                 {setCustomer(prev => ({...prev, password: event.target.value}))}}/>
                 </div>
 
                 <div>
-                <label>Phone number</label>
-                    <input type={"number"} name={"phoneNumber"} value={customer.phoneNumber} onChange={(event) =>
+
+                    <input placeholder="Phone number" type={"number"} name={"phoneNumber"} value={customer.phoneNumber} onChange={(event) =>
                     {setCustomer(prev => ({...prev, phoneNumber: event.target.value}))}}/>
                 </div>
 

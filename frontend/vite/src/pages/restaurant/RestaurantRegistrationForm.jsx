@@ -29,32 +29,28 @@ function RestaurantRegistrationForm(){
         <div>
             <form onSubmit={(event)=>handleSubmit(event)}>
                 <div>
-                    <label>Name</label>
-                    <input type={"text"} name={"name"} value={restaurant.name} onChange={(event) =>
+
+                    <input placeholder={"Name"} type={"text"} name={"name"} value={restaurant.name} onChange={(event) =>
                     {setRestaurant(prev => ({...prev, name: event.target.value}))}}/>
                 </div>
 
                 <div>
-                    <label>e-mail</label>
-                    <input type={"email"} name={"email"} value={restaurant.email} onChange={(event) =>
+                    <input placeholder={"e-mail"} type={"email"} name={"email"} value={restaurant.email} onChange={(event) =>
                     {setRestaurant(prev => ({...prev, email: event.target.value}))}}/>
                 </div>
 
                 <div>
-                    <label>Password</label>
-                    <input type={"password"} name={"password"} value={restaurant.password} onChange={(event) =>
+                    <input placeholder="Password" type={"password"} name={"password"} value={restaurant.password} onChange={(event) =>
                     {setRestaurant(prev => ({...prev, password: event.target.value}))}}/>
                 </div>
 
                 <div>
-                    <label>Phone number</label>
-                    <input type={"number"} name={"phoneNumber"} value={restaurant.phoneNumber} onChange={(event) =>
+                    <input placeholder="Phone number" type={"number"} name={"phoneNumber"} value={restaurant.phoneNumber} onChange={(event) =>
                     {setRestaurant(prev => ({...prev, phoneNumber: event.target.value}))}}/>
                 </div>
 
                 <div>
-                    <label>Address</label>
-                    <input type={"text"} name={"address"} value={restaurant.address} onChange={(event) =>
+                    <input  placeholder="Address" type={"text"} name={"address"} value={restaurant.address} onChange={(event) =>
                     {setRestaurant(prev => ({...prev, address: event.target.value}))}}/>
                 </div>
 
