@@ -2,9 +2,10 @@
 function TableEditor({ onSubmit, onChange }) {
     return (
         <div className={"tableEditorContainer"}>
-            <form style={{ width: "100%" }} onSubmit={(event) => onSubmit(event)}>
+            <form  style={{ width: "100%" }} onSubmit={(event) => onSubmit(event)}>
                 <div>
                     <input
+                        placeholder={"Table name"}
                         style={{ width: "90%" }}
                         type={"text"}
                         name={"name"}
@@ -15,6 +16,7 @@ function TableEditor({ onSubmit, onChange }) {
                 </div>
                 <div>
                     <input
+                        placeholder={"Number of seats"}
                         style={{ width: "90%" }}
                         type={"number"}
                         name={"seats"}

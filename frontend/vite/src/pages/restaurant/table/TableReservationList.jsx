@@ -34,6 +34,7 @@ function TableReservationList({diningSpotId}) {
                 {reservations && reservations.map((reservation) => (
                     <div key={reservation.publicId} className={"tableReservationCard"}>
                         <div className={"restaurantDetail"}>{reservation.start}</div>
+                        <div className={"restaurantDetail"}>Number of guests:{reservation.numberOfCustomers}</div>
                     </div>
                     )
                 )}
