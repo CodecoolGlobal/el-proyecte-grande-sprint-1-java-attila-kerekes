@@ -90,6 +90,9 @@ public class ReservationService {
         return convertReservationEntityToDTO(reservationRepo.findByDiningSpot_RestaurantPublicId(restaurantId));
     }
 
+    public Collection<ReservationDTO> getAllByDiningSpot(UUID diningSpotId){
+        return convertReservationEntityToDTO(reservationRepo.findByDiningSpot_PublicId(diningSpotId));
+    }
     public Collection<ReservationDTO> getAllByCustomerID(UUID id) {
         return convertReservationEntityToDTO(reservationRepo.findAllByCustomerPublicId(id));
     }

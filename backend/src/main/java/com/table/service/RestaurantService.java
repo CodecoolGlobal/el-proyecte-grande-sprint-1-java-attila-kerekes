@@ -1,6 +1,7 @@
 package com.table.service;
 
 import com.table.controller.dto.DiningSpotDTO;
+import com.table.controller.dto.NewDiningSpotDTO;
 import com.table.controller.dto.RegisterRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
 import com.table.model.Client;
@@ -92,12 +93,12 @@ public class RestaurantService {
         return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurantDTO.email(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
 
-    public DiningSpot addTableToRestaurant(UUID restaurantId, DiningSpotDTO diningSpotDTO) {
+    public DiningSpot addDiningSpotToRestaurant(UUID restaurantId, NewDiningSpotDTO newDiningSpotDTO) {
         DiningSpot diningSpot = new DiningSpot();
         Restaurant restaurant = restaurantRepo.findByPublicId(restaurantId).orElseThrow(() -> new EntityNotFoundException("User not found"));
         diningSpot.setRestaurant(restaurant);
-        diningSpot.setCapacity(diningSpotDTO.capacity());
-        diningSpot.setName(diningSpotDTO.name());
+        diningSpot.setCapacity(newDiningSpotDTO.capacity());
+        diningSpot.setName(newDiningSpotDTO.name());
         diningSpotRepo.save(diningSpot);
         return diningSpot;
     }
@@ -115,9 +116,13 @@ public class RestaurantService {
     }
 
     //TODO: RESERVATION METHOD
-    public List<DiningSpot> findAvailableDiningSpots(UUID uuid) {
-        List<DiningSpot> diningSpots = diningSpotRepo.getDiningSpotsByRestaurant_PublicId(uuid);
-        return diningSpots;
+    public List<DiningSpot> getDiningSpotsByEmail(String email) {
+        return diningSpotRepo.findDiningSpotsByRestaurant_Client_Email(email);
+    }
+
+    public RestaurantDTO getRestaurantByEmail(String email) {
+        Restaurant restaurant = restaurantRepo.findRestaurantByClient_Email(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        return new RestaurantDTO(restaurant.getPublicId(), restaurant.getName(), restaurant.getClient().getEmail(), restaurant.getPhoneNumber(), restaurant.getAddress());
     }
 
     //TODO: CUISINE ***FEATURE***

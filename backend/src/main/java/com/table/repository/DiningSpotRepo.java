@@ -14,8 +14,12 @@ import java.util.UUID;
 public interface DiningSpotRepo extends JpaRepository<DiningSpot, Long> {
     DiningSpot getTableByPublicId(UUID uuid);
 
+<<<<<<< HEAD
     List<DiningSpot> getDiningSpotsByRestaurant_PublicId(UUID uuid);
 
+=======
+    List<DiningSpot> findDiningSpotsByRestaurant_Client_Email(String email);
+>>>>>>> development
     DiningSpot deleteTableByPublicId(UUID uuid);
 
     List<DiningSpot> findAllByCapacity(int capacity);

@@ -86,6 +86,10 @@ public class ReservationController {
     public ReservationDTO getReservationByPublicId(@PathVariable UUID reservationId) {
         return reservationService.getReservation(reservationId);
     }
+    @GetMapping("/diningSpot/{diningSpotId}")
+        public Collection<ReservationDTO> getReservationByDiningSpotId(@PathVariable UUID diningSpotId){
+        return reservationService.getAllByDiningSpot(diningSpotId);
+    }
 
     @DeleteMapping("/{reservationId}")
     public void deleteReservation(@PathVariable UUID reservationId) {

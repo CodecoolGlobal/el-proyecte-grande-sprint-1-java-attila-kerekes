@@ -21,4 +21,7 @@ public interface RestaurantRepo extends JpaRepository<Restaurant, Long> {
 
     @Transactional
     void deleteByPublicId(UUID uuid);
+
+    Optional<Restaurant> findRestaurantByClient_Email(String email);
+
 }

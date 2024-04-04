@@ -20,7 +20,7 @@ public class DiningSpot {
     @SequenceGenerator(name = "dining_seq_gen", sequenceName = "dining_seq", initialValue = 1, allocationSize = 1)
     private long id;
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
-    private UUID publicId;
+    private UUID publicId = UUID.randomUUID();;
     private int capacity;
     private String name;
     @OneToMany(mappedBy = "diningSpot", cascade = CascadeType.ALL)
