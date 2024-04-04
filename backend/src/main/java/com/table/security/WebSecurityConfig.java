@@ -64,6 +64,7 @@ public class WebSecurityConfig {
                         auth.requestMatchers("api/customers/**").permitAll()
                                 .requestMatchers("api/restaurants/**").permitAll()
                                 .requestMatchers("api/clients/**").permitAll()
+                                .requestMatchers("api/reservations/**").permitAll()
                                 .requestMatchers("error").permitAll()
                                 .anyRequest().authenticated()
                 );
