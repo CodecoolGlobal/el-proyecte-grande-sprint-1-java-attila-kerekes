@@ -27,6 +27,7 @@ const Login = ({ setIsAuthenticated, setRestaurant }) => {
 
             localStorage.setItem('token', data.jwt);
             const role = data.role;
+            localStorage.setItem("role", role)
 
             if (role === 'ROLE_RESTAURANT') {
                 setRestaurant(true);

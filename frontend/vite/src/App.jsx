@@ -30,6 +30,7 @@ function App() {
         if (token) {
             setIsAuthenticated(true);
         }
+        console.log(localStorage)
     }, []);
 
     // const logInUser = async (id) => {

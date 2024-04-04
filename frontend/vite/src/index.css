@@ -233,6 +233,27 @@ body {
     transition: 0.5s ease;
 }
 
+.tableReservationCardContainer{
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+}
+
+.tableReservationCard{
+    background-color: aliceblue;
+    border: solid;
+    border-color: #1a1a1a;
+    margin: 5px;
+    height: 5vh;
+    width: 100%;
+    transition: 0.5s ease;
+}
+.tableReservationCard:hover {
+    background-color: lightskyblue;
+    transition: 0.5s ease;
+    width: 110%;
+}
+
 .tableCard:hover {
     background-color: lightskyblue;
     transition: 0.5s ease;
