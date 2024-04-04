@@ -14,7 +14,7 @@ import Contact from "./pages/Contact.jsx";
 import CustomerDetails from "./pages/customer/CustomerDetails.jsx";
 import ReservationList from "./pages/ReservationList.jsx";
 import RestaurantDetails from "./pages/restaurant/RestaurantDetails.jsx";
-import TableEditor from "./pages/restaurant/TableEditor.jsx";
+import TableList from "./pages/restaurant/table/TableList.jsx";
 import Home from "./pages/Home.jsx";
 import CustomerRestaurantList from "./pages/customer/CustomerRestaurantList.jsx";
 import ReservationPage_v02 from "./pages/customer/ReservationPage_v02.jsx";
@@ -88,7 +88,7 @@ function App() {
                             path: 'details'
                         },
                         {
-                            element: <TableEditor />,
+                            element: <TableList />,
                             path: 'tables'
                         },
                         {

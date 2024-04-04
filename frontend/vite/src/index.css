@@ -85,12 +85,12 @@ body {
     width: 15vw;
 }
 
-.Sidebar{
+.Sidebar {
     display: flex;
     flex-direction: column;
 }
 
-.MainContainer{
+.MainContainer {
     display: flex;
     flex-direction: row;
     place-content: center;
@@ -104,7 +104,6 @@ body {
     height: 80vh;
     width: 100vw;
 }
-
 
 .CustomerMain {
     display: flex;
@@ -129,10 +128,16 @@ body {
     background-color: lightblue;
 }
 
-.CustomerRestaurantList{
+.CustomerRestaurantList {
 }
 
-.restaurantCardContainer{
+.tableServiceContainer {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+}
+
+.restaurantCardContainer {
     width: 80vw;
     height: 75vh;
     display: flex;
@@ -142,7 +147,7 @@ body {
     flex-direction: column;
 }
 
-.restaurantCard{
+.restaurantCard {
     background-color: aliceblue;
     border: solid;
     border-color: #1a1a1a;
@@ -152,20 +157,90 @@ body {
     transition: 0.5s ease;
 }
 
-.restaurantCard:hover{
+.restaurantCard:hover {
     background-color: lightskyblue;
     transition: 0.5s ease;
     width: 26vw;
 
 }
 
-.restaurantName{
+.restaurantName {
     background-color: #1a1a1a;
     color: #f9f9f9;
 }
 
-.restaurantDetail{
+.restaurantDetail {
     color: #888888;
+}
+
+.RestaurantDisplayBelow {
+    display: flex;
+    place-content: center;
+    background-color: cornflowerblue;
+    height: 80vh;
+    width: 100vw;
+}
+
+.tableCardContainer {
+    width: 60vw;
+    height: 75vh;
+    display: flex;
+    place-items: center;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    flex-direction: column;
+}
+
+.tableContainer {
+    width: 20vw;
+    height: 80vh;
+}
+
+
+.tableEditorContainer {
+    border: solid;
+    border-color: #1a1a1a;
+    width: 20vw;
+    height: 20vh;
+    display: flex;
+    place-items: flex-start;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    flex-direction: column;
+}
+
+.tableReservationListContainer {
+    border-left: solid;
+    border-right: solid;
+    border-bottom: solid;
+    border-color: #1a1a1a;
+    width: 20vw;
+    height: 60vh;
+    display: flex;
+    place-items: center;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    flex-direction: column;
+}
+
+.tableCard {
+    background-color: aliceblue;
+    border: solid;
+    border-color: #1a1a1a;
+    margin: 5px;
+    height: 15vh;
+    width: 25vw;
+    transition: 0.5s ease;
+}
+
+.tableCard:hover {
+    background-color: lightskyblue;
+    transition: 0.5s ease;
+    width: 26vw;
+}
+
+.tableDetail {
+    color: #1a1a1a;
 }
 
 h1 {

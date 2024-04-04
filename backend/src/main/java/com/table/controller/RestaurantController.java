@@ -1,7 +1,10 @@
 package com.table.controller;
 
+import com.table.controller.dto.DiningSpotDTO;
+import com.table.controller.dto.NewDiningSpotDTO;
 import com.table.controller.dto.RegisterRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
+import com.table.model.DiningSpot;
 import com.table.security.jwt.JwtUtils;
 import com.table.service.CustomerService;
 import com.table.service.RestaurantService;
@@ -38,11 +41,28 @@ public class RestaurantController {
         return restaurantService.addRestaurant(NewRestaurantDTO);
     }
 
+    @PostMapping("/diningSpot/{restaurant_uuid}")
+    public DiningSpot addDiningSpotToRestaurant(@PathVariable  UUID restaurant_uuid, @RequestBody NewDiningSpotDTO newDiningSpotDTO){
+        return restaurantService.addDiningSpotToRestaurant(restaurant_uuid, newDiningSpotDTO);
+    }
+
     //Read
     @GetMapping
     @PreAuthorize("hasRole('CUSTOMER')")
     public List<RestaurantDTO> getAllRestaurants() {
         return restaurantService.getRestaurants();
+    }
+
+    @GetMapping("/email/{email}")
+    @PreAuthorize("hasRole('RESTAURANT')")
+    public RestaurantDTO getRestaurantDetail(@PathVariable String email) {
+        return restaurantService.getRestaurantByEmail(email);
+    }
+
+    @GetMapping("/diningSpot/{email}")
+    @PreAuthorize("hasRole('RESTAURANT')")
+    public List<DiningSpot> getDiningSpotByEmail(@PathVariable String email){
+        return restaurantService.getDiningSpotsByEmail(email);
     }
 
     @GetMapping("/name/{name}")
@@ -69,4 +89,6 @@ public class RestaurantController {
     public void deleteRestaurant(@PathVariable UUID id) {
         restaurantService.deleteRestaurant(id);
     }
+
+
 }
