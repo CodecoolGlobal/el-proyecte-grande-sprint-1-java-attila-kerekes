@@ -198,7 +198,7 @@ body {
     place-items: center;
     overflow-y: scroll;
     scrollbar-width: none;
-    flex-direction: column;
+    flex-direction: column-reverse;
 }
 
 .tableContainer {
