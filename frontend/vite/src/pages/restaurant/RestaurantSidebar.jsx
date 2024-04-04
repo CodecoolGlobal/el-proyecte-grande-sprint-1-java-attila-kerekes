@@ -16,6 +16,7 @@ function RestaurantSidebar() {
             <Link to={`reservations`}>
                 <button>Reservations</button>
             </Link>
+
         </nav>
     )
 }
