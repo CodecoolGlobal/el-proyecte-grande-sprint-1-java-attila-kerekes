@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
@@ -59,7 +60,7 @@ public class ReservationService {
             Reservation reservation = new Reservation();
             reservation.setCustomer(customer.get());
             reservation.setDiningSpot(allFreeDiningSpot.get(0));
-            reservation.setDuration(newReservationDTO.duration());
+            reservation.setDuration(Duration.ofNanos(newReservationDTO.duration().getSeconds()));
             reservation.setStart(newReservationDTO.start());
             reservation.setNumberOfCustomers(newReservationDTO.numberOfCustomers());
             reservationRepo.save(reservation);
