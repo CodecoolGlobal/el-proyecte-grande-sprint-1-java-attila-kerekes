@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {jwtDecode} from "jwt-decode";
 import {useParams} from "react-router-dom";
 
-function ReservationTableFor_v02({startDate, openingTime, closingTime, disabledTimeslots, numberOfCustomers, onBookingMade }) {
+function ReservationTable({startDate, openingTime, closingTime, disabledTimeslots, numberOfCustomers, onBookingMade }) {
 
     const [customerDetails, setCustomerDetails] = useState([]);
     const [reservationInfo, setReservationInfo] = useState({
@@ -40,13 +40,21 @@ function ReservationTableFor_v02({startDate, openingTime, closingTime, disabledT
 
     async function handleReserveClick(event, date, time) {
         event.preventDefault();
-        const startDateTime = new Date(date);
         const [year, month, day] = date.split('-');
         const [hours, minutes] = time.split(':');
-        startDateTime.setHours(hours, minutes)
-        startDateTime.setFullYear(year, month - 1, day)
+
+        const startDateTime = new Date(year, month - 1, day, hours, minutes);
+
         console.log(startDateTime)
-        const reservationDTO = {...reservationInfo, start: startDateTime.toISOString()};
+        startDateTime.setMinutes(startDateTime.getMinutes() - startDateTime.getTimezoneOffset());
+
+        console.log(startDateTime)
+
+        const reservationDTO = {
+            ...reservationInfo,
+            start: startDateTime.toISOString()
+        };
+
         console.log(reservationDTO);
 
         try {
@@ -134,4 +142,4 @@ function ReservationTableFor_v02({startDate, openingTime, closingTime, disabledT
     );
 }
 
-export default ReservationTableFor_v02;
+export default ReservationTable;
