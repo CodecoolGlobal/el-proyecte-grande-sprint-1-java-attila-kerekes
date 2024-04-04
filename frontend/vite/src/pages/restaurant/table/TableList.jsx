@@ -40,7 +40,7 @@ function TableList() {
                 <h3>Tables</h3>
                 <div className={"tableCardContainer"}>
                     {diningSpots && diningSpots.map((diningSpot) => (
-                        <div className={"tableCard"} onClick={() => setSelectedSpotId(diningSpot)} key={diningSpot.id}>
+                        <div className={"tableCard"} onClick={() => setSelectedSpotId(diningSpot.publicId)} key={diningSpot.id}>
                             <div className={"tableDetail"}>
                                 {diningSpot.name.toUpperCase()}
                             </div>
@@ -53,7 +53,7 @@ function TableList() {
             </div>
             <div className={"tableContainer"}>
             <TableEditor></TableEditor>
-            <TableReservationList diningSpot={selectedSpotId}></TableReservationList>
+            <TableReservationList diningSpotId={selectedSpotId}></TableReservationList>
             </div>
         </div>
     )
