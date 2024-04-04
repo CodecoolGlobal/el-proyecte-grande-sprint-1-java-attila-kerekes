@@ -1,5 +1,5 @@
 
-function ReservationTableFor_v02({ startDate, openingTime, closingTime }) {
+function ReservationTable({ startDate, openingTime, closingTime }) {
 
   const generateDateStrings = (startDate) => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -57,4 +57,4 @@ function ReservationTableFor_v02({ startDate, openingTime, closingTime }) {
   );
 }
 
-export default ReservationTableFor_v02;
+export default ReservationTable;

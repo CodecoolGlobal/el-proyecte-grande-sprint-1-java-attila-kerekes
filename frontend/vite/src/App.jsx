@@ -17,7 +17,7 @@ import RestaurantDetails from "./pages/restaurant/RestaurantDetails.jsx";
 import TableList from "./pages/restaurant/table/TableList.jsx";
 import Home from "./pages/Home.jsx";
 import CustomerRestaurantList from "./pages/customer/CustomerRestaurantList.jsx";
-import ReservationPage_v02 from "./pages/customer/ReservationPage_v02.jsx";
+import ReservationPage from "./pages/customer/ReservationPage.jsx";
 import CustomerReservationList from "./pages/customer/CustomerReservationList.jsx";
 
 function App() {
@@ -59,12 +59,8 @@ function App() {
                             element: <CustomerDetails />,
                             path: 'details'
                         },
-                        // {
-                        //     element: <ReservationPage/>,
-                        //     path: 'restaurants/:id'
-                        // },
                         {
-                            element: <ReservationPage_v02/>,
+                            element: <ReservationPage/>,
                             path: 'restaurants/:id'
                         },
                         {
