@@ -88,8 +88,9 @@ public class ReservationService {
     }
 
     public Collection<ReservationDTO> getAllByRestaurantID(UUID restaurantId) {
-        return convertReservationEntityToDTO(reservationRepo.findByDiningSpot_RestaurantPublicId(restaurantId));
+        return convertReservationEntityToDTO(reservationRepo.findReservationsByDiningSpot_Restaurant_PublicId(restaurantId));
     }
+
 
     public Collection<ReservationDTO> getAllByDiningSpot(UUID diningSpotId){
         return convertReservationEntityToDTO(reservationRepo.findByDiningSpot_PublicId(diningSpotId));
