@@ -21,7 +21,6 @@ import ReservationPage from "./pages/customer/ReservationPage.jsx";
 import CustomerReservationList from "./pages/customer/CustomerReservationList.jsx";
 
 function App() {
-    // const [userId, setUserId] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isRestaurant, setRestaurant] = useState(false);
 
@@ -30,12 +29,11 @@ function App() {
         if (token) {
             setIsAuthenticated(true);
         }
-        console.log(localStorage)
+        const role = localStorage.getItem('role');
+        if (role === 'ROLE_RESTAURANT') {
+            setRestaurant(true);
+        }
     }, []);
-
-    // const logInUser = async (id) => {
-    //     setUserId(id);
-    // }
 
     const routes = useRoutes([
         {
