@@ -1,34 +1,32 @@
-import {useState} from "react";
 
-function TableEditor() {
-    const [diningSpot, setDiningSpot] = useState({name: "", capacity: 0});
-
-
+function TableEditor({ onSubmit, onChange }) {
     return (
         <div className={"tableEditorContainer"}>
-            <form style={{width: "100%"}} onSubmit={(event) => (event)}>
+            <form style={{ width: "100%" }} onSubmit={(event) => onSubmit(event)}>
                 <div>
-                    <input style={{width: "90%"}}
-                           type={"text"}
-                           name={"name"}
-                           value={diningSpot.name}
-                           onChange={(event) => {
-                               setDiningSpot(prev => ({...prev, name: event.target.value}))
-                           }}/>
+                    <input
+                        style={{ width: "90%" }}
+                        type={"text"}
+                        name={"name"}
+                        onChange={(event) => {
+                            onChange((prev) => ({ ...prev, name: event.target.value }));
+                        }}
+                    />
                 </div>
                 <div>
-                    <input style={{width: "90%"}}
-                           type={"number"}
-                           name={"seats"}
-                           value={diningSpot.capacity}
-                           onChange={(event) => {
-                               setDiningSpot(prev => ({...prev, capacity: event.target.value}))
-                           }}/>
+                    <input
+                        style={{ width: "90%" }}
+                        type={"number"}
+                        name={"seats"}
+                        onChange={(event) => {
+                            onChange((prev) => ({ ...prev, capacity: parseInt(event.target.value) }));
+                        }}
+                    />
                 </div>
-                <button>Save</button>
+                <button type="submit">Save</button>
             </form>
         </div>
-    )
+    );
 }
 
 export default TableEditor;

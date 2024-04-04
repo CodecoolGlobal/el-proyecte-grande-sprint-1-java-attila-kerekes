@@ -12,7 +12,7 @@ import {useEffect, useState} from "react";
 import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import CustomerDetails from "./pages/customer/CustomerDetails.jsx";
-import ReservationList from "./pages/ReservationList.jsx";
+import ReservationList from "./pages/restaurant/reservation/ReservationList.jsx";
 import RestaurantDetails from "./pages/restaurant/RestaurantDetails.jsx";
 import TableList from "./pages/restaurant/table/TableList.jsx";
 import Home from "./pages/Home.jsx";
@@ -37,11 +37,14 @@ function App() {
 
     const routes = useRoutes([
         {
-            element: <MainPage isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}/>,
+            element: <MainPage isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated}
+            />,
             path: '/',
             children: [
                 {
-                    element: <Home/>,
+                    element:isAuthenticated ?
+                        (isRestaurant ? <Navigate to="/restaurant" /> : <CustomerPage />)
+                        : <Home/>,
                     path: '/'
                 },
                 {

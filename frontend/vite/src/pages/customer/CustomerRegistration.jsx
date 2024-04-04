@@ -1,4 +1,4 @@
-import CustomerRegistrationForm from "../../components/customer_components/CustomerRegistrationForm.jsx";
+import CustomerRegistrationForm from "./CustomerRegistrationForm.jsx";
 
 export default function CustomerRegistration() {
     return (

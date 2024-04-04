@@ -15,6 +15,8 @@ public interface ReservationRepo extends JpaRepository<Reservation, Long> {
   
     List<Reservation> findByDiningSpot_RestaurantPublicId(UUID restaurantId);
 
+    List<Reservation> findReservationsByDiningSpot_Restaurant_PublicId(UUID restaurantId);
+
     List<Reservation> findByDiningSpot_PublicId(UUID id);
 
 
