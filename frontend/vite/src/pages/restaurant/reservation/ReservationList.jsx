@@ -6,12 +6,13 @@ function ReservationList() {
     const [reservations, setReservations] = useState(null)
     const [restaurantDetails, setRestaurantDetails] = useState(null)
 
+    const token = localStorage.getItem("token");
+    const decodedToken = jwtDecode(token);
+    const email = decodedToken.sub;
+
     useEffect(() => {
         const fetchDetails = async () => {
             try {
-                const token = localStorage.getItem("token");
-                const decodedToken = jwtDecode(token);
-                const email = decodedToken.sub;
                 const response = await fetch(`/api/restaurants/email/${email}`, {
                     headers: {"Authorization": `Bearer ${token}`},
                 })
@@ -30,11 +31,19 @@ function ReservationList() {
 
     useEffect(() => {
         const fetchReservations = async () => {
-            const response = await fetch(`/api/reservations/restaurant/${restaurantDetails.publicId}`);
-            const reservationList = await response.json();
-            console.log(reservationList);
-            setReservations(reservationList);
-        }
+            try {
+                const response = await fetch(`/api/reservations/restaurant/${restaurantDetails.publicId}`, {
+                    headers: {"Authorization": `Bearer ${token}`},
+                });
+                if (!response.ok) {
+                    throw new Error("Failed to fetch reservations")
+                }
+                const reservationList = await response.json();
+                setReservations(reservationList);
+            } catch (error) {
+                console.error(error)
+            }
+        };
         restaurantDetails && fetchReservations();
     }, [restaurantDetails]);
 

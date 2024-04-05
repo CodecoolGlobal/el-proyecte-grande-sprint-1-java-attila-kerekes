@@ -213,7 +213,7 @@ body {
     width: 20vw;
     height: 20vh;
     display: flex;
-    place-items: flex-start;
+    place-items: center;
     overflow-y: scroll;
     scrollbar-width: none;
     flex-direction: column;

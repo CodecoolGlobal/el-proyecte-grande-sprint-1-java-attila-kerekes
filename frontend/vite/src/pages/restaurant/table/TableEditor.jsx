@@ -2,26 +2,27 @@
 function TableEditor({ onSubmit, onChange }) {
     return (
         <div className={"tableEditorContainer"}>
-            <form  style={{ width: "100%" }} onSubmit={(event) => onSubmit(event)}>
+            <h3>Add new table</h3>
+            <form style={{width: "100%"}} onSubmit={(event) => onSubmit(event)}>
                 <div>
                     <input
-                        placeholder={"Table name"}
-                        style={{ width: "90%" }}
+                        style={{width: "90%"}}
                         type={"text"}
                         name={"name"}
+                        placeholder={"Table name"}
                         onChange={(event) => {
-                            onChange((prev) => ({ ...prev, name: event.target.value }));
+                            onChange((prev) => ({...prev, name: event.target.value}));
                         }}
                     />
                 </div>
                 <div>
                     <input
-                        placeholder={"Number of seats"}
-                        style={{ width: "90%" }}
+                        style={{width: "90%"}}
                         type={"number"}
                         name={"seats"}
+                        placeholder={"Number of seats"}
                         onChange={(event) => {
-                            onChange((prev) => ({ ...prev, capacity: parseInt(event.target.value) }));
+                            onChange((prev) => ({...prev, capacity: parseInt(event.target.value)}));
                         }}
                     />
                 </div>
