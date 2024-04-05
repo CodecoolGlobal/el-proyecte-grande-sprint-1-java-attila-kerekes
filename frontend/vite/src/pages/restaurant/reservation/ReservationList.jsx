@@ -52,8 +52,10 @@ function ReservationList() {
         <div>
             <div className={"tableReservationCardContainer"}>
                 {reservations && reservations.map((reservation) => (
-                        <div key={reservation.publicId}>{reservation.stat}</div>
-
+                    <div className={"tableReservationCard"}>
+                        <div className={"restaurantDetail"} key={reservation.publicId}>Customers: {reservation.numberOfCustomers}</div>
+                        <div className={"restaurantDetail"} key={reservation.publicId}>Timeslot: {reservation.start}</div>
+                    </div>
                     )
                 )}
             </div>
