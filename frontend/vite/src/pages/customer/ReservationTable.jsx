@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {jwtDecode} from "jwt-decode";
 import {useParams} from "react-router-dom";
 
-function ReservationTable({startDate, openingTime, closingTime, disabledTimeslots, numberOfCustomers, onBookingMade}) {
+function ReservationTable({startDate, openingTime, closingTime, disabledTimeslots, numberOfCustomers, onBookingMade }) {
 
     const [customerDetails, setCustomerDetails] = useState([]);
     const [reservationInfo, setReservationInfo] = useState({
@@ -108,13 +108,17 @@ function ReservationTable({startDate, openingTime, closingTime, disabledTimeslot
         return disabledTimeslots.some(slot => slot.dayOfWeek === dayOfWeek && slot.hourOfDay - 12 === hourOfDay);
     };
 
+    const getButtonStyle = (isDisabled) => {
+        return isDisabled ? { backgroundColor: 'red' } : { backgroundColor: 'green' };
+    };
+
     return (
         <table>
             <thead>
             <tr>
                 <th></th>
                 {dates.map((date, index) => (
-                    <th key={index}>{date}</th>
+                    <th key={index}>{date.substring(5)}</th>
                 ))}
             </tr>
             </thead>
@@ -125,7 +129,7 @@ function ReservationTable({startDate, openingTime, closingTime, disabledTimeslot
                     {dates.map((_, dateIndex) => (
                         <td key={dateIndex}>
                             <button
-                                style={{padding: "5px", fontSize: "15px"}}
+                                style={{ padding: "5px", fontSize: "15px", color: "white", ...getButtonStyle(isTimeslotDisabled(dateIndex, timeIndex)) }}
                                 disabled={isTimeslotDisabled(dateIndex, timeIndex)}
                                 onClick={(event) => {
                                     handleReserveClick(event, dates[dateIndex], time)
@@ -140,7 +144,6 @@ function ReservationTable({startDate, openingTime, closingTime, disabledTimeslot
             </tbody>
         </table>
     );
-
 }
 
 export default ReservationTable;
