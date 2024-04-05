@@ -198,7 +198,7 @@ body {
     place-items: center;
     overflow-y: scroll;
     scrollbar-width: none;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .tableContainer {
@@ -254,7 +254,7 @@ body {
     border: solid;
     border-color: #1a1a1a;
     margin: 5px;
-    height: 5vh;
+    height: 8vh;
     width: 100%;
     transition: 0.5s ease;
 }
