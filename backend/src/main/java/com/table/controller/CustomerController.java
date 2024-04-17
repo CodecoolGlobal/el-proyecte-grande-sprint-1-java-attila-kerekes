@@ -39,7 +39,7 @@ public class CustomerController {
 
     @PostMapping
     public CustomerDTO addCustomer(@RequestBody RegisterCustomerDTO customerDTO) {
-        return customerService.saveCustomer(customerDTO);
+        return customerService.createCustomer(customerDTO);
     }
 
     @DeleteMapping("/{id}")

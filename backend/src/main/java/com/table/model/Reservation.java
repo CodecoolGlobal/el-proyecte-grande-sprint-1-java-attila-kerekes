@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -21,8 +23,12 @@ public class Reservation {
     private long id;
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
+    @Future
+    @NonNull
     private LocalDateTime start;
+    @NonNull
     private Duration duration;
+    @Min(1)
     private int numberOfCustomers;
     @ManyToOne
     @JsonIgnore

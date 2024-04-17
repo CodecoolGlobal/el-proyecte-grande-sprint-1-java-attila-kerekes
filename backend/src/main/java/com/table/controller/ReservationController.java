@@ -8,8 +8,6 @@ import com.table.model.Reservation;
 import com.table.service.ReservationService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +16,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api/reservations")
@@ -56,7 +53,7 @@ public class ReservationController {
 
         LocalDate endOfWeek = currentWeekMonday.plusDays(7);
 
-        List<DiningSpot> suitableTables = reservationService.suitableTables(numberOfGuests, restaurantId);
+        List<DiningSpot> suitableTables = reservationService.getSuitableTables(numberOfGuests, restaurantId);
 
         List<LocalDateTime> timeslots = suitableTables.stream()
                 .flatMap(table -> table.getReservations().stream())
