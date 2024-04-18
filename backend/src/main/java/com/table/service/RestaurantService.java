@@ -53,7 +53,7 @@ public class RestaurantService {
         return new RestaurantDTO(
           restaurant.getPublicId(),
           restaurant.getName(),
-          restaurant.getName(),
+          restaurant.getClient().getEmail(),
           restaurant.getPhoneNumber(),
           restaurant.getAddress());
     }
