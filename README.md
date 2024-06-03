@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/CodecoolGlobal/el-proyecte-grande-sprint-1-java-attila-kerekes">
-    <img src="images/restaurant.png" alt="Logo" width="700" height="350">
+    <img src="images/restaurant.PNG" alt="Logo" width="700" height="350">
   </a>
 
 <h3 align="center">RESTaurant API - Table Reservation App</h3>
