@@ -20,6 +20,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/clients")
+
 public class ClientController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;

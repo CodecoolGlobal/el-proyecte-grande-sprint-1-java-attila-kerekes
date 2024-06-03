@@ -89,7 +89,8 @@ public class RestaurantController {
     //Update
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('RESTAURANT')")
-    public RestaurantDTO updateRestaurant(@RequestBody RestaurantDTO restaurantDTO, @PathVariable UUID id){
+    public RestaurantDTO updateRestaurant(@RequestBody RestaurantDTO restaurantDTO,
+                                          @PathVariable UUID id){
         return restaurantService.updateRestaurant(restaurantDTO, id);
     }
 
