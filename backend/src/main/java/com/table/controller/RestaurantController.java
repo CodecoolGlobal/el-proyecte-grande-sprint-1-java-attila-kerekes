@@ -1,6 +1,5 @@
 package com.table.controller;
 
-import com.table.controller.dto.DiningSpotDTO;
 import com.table.controller.dto.NewDiningSpotDTO;
 import com.table.controller.dto.RegisterRestaurantDTO;
 import com.table.controller.dto.RestaurantDTO;
@@ -38,12 +37,12 @@ public class RestaurantController {
     //Create
     @PostMapping
     public RestaurantDTO addRestaurant(@RequestBody RegisterRestaurantDTO NewRestaurantDTO) {
-        return restaurantService.addRestaurant(NewRestaurantDTO);
+        return restaurantService.createRestaurant(NewRestaurantDTO);
     }
 
     @PostMapping("/diningSpot/{restaurant_uuid}")
     public DiningSpot addDiningSpotToRestaurant(@PathVariable  UUID restaurant_uuid, @RequestBody NewDiningSpotDTO newDiningSpotDTO){
-        return restaurantService.addDiningSpotToRestaurant(restaurant_uuid, newDiningSpotDTO);
+        return restaurantService.createDiningSpotToRestaurant(restaurant_uuid, newDiningSpotDTO);
     }
 
     //Read

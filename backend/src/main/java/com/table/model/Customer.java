@@ -19,15 +19,15 @@ public class Customer {
     private long id;
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
+    @NonNull
     private String firstName;
+    @NonNull
     private String lastName;
+    @Column(unique = true, nullable = false)
     private String phoneNumber;
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Reservation> reservations;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id", referencedColumnName = "id", nullable = false)
     private Client client;
-
-    public Customer(UUID id, String email, String password, String firstName, String lastName, String phoneNumber) {
-    }
 }

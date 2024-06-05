@@ -17,6 +17,7 @@ public class Cuisine {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cuisine_seq_gen")
     @SequenceGenerator(name = "cuisine_seq_gen", sequenceName = "cuisine_seq", initialValue = 1, allocationSize = 1)
     private long id;
+    @NonNull
     private String cuisineType;
     @ManyToMany
     @JsonIgnore

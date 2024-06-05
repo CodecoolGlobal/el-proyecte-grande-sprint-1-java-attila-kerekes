@@ -32,7 +32,7 @@ body {
     display: flex;
     place-content: center;
     align-content: center;
-    background-color: #1a1a1a;
+    background-color: #60bfc2;
     min-width: 15vw;
     width: 15vw;
     border-right: solid;
@@ -42,7 +42,7 @@ body {
 .Title {
     min-height: 10vh;
     align-content: center;
-    color: cornflowerblue;
+    color: #213547;
 }
 
 .RegistrationPicsContainer {
@@ -100,7 +100,7 @@ body {
 .CustomerDisplayBelow {
     display: flex;
     place-content: center;
-    background-color: cornflowerblue;
+    background-color: lightblue;
     height: 80vh;
     width: 100vw;
 }
@@ -117,7 +117,7 @@ body {
     place-content: space-between;
     height: 10vh;
     width: 100vw;
-    background-color: lightblue;
+    background-color: cadetblue;
 }
 
 .CustomerNavbarFooter {
@@ -125,7 +125,7 @@ body {
     place-content: center;
     height: 10vh;
     width: 100vw;
-    background-color: lightblue;
+    background-color: cadetblue;
 }
 
 .CustomerRestaurantList {
@@ -186,7 +186,7 @@ body {
 .RestaurantDisplayBelow {
     display: flex;
     place-content: center;
-    background-color: cornflowerblue;
+    background-color: lightblue;
     height: 80vh;
     width: 100vw;
 }

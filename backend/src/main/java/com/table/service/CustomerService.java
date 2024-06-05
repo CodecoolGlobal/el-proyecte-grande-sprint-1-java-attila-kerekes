@@ -7,7 +7,7 @@ import com.table.model.Customer;
 import com.table.repository.CustomerRepo;
 import com.table.security.Role;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,16 +26,31 @@ public class CustomerService {
     }
 
     public CustomerDTO getCustomerById(UUID id) {
-        Customer customer = customerRepo.findByPublicId(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        return new CustomerDTO(customer.getPublicId(), customer.getClient().getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
+        Customer customer = customerRepo.findByPublicId(id)
+          .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        return new CustomerDTO(
+          customer.getPublicId(),
+          customer.getClient().getEmail(),
+          customer.getFirstName(),
+          customer.getLastName(),
+          customer.getPhoneNumber());
     }
 
     public CustomerDTO getCustomerByEmail(String email) {
-        Customer customer = customerRepo.findCustomerByClient_Email(email).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        return new CustomerDTO(customer.getPublicId(), customer.getClient().getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
+        Customer customer = customerRepo.findCustomerByClient_Email(email)
+          .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        return new CustomerDTO(
+          customer.getPublicId(),
+          customer.getClient().getEmail(),
+          customer.getFirstName(),
+          customer.getLastName(),
+          customer.getPhoneNumber());
     }
 
-    public CustomerDTO saveCustomer(RegisterCustomerDTO customerDTO) {
+    @Transactional
+    public CustomerDTO createCustomer(RegisterCustomerDTO customerDTO) {
         Client client = new Client();
         client.setEmail(customerDTO.email());
         client.setPassword(encoder.encode(customerDTO.password()));
@@ -48,23 +63,34 @@ public class CustomerService {
         customer.setClient(client);
         Customer saved = customerRepo.save(customer);
 
-        return new CustomerDTO(saved.getPublicId(), client.getEmail(), saved.getFirstName(), saved.getLastName(), saved.getPhoneNumber());
-    }
-
-    @Transactional
-    public void deleteCustomer(UUID id) {
-        customerRepo.deleteByPublicId(id);
+        return new CustomerDTO(
+          saved.getPublicId(),
+          client.getEmail(),
+          saved.getFirstName(),
+          saved.getLastName(),
+          saved.getPhoneNumber());
     }
 
     @Transactional
     public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-        Customer customer = customerRepo.findByPublicId(customerDTO.id()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Customer customer = customerRepo.findByPublicId(customerDTO.id())
+          .orElseThrow(() -> new EntityNotFoundException("User not found"));
         customer.getClient().setEmail(customerDTO.email());
         customer.setFirstName(customerDTO.firstName());
         customer.setLastName(customerDTO.lastName());
         customer.setPhoneNumber(customerDTO.phoneNumber());
         customerRepo.save(customer);
 
-        return new CustomerDTO(customer.getPublicId(), customer.getClient().getEmail(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber());
+        return new CustomerDTO(
+          customer.getPublicId(),
+          customer.getClient().getEmail(),
+          customer.getFirstName(),
+          customer.getLastName(),
+          customer.getPhoneNumber());
+    }
+
+    @Transactional
+    public void deleteCustomer(UUID id) {
+        customerRepo.deleteByPublicId(id);
     }
 }

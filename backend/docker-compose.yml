@@ -1,0 +1,24 @@
+name: reservation
+services:
+  backend:
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - DB_URL=jdbc:postgresql://postgres:5432/reservationapp
+      - DB_USERNAME=reservation
+      - DB_PASS=1234
+      - SECRET_KEY==================abcaaaaaaaaaa================
+
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/reservationapp/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_USER=reservation
+      - POSTGRES_DB=reservationapp
+
+

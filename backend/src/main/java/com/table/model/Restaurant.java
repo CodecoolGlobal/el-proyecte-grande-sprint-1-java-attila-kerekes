@@ -18,11 +18,13 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "restaurant_seq_gen")
     @SequenceGenerator(name = "restaurant_seq_gen", sequenceName = "restaurant_seq", initialValue = 1, allocationSize = 1)
     private long id;
-    //TODO: FIX THIS
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID publicId = UUID.randomUUID();
+    @Column(unique = true, nullable = false)
     private String name;
+    @Column(unique = true, nullable = false)
     private String phoneNumber;
+    @NonNull
     private String address;
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<DiningSpot> tables;

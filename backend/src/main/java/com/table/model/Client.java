@@ -17,6 +17,7 @@ public class Client {
     private long id;
     @Column(unique = true)
     private String email;
+    @NonNull
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
