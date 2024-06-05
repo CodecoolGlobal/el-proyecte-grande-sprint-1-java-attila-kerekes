@@ -1,4 +1,5 @@
 import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Container, Navbar as NavbarBs} from "react-bootstrap";
 
 function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
   const navigate = useNavigate();
@@ -13,12 +14,9 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
   };
 
   return (
-    <nav className="CustomerNavbar">
-      <div className={"TitleContainer"}>
+    <NavbarBs>
+      <Container>
         <h2 className={"Title"}>RESTaurant</h2>
-      </div>
-      <div>
-
         {isAuthenticated ? (
             <>
               <Link to={`/customer/restaurants`}>
@@ -34,7 +32,7 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
           (
             <>
               <Link to={`/`}>
-                <button>RESTaurant</button>
+                <button className="btn btn-primary">RESTaurant</button>
               </Link>
 
               <Link to={`/register`}>
@@ -46,8 +44,8 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
             </>
           )
         }
-      </div>
-    < /nav>
+      </Container>
+    </NavbarBs>
   )
 }
 
