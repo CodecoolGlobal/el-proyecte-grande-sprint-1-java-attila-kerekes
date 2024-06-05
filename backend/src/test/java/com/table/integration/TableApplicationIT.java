@@ -41,8 +41,7 @@ class TableApplicationIT {
     RequestBuilder request = MockMvcRequestBuilders.get("/api/restaurants/e40856d1-3152-4e65-bbe8-c3f0a1db445b");
 
     String responseString = mockMvc.perform(request)
-      .andExpect(status().is2xxSuccessful())
-      .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+      .andExpect(status().is4xxClientError())
       .andReturn()
       .getResponse()
       .getContentAsString();

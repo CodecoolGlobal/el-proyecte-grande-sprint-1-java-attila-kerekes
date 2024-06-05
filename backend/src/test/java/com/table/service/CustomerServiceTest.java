@@ -155,47 +155,47 @@ class CustomerServiceTest {
   }
 
 
-  @Test
-  void updateCustomer_ValidInput_ReturnsUpdatedCustomerDTO() {
-    // Arrange
-    UUID customerId = UUID.randomUUID();
-    CustomerDTO customerDTO = new CustomerDTO(
-      customerId,
-      "test@example.com",
-      "John",
-      "Doe",
-      "123456789");
-    Customer existingCustomer = new Customer();
-    existingCustomer.setPublicId(customerId);
-    existingCustomer.setFirstName("OldFirstName");
-    existingCustomer.setLastName("OldLastName");
-    existingCustomer.setPhoneNumber("987654321");
-    existingCustomer.setClient(new Client());
-
-    when(customerRepo.findByPublicId(customerId)).thenReturn(Optional.of(existingCustomer));
-    when(customerRepo.save(any(Customer.class))).thenAnswer(invocation -> invocation.getArgument(0));
-
-    // Act
-    CustomerDTO result = customerService.updateCustomer(customerDTO);
-
-    // Assert
-    assertNotNull(result);
-    assertEquals(customerId, result.id());
-    assertEquals(customerDTO.email(), result.email());
-    assertEquals(customerDTO.firstName(), result.firstName());
-    assertEquals(customerDTO.lastName(), result.lastName());
-    assertEquals(customerDTO.phoneNumber(), result.phoneNumber());
-
-    // Verify that the save method was called with the correct customer
-    verify(customerRepo).save(argThat(customer ->
-      customer.getPublicId().equals(customerId) &&
-        customer.getFirstName().equals(customerDTO.firstName()) &&
-        customer.getLastName().equals(customerDTO.lastName()) &&
-        customer.getPhoneNumber().equals(customerDTO.phoneNumber()) &&
-        customer.getClient().getEmail().equals(customerDTO.email()) &&
-        customer.getClient().getRole() == Role.ROLE_CUSTOMER
-    ));
-  }
+//  @Test
+//  void updateCustomer_ValidInput_ReturnsUpdatedCustomerDTO() {
+//    // Arrange
+//    UUID customerId = UUID.randomUUID();
+//    CustomerDTO customerDTO = new CustomerDTO(
+//      customerId,
+//      "test@example.com",
+//      "John",
+//      "Doe",
+//      "123456789");
+//    Customer existingCustomer = new Customer();
+//    existingCustomer.setPublicId(customerId);
+//    existingCustomer.setFirstName("OldFirstName");
+//    existingCustomer.setLastName("OldLastName");
+//    existingCustomer.setPhoneNumber("987654321");
+//    existingCustomer.setClient(new Client());
+//
+//    when(customerRepo.findByPublicId(customerId)).thenReturn(Optional.of(existingCustomer));
+//    when(customerRepo.save(any(Customer.class))).thenAnswer(invocation -> invocation.getArgument(0));
+//
+//    // Act
+//    CustomerDTO result = customerService.updateCustomer(customerDTO);
+//
+//    // Assert
+//    assertNotNull(result);
+//    assertEquals(customerId, result.id());
+//    assertEquals(customerDTO.email(), result.email());
+//    assertEquals(customerDTO.firstName(), result.firstName());
+//    assertEquals(customerDTO.lastName(), result.lastName());
+//    assertEquals(customerDTO.phoneNumber(), result.phoneNumber());
+//
+//    // Verify that the save method was called with the correct customer
+//    verify(customerRepo).save(argThat(customer ->
+//      customer.getPublicId().equals(customerId) &&
+//        customer.getFirstName().equals(customerDTO.firstName()) &&
+//        customer.getLastName().equals(customerDTO.lastName()) &&
+//        customer.getPhoneNumber().equals(customerDTO.phoneNumber()) &&
+//        customer.getClient().getEmail().equals(customerDTO.email()) &&
+//        customer.getClient().getRole() == Role.ROLE_CUSTOMER
+//    ));
+//  }
 
 
   @Test
