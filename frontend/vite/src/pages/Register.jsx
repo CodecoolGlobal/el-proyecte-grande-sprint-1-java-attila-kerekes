@@ -2,6 +2,7 @@ import {Link, Outlet} from "react-router-dom";
 import customerPic from "./photos/customer.jpg"
 import restaurantPic from "./photos/restaurant.jpg"
 import {useEffect, useState} from "react";
+import {Container} from "react-bootstrap";
 
 export default function Register() {
     const [customer, setCustomer] = useState(false)
@@ -15,37 +16,47 @@ export default function Register() {
 
     return (
         <div>
-            <div>
+            <Container className={"mb-4 d-flex justify-content-xl-center"}>
                 <h2>Register</h2>
-            </div>
+            </Container>
 
-
-            <div className={"RegistrationPicsContainer"}>
-
-                <div> {restaurant ?
+            <Container className={"d-inline-flex p-2"}>
+                <Container> {restaurant ?
                     <Outlet/> :
 
-                    <div className={"PicContainer"}>
+                    <Container className={"mb-4"}>
                         <div>As customer</div>
-                        <Link to={`customer`}> <img onClick={() => {
-                            setCustomer(true)
-                        }} className={"RegistrationPic"} src={customerPic}></img></Link>
-                    </div>
+                        <Link to={`customer`}>
+                            <img onClick={() => {
+                                setCustomer(true)
+                            }}
+                                 className={"rounded float-left"}
+                                 src={customerPic}
+                                 alt={"customer"}
+                                 style={{width: "400px"}}>
+                            </img>
+                        </Link>
+                    </Container>
                 }
-                </div>
+                </Container>
 
+                <Container>{customer ? <Outlet/> :
 
-                <div>{customer ? <Outlet/> :
-
-                    <div className={"PicContainer"}>
+                    <Container className={"mb-4"}>
                         <div>As restaurant</div>
-                        <Link to={`restaurant`}><img onClick={() => {
-                            setRestaurant(true)
-                        }} className={"RegistrationPic"} src={restaurantPic}></img></Link>
-                    </div>
+                        <Link to={`restaurant`}>
+                            <img onClick={() => {
+                                setRestaurant(true)
+                            }}
+                                 className={"rounded float-right"}
+                                 src={restaurantPic}
+                                 alt={"restaurant"}
+                                 style={{width: "400px"}}>
+                            </img></Link>
+                    </Container>
                 }
-                </div>
-            </div>
+                </Container>
+            </Container>
         </div>
     )
 }

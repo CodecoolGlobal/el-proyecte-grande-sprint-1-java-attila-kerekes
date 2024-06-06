@@ -15,10 +15,9 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
 
   return (
     <NavbarBs>
-      <Container>
         <h2 className={"Title"}>RESTaurant</h2>
         {isAuthenticated ? (
-            <>
+            <Container className={"mb-4 justify-content-start"}>
               <Link to={`/customer/restaurants`}>
                 <button>RESTaurant</button>
               </Link>
@@ -26,11 +25,11 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
                 <button>My profile</button>
               </Link>
               <button onClick={handleLogout}>Logout</button>
-            </>
+            </Container>
           )
           :
           (
-            <>
+            <Container className={"mb-4 justify-content-end"}>
               <Link to={`/`}>
                 <button className="btn btn-primary">RESTaurant</button>
               </Link>
@@ -41,10 +40,9 @@ function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
               <Link to={`/login`}>
                 <button>Login</button>
               </Link>
-            </>
+            </Container>
           )
         }
-      </Container>
     </NavbarBs>
   )
 }
