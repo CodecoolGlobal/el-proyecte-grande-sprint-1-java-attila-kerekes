@@ -19,7 +19,6 @@ import Home from "./pages/Home.jsx";
 import CustomerRestaurantList from "./pages/customer/CustomerRestaurantList.jsx";
 import ReservationPage from "./pages/customer/ReservationPage.jsx";
 import CustomerReservationList from "./pages/customer/CustomerReservationList.jsx";
-import {Container} from "react-bootstrap";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
