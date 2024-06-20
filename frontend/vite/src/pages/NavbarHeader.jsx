@@ -1,17 +1,17 @@
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Container, Nav, Navbar as NavbarBs} from "react-bootstrap";
 
 function NavbarHeader({id, isAuthenticated, setIsAuthenticated}) {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleLogout = () => {
+    const handleLogout = () => {
 
-    setIsAuthenticated(false);
+        setIsAuthenticated(false);
 
-    localStorage.removeItem('token');
+        localStorage.removeItem('token');
 
-    navigate("/");
-  };
+        navigate("/");
+    };
 
   return (
     <NavbarBs sticky={"top"} className={"bg-white shadow-lg mb-4"}>
