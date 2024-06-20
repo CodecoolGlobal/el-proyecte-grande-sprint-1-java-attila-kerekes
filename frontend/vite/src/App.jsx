@@ -4,8 +4,6 @@ import {Navigate, useRoutes} from 'react-router-dom'
 import MainPage from "./pages/MainPage.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import CustomerRegistration from "./pages/customer/CustomerRegistration.jsx";
-import RestaurantRegistration from "./pages/restaurant/RestaurantRegistration.jsx";
 import CustomerPage from "./pages/customer/CustomerPage.jsx";
 import RestaurantPage from "./pages/restaurant/RestaurantPage.jsx";
 import {useEffect, useState} from "react";
@@ -42,23 +40,23 @@ function App() {
             path: '/',
             children: [
                 {
-                    element:isAuthenticated ?
-                        (isRestaurant ? <Navigate to="/restaurant" /> : <CustomerPage />)
+                    element: isAuthenticated ?
+                        (isRestaurant ? <Navigate to="/restaurant"/> : <CustomerPage/>)
                         : <Home/>,
                     path: '/'
                 },
                 {
-                    element: <Login setIsAuthenticated={setIsAuthenticated} setRestaurant={setRestaurant} />,
+                    element: <Login setIsAuthenticated={setIsAuthenticated} setRestaurant={setRestaurant}/>,
                     path: '/login'
                 },
                 {
                     element: isAuthenticated ?
-                        (isRestaurant ? <Navigate to="/restaurant" /> : <CustomerPage />)
-                        : <Navigate to="/" />,
+                        (isRestaurant ? <Navigate to="/restaurant"/> : <CustomerPage/>)
+                        : <Navigate to="/"/>,
                     path: '/customer',
                     children: [
                         {
-                            element: <CustomerDetails />,
+                            element: <CustomerDetails/>,
                             path: 'details'
                         },
                         {
@@ -66,31 +64,31 @@ function App() {
                             path: 'restaurants/:id'
                         },
                         {
-                            element: <CustomerRestaurantList />,
+                            element: <CustomerRestaurantList/>,
                             path: 'restaurants'
                         },
                         {
-                            element: <CustomerReservationList />,
+                            element: <CustomerReservationList/>,
                             path: 'reservations'
                         },
                     ]
                 },
                 {
                     element: isAuthenticated ?
-                        (isRestaurant ? <RestaurantPage /> : <Navigate to="/customer" />)
-                        : <Navigate to="/" />,
+                        (isRestaurant ? <RestaurantPage/> : <Navigate to="/customer"/>)
+                        : <Navigate to="/"/>,
                     path: '/restaurant',
                     children: [
                         {
-                            element: <RestaurantDetails />,
+                            element: <RestaurantDetails/>,
                             path: 'details'
                         },
                         {
-                            element: <TableList />,
+                            element: <TableList/>,
                             path: 'tables'
                         },
                         {
-                            element: <ReservationList />,
+                            element: <ReservationList/>,
                             path: 'reservations'
                         },
                     ]
@@ -98,23 +96,13 @@ function App() {
                 {
                     element: <Register/>,
                     path: '/register',
-                    children: [
-                        {
-                            element: <CustomerRegistration />,
-                            path: 'customer'
-                        },
-                        {
-                            element: <RestaurantRegistration />,
-                            path: 'restaurant'
-                        }
-                    ]
                 },
                 {
-                    element: <About />,
+                    element: <About/>,
                     path: '/about'
                 },
                 {
-                    element: <Contact />,
+                    element: <Contact/>,
                     path: '/contact'
                 },
             ]
